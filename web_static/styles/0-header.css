@@ -13,45 +13,31 @@ header h1 {
     font-weight: bold;
 }
 
-header .fa-bars {
+header .menu {
     position: absolute;
-    left: 20px;
+    left: 10px;
+    top: 35px;
+
 }
 
-header .bars {
-    position: absolute;
-    left: 25px;
-    top: 50px;
-    background-color: #D27D2D;
-    height: 270px;
-    width: 250px;
-    border-radius: 20px;
-    display: none; /* Initially hide the element */
-    justify-content: center;
+header .info {
     border: 1px solid black;
+    margin: 10px;
+    display: none;
+    background-color: #D27D2D;
+    border-radius: 10px;
 }
 
-/** this will later be replaced with javascript to respond to user
-clicks**/
-
-header:hover .bars {
-    display: flex; /* Display the element when hovering over the header */
+header .menu:hover .info {
+    display: block;
+    background-color: black;
+    color: white;
 }
 
-
-
-.bars .bar-content {
-    position: absolute;
-    top: 40px;
-    left: 24px;
-
+header .info h5 {
+    margin: 10px;
 }
 
-.bar-content ol {
-    list-style-type: none;
-}
-
-.bar-content li {
-    margin: 20px;
-    font-weight: bold;
+.menu .info h5 {
+    color: #FF0000;
 }
