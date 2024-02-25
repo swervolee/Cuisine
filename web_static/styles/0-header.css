@@ -1,6 +1,7 @@
 header {
     border-bottom: 2px solid black;
     height: 80px;
+    padding: 30px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -34,10 +35,19 @@ header .menu:hover .info {
     color: white;
 }
 
+.menu .info i {
+    margin: 20px;
+}
+
+
 header .info h5 {
-    margin: 10px;
+    margin: 20px;
 }
 
 .menu .info h5 {
     color: #FF0000;
+}
+
+.menu .info > h5:hover {
+    background-color: white;
 }
