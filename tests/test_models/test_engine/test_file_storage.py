@@ -7,6 +7,8 @@ import unittest
 import json
 FileStorage = models.engine.file_storage.FileStorage
 from models.engine import file_storage
+from models.base_model import BaseModel
+classes = {"BaseModel": BaseModel}
 
 
 class TestFileStorageDocs(unittest.TestCase):
@@ -48,3 +50,29 @@ class TestFileStorageDocs(unittest.TestCase):
             self.assertTrue(len(function[1].__doc__) >=1,
                             "{} method needs a dodcstring".format(function[0]))
 
+
+class TestFileStorage(unittest.TestCase):
+    """TESTS THE FILESTORAGE CLASS"""
+    @unittest.skipIf(models.storage == "db", "not testin database")
+    def test_all_returns_dict(self):
+        storage = FileStorage()
+        all_items = storage.all()
+        self.assertEqual(type(all_items), dict)
+        self.assertIs(all_items, storage._FileStorage__objects)
+
+    @unittest.skipIf(models.storage == "db", "not testing database")
+    def test_fileStorage_new_method(self):
+        """TESTS THE FILESTORAGE METHOD NEW"""
+        storage = FileStorage()
+        save = FileStorage._FileStorage__objects
+        FileStorage._FileStorage__objects = {}
+        test_dict = {}
+
+        for key, value in classes.items():
+            with self.subTest(key=key, value=value):
+                instance = value()
+                instance_key = instance.__class__.__name__ + "." + instance.id
+                storage.new(instance)
+                test_dict[instance_key] = instance
+                self.assertEqual(test_dict, storage._FileStorage__objects)
+        FileStorage._FileStorage__objects = save
