@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-import json
 """
 AN OBJECT STORAGE
 """
+import json
 
 
 class FileStorage():
