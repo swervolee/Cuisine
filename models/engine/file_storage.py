@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 """
- A STORAGE FOR OBJECTS
+AN OBJECT STORAGE
 """
 
 
@@ -12,7 +12,6 @@ class FileStorage():
 
     __file_path = "storage.json"
     __objects = {}
-
 
     def all(self, cls=None):
         """RETURNS A DICTIONARY WITH ALL CREATED OBJECTS"""
@@ -32,7 +31,6 @@ class FileStorage():
             key = f"{obj.__class__.__name__}.{obj.id}"
             self.__objects[key] = obj
 
-
     def save(self):
         """WRITES __objects TO A FILE"""
         data = {}
@@ -43,7 +41,6 @@ class FileStorage():
         with open(self.__file_path, 'w') as f:
             json.dump(data, f)
 
-
     def reload(self):
         """DESERIALIZES OBJECTS FROM THE JSON FILE"""
         try:
@@ -52,7 +49,7 @@ class FileStorage():
                     value = eval(value["__class__"])(**value)
                     self.__objects[key] = value
         except Exception:
-            pass # if the file does not exist do nothing
+            pass  # if the file does not exist do nothing
 
     def delete(self, obj=None):
         """DELTE AN OBJECT FROM self.__objects"""
@@ -60,7 +57,6 @@ class FileStorage():
             key = obj.__class__.__name__ + '.' + obj.id
             if key in self.__objects:
                 del self.__objects[key]
-
 
     def close(self):
         """CALLS RELOAD TO DESERIALIZE THE OBJECTS"""
