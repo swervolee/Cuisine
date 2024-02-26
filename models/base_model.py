@@ -5,6 +5,7 @@ A BASEMODEL FOR THE CLASSES
 
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -49,8 +50,8 @@ class BaseModel:
         SAVES AN OBJECT TO FILESTORAGE
         """
         self.updated_at = datetime.utcnow()
-        # models.storage.new(self)
-        # models.storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
 
     def to_dict(self):
@@ -63,3 +64,7 @@ class BaseModel:
         new_dict['updated_at'] = self.updated_at.isoformat()
         return new_dict
 
+
+    def delete(self):
+        """DELETES SELF FROM THE FILESTORAGE"""
+        models.storage.delete(self)
