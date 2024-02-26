@@ -2,7 +2,6 @@
 """
 A BASEMODEL FOR THE CLASSES
 """
-
 import uuid
 from datetime import datetime
 import models
@@ -37,7 +36,6 @@ class BaseModel:
             self.created_at = datetime.utcnow()
             self.updated_at = self.created_at
 
-
     def __str__(self):
         """
         RETURNS  A STRING REPRESENTATION OF THE STRING
@@ -53,7 +51,6 @@ class BaseModel:
         models.storage.new(self)
         models.storage.save()
 
-
     def to_dict(self):
         """
         RETURNS A DICTIONARY REPRESENTATION OF A CLASS
@@ -63,7 +60,6 @@ class BaseModel:
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()
         return new_dict
-
 
     def delete(self):
         """DELETES SELF FROM THE FILESTORAGE"""
