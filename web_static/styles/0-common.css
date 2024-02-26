@@ -16,7 +16,7 @@ body {
     font-family: Circular, "Helvetica Neue",Helvetica,Arial,sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #FEE715
+    background-color: #101820;
 }
 .container {
     max-width: 1000px;

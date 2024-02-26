@@ -13,8 +13,8 @@ article {
     border-radius: 4px;
     pposition: relative;
     z-index: -1;
-    background-color: #101820;
-    color: white;
+    background-color: #FEE715;
+    color: black;
     max-height: 500px;
     overflow-y: scroll;
 }
