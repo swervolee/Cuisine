@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+
+article {
+    padding: 20px;
+    margin: 20px 20px 20px 20px;
+    width: 450px;
+    border: 1px solid #AA0004;
+    border-radius: 4px;
+    pposition: relative;
+    z-index: -1;
+    background-color: #101820;
+    color: white;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+article .title {
+    border-bottom: 1px solid white;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+article ul {
+    margin: 20px;
+}
+
+article li {
+    margin: 5px;
+}
+
+article h2 {
+    margin: 30px;
+    border-bottom: 1px solid white;
+    text-align: center;

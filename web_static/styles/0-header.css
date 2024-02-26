@@ -1,0 +1,53 @@
+header {
+    border-bottom: 2px solid black;
+    height: 80px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+header h1 {
+    color: #FF0000;
+    font-style: italic;
+    margin-right: 40px;
+    font-weight: bold;
+}
+
+header .menu {
+    position: absolute;
+    left: 10px;
+    top: 35px;
+
+}
+
+header .info {
+    border: 1px solid black;
+    margin: 10px;
+    display: none;
+    background-color: #D27D2D;
+    border-radius: 10px;
+}
+
+header .menu:hover .info {
+    display: block;
+    background-color: black;
+    color: white;
+}
+
+.menu .info i {
+    margin: 20px;
+}
+
+
+header .info h5 {
+    margin: 20px;
+}
+
+.menu .info h5 {
+    color: #FF0000;
+}
+
+.menu .info > h5:hover {
+    background-color: white;
+}
