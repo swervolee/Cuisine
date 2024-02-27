@@ -55,6 +55,7 @@ class TestBaseModelDocs(unittest.TestCase):
                     "{:s} method needs a docstring".format(func[0])
                 )
 
+
 class TestBaseModel(unittest.TestCase):
     """Test the BaseModel class"""
     def test_instantiation(self):
