@@ -10,13 +10,17 @@ article {
     margin: 20px 20px 20px 20px;
     width: 450px;
     border: 1px solid #AA0004;
-    border-radius: 4px;
+    border-radius: 20px;
     pposition: relative;
     z-index: -1;
     background-color: #FEE715;
     color: black;
     max-height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+article::-webkit-scrollbar {
+    width: 0;
 }
 
 article .title {
@@ -34,6 +38,36 @@ article li {
 }
 
 article h2 {
-    margin: 30px;
-    border-bottom: 1px solid white;
+    margin: 40px;
+    border-bottom: 1px solid #aa0004;
     text-align: center;
+}
+
+
+article .more-info {
+    border: 1px solid black;
+    width: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    color:white;
+    background-color: black;
+    margin-top: 10px;
+
+
+}
+
+
+article .drop-down {
+    border: 1px solid black;
+    height: 40px;
+    display: none;
+    width: 200px;
+    padding: 5px;
+    background-color: black;
+    color: white;
+}
+
+
+article .more-info:hover + .drop-down {
+    display: block;
