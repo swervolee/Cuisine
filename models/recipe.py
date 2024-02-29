@@ -2,40 +2,51 @@
 """A CLASS RECIPES"""
 from models.base_model import BaseModel
 from models.comment import Comment
+import models
 
 
 class Recipe(BaseModel):
-    """A CLASS RECIPE"""
+    """
+    DEFINES THE RECIPE CLASS
+    """
     title = ""
     introduction = ""
     ingredients = []
     instructions = []
-    tags = []
+    _tags = []
     servings = 0
     private = False
     user_id = ""
 
     @property
     def tags(self):
-        """RETURNS ID OF ASSOCIATED TAGS"""
-        return self.tags;
+        """
+        RETURNS A LIST OF TAGS ASSOCIATED WITH THE RECIPE
+        """
+        return self._tags
 
     @tags.setter
     def tags(self, value):
-        """ASSOCIATES A RECIPE WITH A TAG"""
-        if value and isintance(value, str) and value not in self.tags:
-            tags.append(value)
+        """
+        ASSOCIATES A RECIPE WITH A TAG
+        """
+        if value and isinstance(value, str) and value not in self._tags:
+            self._tags.append(value)
 
     def untag(self, value):
-        """UNTAGS A RECIPE"""
-        if value in self.tags:
-            self.tags.remove(value)
+        """
+        UNTAG A RECIPE
+        """
+        if value in self._tags:
+            self._tags.remove(value)
 
     @property
     def comments(self):
-        """RETURNS IDS OF COMMENTS ASSOCIATED WITH THE RECIPE"""
+        """
+        RETURNS A LIST OF COMMENT IDS ASSOCIATED WITH A CLASS
+        """
         result = []
-        for item in storage.all(Comment):
-            if item.recipe == self.id:
+        for item in models.storage.all(Comment).values():
+            if item.recipe_id == self.id:
                 result.append(item.id)
         return result

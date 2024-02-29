@@ -9,26 +9,28 @@ import models
 
 class BaseModel:
     """
-    A DEFINATION OF THE BASEMODEL CLASS
-    -----------------------------------
+    MAIN CLASS
+    ------------
 
-    * CREATED_AT - THE TIME AT WHICH THE OBJECT WAS CREATED
-    * UPDATED_AT -THE TIME AT WHICH AN OBJECT WAS UPDATED
-    * ID - A UNIQUE IDENTITY FOR EACH OBJECT
+
+    CUISINE
     """
-
     def __init__(self, *args, **kwargs):
-        """Initialization of the base model"""
+        """
+        CLASS INSTANCIATION
+        """
         if kwargs:
             for key, value in kwargs.items():
                 if key != "__class__":
                     setattr(self, key, value)
             if kwargs.get("created_at", None) and type(self.created_at) is str:
-                self.created_at = datetime.strptime(kwargs["created_at"], time)
+                self.created_at = datetime.strptime(
+                    kwargs["created_at"], '%Y-%m-%dT%H:%M:%S.%f')
             else:
                 self.created_at = datetime.utcnow()
             if kwargs.get("updated_at", None) and type(self.updated_at) is str:
-                self.updated_at = datetime.strptime(kwargs["updated_at"], time)
+                self.updated_at = datetime.strptime(
+                    kwargs["updated_at"], '%Y-%m-%dT%H:%M:%S.%f')
             else:
                 self.updated_at = datetime.utcnow()
             if kwargs.get("id", None) is None:
@@ -40,14 +42,14 @@ class BaseModel:
 
     def __str__(self):
         """
-        RETURNS  A STRING REPRESENTATION OF THE STRING
+        STRING METHOD FOR ALL CLASSES
         """
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-                                     self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
-        SAVES AN OBJECT TO FILESTORAGE
+        SAVES CLASS TO FILE STORAGE
         """
         self.updated_at = datetime.utcnow()
         models.storage.new(self)
@@ -55,7 +57,7 @@ class BaseModel:
 
     def to_dict(self):
         """
-        RETURNS A DICTIONARY REPRESENTATION OF A CLASS
+        SERIALIZES THE  CLASS
         """
         new_dict = self.__dict__.copy()
         new_dict['__class__'] = self.__class__.__name__
@@ -64,5 +66,9 @@ class BaseModel:
         return new_dict
 
     def delete(self):
-        """DELETES SELF FROM THE FILESTORAGE"""
+        """
+        DELETES ITSELF  FROM FILESTORAGE
+        IN OTHER WORDS SUICIDE
+        """
         models.storage.delete(self)
+        models.storage.save()

@@ -1,1 +1,1 @@
-{"User.bb34a48b-8bc9-4be7-aa7e-b8e8d99735a5": {"first_name": "william", "last_name": "kubai", "email": "williamkubai101@gmail.com", "password": 25443533, "bio": "i am a software engineer", "created_at": "2024-02-27T20:40:42.895747", "updated_at": "2024-02-27T20:40:42.895768", "id": "bb34a48b-8bc9-4be7-aa7e-b8e8d99735a5", "__class__": "User"}}
+{"BaseModel.b5a3e505-8cfa-4285-a431-3a652d308dc8": {"id": "b5a3e505-8cfa-4285-a431-3a652d308dc8", "created_at": "2024-02-29T06:39:22.002379", "updated_at": "2024-02-29T06:39:22.002450", "__class__": "BaseModel"}}

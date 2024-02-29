@@ -2,6 +2,7 @@
 """This module instantiates an object of class FileStorage"""
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
+from models.recipe import Recipe
 from os import getenv
 
 if getenv("HBNB_TYPE_STORAGE") == "db":

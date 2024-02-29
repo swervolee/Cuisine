@@ -1,62 +1,50 @@
 #!/usr/bin/python3
-"""
-A MODEL FOR USERS
-"""
+"""USER CLASS"""
 from models.base_model import BaseModel
 from models import storage
 
 
 class User(BaseModel):
     """
-    USERS MODEL
-    -------------
-    FIRST_NAME - USERS FIRST NAME
-    LAST_NAME - USERS LAST NAME
-    EMAIL - EMAIL OF THE USER
-    PASSWORD - USERS PASSWORD.THE PASSWORD WILL BE HASHED
-    BIO - SMALL INFO ABOUT THE USER.(OPTIONAL)
-    FAVORITES - USERS FAVOURITE RECIPES ID
-    COMMENTS - IDS OF COMMENTS THAT HAVE BEEN CREATED BY THE USER
+    CONSTRUCTS THE CLASS BASEMODEL
     """
-
     first_name = ""
     last_name = ""
     email = ""
     password = ""
     bio = ""
-    favorites = []
+    _favorites = []
 
     @property
     def favorites(self):
-        """FAVOURITE RECIPES ID"""
-        return self.favorites
+        """RETURNS FAVOURITED RECIIPES ID LIST"""
+        return self._favorites
 
     @favorites.setter
     def favorites(self, value):
-        """ADDS TO FAVOURITES LIST"""
+        """ADDS TO THE FAVOURITES LIST"""
         if isinstance(value, str):
-            self.favorites.append(value)
+            self._favorites.append(value)
 
     def unfavorite(self, value):
-        """DELETE A RECIPE FROM FAVOURITES"""
-        if value in self.favorites:
-            self.favorites.remove(value)
+        """REMOVE AN ID FROM FAVOURITES"""
+        if value in self._favorites:
+            self._favorites.remove(value)
 
     @property
     def recipes(self):
-        """RETURNS RECIPES CREATED BY THE USER"""
+        """RETURNS A LIST OF IDS CREATED BY THE USER"""
         result = []
-        for item in storage.all(Recipe):
+        for item in models.storage.all(Recipe).values():
             if item.user_id == self.id:
                 result.append(item.id)
         return result
 
-
-
     @property
     def comments(self):
-        """COMMENTS CREATED BY THE USER"""
+        """RETURNS A LIST OF COMMENTS BY THE USER"""
         result = []
-        for item in storage.all(Recipe):
+        for item in models.storage.all(Comment).values():
             if item.user_id == self.id:
                 result.append(item.id)
+        return result

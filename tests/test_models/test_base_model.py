@@ -6,6 +6,7 @@ import models
 import pep8 as pycodestyle
 import time
 import unittest
+import uuid
 from unittest import mock
 BaseModel = models.base_model.BaseModel
 module_doc = models.base_model.__doc__
@@ -140,3 +141,103 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(old_created_at, new_created_at)
         self.assertTrue(mock_storage.new.called)
         self.assertTrue(mock_storage.save.called)
+
+
+class TestBaseModel(unittest.TestCase):
+
+    def setUp(self):
+        """
+        SET UP CLASS
+        """
+        self.base_model = BaseModel()
+
+    def test_instance_creation(self):
+        """
+        TEST IF AN INSTANCE IS BEING CREATED
+        """
+        self.assertIsInstance(self.base_model, BaseModel)
+
+    def test_id_generation(self):
+        """
+        TEST IF AN ID IS BEING GENERATED
+        """
+        self.assertTrue(hasattr(self.base_model, 'id'))
+        self.assertIsInstance(self.base_model.id, str)
+        self.assertNotEqual(self.base_model.id, '')
+
+    def test_created_at_and_updated_at(self):
+        """
+        TEST IF UPDATED AT AND CREATED AT IS BEING
+        GENERATED CORRECTLY
+        """
+        self.assertTrue(hasattr(self.base_model, 'created_at'))
+        self.assertTrue(hasattr(self.base_model, 'updated_at'))
+        self.assertIsInstance(self.base_model.created_at, datetime)
+        self.assertIsInstance(self.base_model.updated_at, datetime)
+        self.assertEqual(
+            self.base_model.created_at, self.base_model.updated_at)
+
+    def test_str_representation(self):
+        """
+        TEST IF STR REPRESENTATION IS BEING CORRECTLY
+        GENERATED
+        """
+        string_representation = str(self.base_model)
+        self.assertIn('[BaseModel]', string_representation)
+        self.assertIn('id', string_representation)
+        self.assertIn('created_at', string_representation)
+        self.assertIn('updated_at', string_representation)
+
+    def test_to_dict_method(self):
+        """
+        TEST IF OBJECT TO DICTIONARY IS WORKING CORRECT
+        """
+        base_model_dict = self.base_model.to_dict()
+        self.assertIsInstance(base_model_dict, dict)
+        self.assertIn('__class__', base_model_dict)
+        self.assertIn('id', base_model_dict)
+        self.assertIn('created_at', base_model_dict)
+        self.assertIn('updated_at', base_model_dict)
+        self.assertEqual(base_model_dict['__class__'], 'BaseModel')
+        self.assertEqual(base_model_dict['id'], self.base_model.id)
+        self.assertEqual(base_model_dict[
+            'created_at'], self.base_model.created_at.isoformat())
+        self.assertEqual(base_model_dict[
+            'updated_at'], self.base_model.updated_at.isoformat())
+
+    def test_save_method(self):
+        """
+        TEST FILE STORAGE SAVING
+        """
+        initial_updated_at = self.base_model.updated_at
+        self.base_model.save()
+        self.assertNotEqual(initial_updated_at, self.base_model.updated_at)
+
+    def test_delete_method(self):
+        """
+        TEST DELETION FROM FILE STORAGE
+        """
+        # Save the object first
+        self.base_model.save()
+        self.assertTrue(hasattr(self.base_model, 'id'))
+        object_key = self.base_model.__class__.__name__
+        object_key += "." + self.base_model.id
+        all_objects = models.storage.all().values()
+        self.assertTrue(self.base_model in all_objects)
+        self.base_model.delete()
+        all_objects = models.storage.all().values()
+        self.assertFalse(self.base_model in all_objects)
+
+    def test_init_method_with_parameters(self):
+        """
+        TEST INSTANCIATION
+        """
+        test_id = str(uuid.uuid4())
+        test_created_at = datetime.utcnow()
+        test_updated_at = datetime.utcnow()
+        test_base_model = BaseModel(
+            id=test_id, created_at=test_created_at.isoformat(
+            ), updated_at=test_updated_at.isoformat())
+        self.assertEqual(test_base_model.id, test_id)
+        self.assertEqual(test_base_model.created_at, test_created_at)
+        self.assertEqual(test_base_model.updated_at, test_updated_at)

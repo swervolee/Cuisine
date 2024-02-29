@@ -3,9 +3,10 @@
 from models.base_model import BaseModel
 
 
-
 class Comment(BaseModel):
-    """CREATES AND SETS A COMMENT MODEL"""
+    """
+    DEFINES A COMMENT CLASS
+    """
     text = ""
     user_id = ""
     recipe_id = ""
