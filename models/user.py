@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """USER CLASS"""
-from models.base_model import BaseModel
-from models import storage
 import models
+from models.base_model import BaseModel
 from models.comment import Comment
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """TAG CLASS"""
-from models import BaseModel
+from models.base_model import BaseModel
 
 
 class Tag(BaseModel):

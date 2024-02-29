@@ -7,9 +7,6 @@ if getenv("HBNB_TYPE_STORAGE") == "db":
     storage = DBStorage()
 else:
     storage = FileStorage()
+
 storage.reload()
 
-from models.base_model import BaseModel
-from models.recipe import Recipe
-from models.user import User
-from models.tag import Tag
