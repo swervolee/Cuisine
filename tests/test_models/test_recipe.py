@@ -59,29 +59,41 @@ class TestRecipeDocs(unittest.TestCase):
 
 class TestRecipe(unittest.TestCase):
     """Test the Recipe class"""
+
+    def setUp(self):
+        """
+        SET UP TEST
+        """
+        self.recipe = Recipe()
+
     def test_instantiation(self):
         """Test that object is correctly created"""
-        recipe = Recipe()
-        self.assertIs(type(recipe), Recipe)
+        self.assertIsInstance(self.recipe, Recipe)
 
     def test_attributes(self):
         """Test the presence of attributes"""
-        recipe = Recipe()
-        self.assertTrue(hasattr(recipe, 'title'))
-        self.assertTrue(hasattr(recipe, 'introduction'))
-        self.assertTrue(hasattr(recipe, 'ingredients'))
-        self.assertTrue(hasattr(recipe, 'instructions'))
-        self.assertTrue(hasattr(recipe, 'tags'))
-        self.assertTrue(hasattr(recipe, 'servings'))
-        self.assertTrue(hasattr(recipe, 'private'))
-        self.assertTrue(hasattr(recipe, 'user_id'))
+        self.assertTrue(hasattr(self.recipe, 'title'))
+        self.assertTrue(hasattr(self.recipe, 'introduction'))
+        self.assertTrue(hasattr(self.recipe, 'ingredients'))
+        self.assertTrue(hasattr(self.recipe, 'instructions'))
+        self.assertTrue(hasattr(self.recipe, 'tags'))
+        self.assertTrue(hasattr(self.recipe, 'servings'))
+        self.assertTrue(hasattr(self.recipe, 'private'))
+        self.assertTrue(hasattr(self.recipe, 'user_id'))
+
+        self.assertIs(type(self.recipe.title), str)
+        self.assertIs(type(self.recipe.introduction), str)
+        self.assertIs(type(self.recipe.ingredients), list)
+        self.assertIs(type(self.recipe.instructions), list)
+        self.assertIs(type(self.recipe.tags), list)
+        self.assertIs(type(self.recipe.servings), int)
+        self.assertIs(type(self.recipe.private), bool)
+        self.assertIs(type(self.recipe.user_id), str)
 
     def test_tags_property(self):
         """Test the tags property"""
-        recipe = Recipe()
-        self.assertIsInstance(recipe.tags, list)
+        self.assertIsInstance(self.recipe.tags, list)
 
     def test_comments_property(self):
         """Test the comments property"""
-        recipe = Recipe()
-        self.assertIsInstance(recipe.comments, list)
+        self.assertIsInstance(self.recipe.comments, list)

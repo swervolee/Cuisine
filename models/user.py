@@ -2,6 +2,8 @@
 """USER CLASS"""
 from models.base_model import BaseModel
 from models import storage
+import models
+from models.comment import Comment
 
 
 class User(BaseModel):
