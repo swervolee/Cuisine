@@ -3,6 +3,12 @@
 AN OBJECT STORAGE
 """
 import json
+import models
+from models.user import User
+from models.recipe import Recipe
+from models.comment import Comment
+from models.tag import Tag
+from models.base_model import BaseModel
 
 
 class FileStorage():
@@ -10,7 +16,7 @@ class FileStorage():
     A CLASS TO CREATE A FILE STORAGE FOR OUR OBJECTS
     """
 
-    __file_path = "storage.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self, cls=None):
@@ -44,12 +50,12 @@ class FileStorage():
     def reload(self):
         """DESERIALIZES OBJECTS FROM THE JSON FILE"""
         try:
-            with open(self.__file_path, 'r', encoding="UTF-8") as f:
-                for key, value in (json.load(f).items()):
-                    value = eval(value["__class__"])(**value)
-                    self.__objects[key] = value
-        except Exception:
-            pass  # if the file does not exist do nothing
+            with open(self.__file_path, 'r') as f:
+                jo = json.load(f)
+            for key in jo:
+                self.__objects[key] = eval(jo[key]["__class__"])(**jo[key])
+        except:
+            pass
 
     def delete(self, obj=None):
         """DELTE AN OBJECT FROM self.__objects"""
@@ -66,9 +72,6 @@ class FileStorage():
         """
         RETURNS AN OBJECT BASED ON THE CLASS NAME AND THE ID
         """
-        if cls not in classes.values():
-            return None
-
         all_cls = models.storage.all(cls)
         for value in all_cls.values():
             if (value.id == id):
