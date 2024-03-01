@@ -20,6 +20,9 @@ classes = {"BaseModel":BaseModel,
            "Tag": Tag
            }
 
+dots = ["all", "count", "show", "destroy", "update"]
+
+
 class CuisineConsole(cmd.Cmd):
     """CONSOLE FOR CUISINE"""
     prompt = "(cuisine$) "
@@ -250,6 +253,99 @@ class CuisineConsole(cmd.Cmd):
                                               attr_name))(attr_value)
                 setattr(item_dict, attr_name, attr_value)
                 item_dict.save()  # Save the changes to file.json
+
+    def help_update(self):
+        """
+        UPDATES AN INSTANCE'S ATTRIBUTES
+        """
+        print("Updates the attribute of an instance")
+        print("[usage] update <class name> <class id> <attribute> <value>")
+
+    def do_count(self, arg):
+        """
+        COUNTS THE NUMBER OF CLASS INSTANCES
+        """
+        count = 0;
+        for item in models.storage.all().values():
+            if item.__class__ == arg or item.__class__.__name__ == arg:
+                count += 1
+        print(count)
+
+    def help_count(self):
+        """
+        COUNTS INSTANCES
+        """
+        print("Counts number of instances of a class")
+        print ("[usage] count <class name>")
+
+    def default(self, args):
+        """
+        HANDLES CLASS DOT COMMANDS COMMANDS
+        """
+        if "." not in args or "(" not in args or ")" not in args:
+            return
+
+        class_name = class_id = command = obj = None
+
+        arguments = args.partition(".")
+        class_name = arguments[0]
+
+        if class_name not in classes:
+            print(f"Unknown syntax {args}")
+            return
+
+        command = arguments[2]
+
+        if not command:
+            print(f"Unknown syntax {args}")
+            return
+
+        dot_command = command[: command.find("(", 1)]
+
+        if dot_command not in dots:
+            print(f"Unknown syntax {args}")
+            return
+
+        if dot_command == "all":
+            return self.do_all(class_name)
+
+        if dot_command == "count":
+            return self.do_count(class_name)
+
+        if dot_command == "show" or dot_command == "destroy":
+            class_id = command[command.find('(') + 1: command.find(')')].strip("\"'")
+            obj = models.storage.get(class_name, class_id)
+
+            if not obj:
+                print("** no instance found **")
+                return
+
+            if dot_command == "show":
+                print(obj)
+            elif dot_command == "destroy":
+                obj.delete()
+
+        if dot_command == "update":
+            command = command[command.find('(') + 1: command.find(')')]
+            command = command.partition(" ")
+            class_id = command[0]
+
+            if not class_id:
+                print(f"Unknown syntax {args}")
+                return
+
+            class_id = class_id.strip("\"',")
+
+            obj = models.storage.get(class_name, class_id)
+
+            if not obj:
+                print("** no instance found **")
+                return
+            else:
+                print(obj)
+
+
+
 
 if __name__ == "__main__":
     CuisineConsole().cmdloop()
