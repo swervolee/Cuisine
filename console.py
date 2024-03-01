@@ -10,18 +10,20 @@ from models.comment import Comment
 from models.tag import Tag
 import shlex
 import sys
+from models import storage
 
 
 classes = {"BaseModel":BaseModel,
            "Recipe": Recipe,
            "User": User,
-           "Commnet": Comment,
+           "Commmet": Comment,
            "Tag": Tag
            }
 
 class CuisineConsole(cmd.Cmd):
     """CONSOLE FOR CUISINE"""
     prompt = "(cuisine$) "
+    verbose = True
 
     def do_EOF(self, args):
         """
@@ -179,77 +181,75 @@ class CuisineConsole(cmd.Cmd):
         print("Prints string representation of given class or all")
         print("[Usage] all [class_name]")
 
-    def do_update(self, args):
+    def do_update(self, cmd=None):
         """
-        UPDATES THE ATTRIBUTES OF AN OBJECT
+        Updates a class with new attributes
+        or new values
+        command syntax: update <clsname> <id> <attrName> <attrValue>
         """
-        class_name = id = attribute = value = None
+        cls_name, id, attr_name, attr_val = None, None, None, None
+        all_objects = storage.all()
 
-        if args:
-            arguments = args.partition(" ")
-            class_name = arguments[0]
+        arg_tuple = cmd.partition(" ")  # Extract the clsName
+        if arg_tuple[0]:
+            cls_name = arg_tuple[0]
+        else:
+            print("** class name missing **")
+            return
 
-            if not class_name:
-                print("** class name missing **")
-                return
+        if cls_name not in classes:
+            print("** class doesn't exist **")
+            return
 
-            if class_name not in classes:
-                print("** class doesn't exist **")
-                return
+        arg_tuple = arg_tuple[2].partition(" ")  # Skip clsName and " "
+        if arg_tuple[0]:
+            id = arg_tuple[0]  # (<id>, " ", <arguments>)
+        else:
+            print("** instance id missing **")
+            return
 
-            arguments = arguments[2].partition(" ")
-            id = arguments[0]
+        key = f"{cls_name}.{id}"  # Key of storage.all() <clsname.id>
 
-            if not id:
-                print("** instance id missing **")
-                return
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+        item_dict = all_objects[key]  # Key the object
 
-            obj = models.storage.get(class_name, id)
+        if '{' in arg_tuple[2] and '}' in arg_tuple[2] and\
+           type(eval(arg_tuple[2])) is dict:
+            cmd_list = []  # If args is dict, list it, [key, value]
+            for k, v in eval(arg_tuple[2]).items():
+                cmd_list.append(k)
+                cmd_list.append(v)
+        else:
+            arg = arg_tuple[2]
+            arg = arg.strip()
+            if arg and arg.startswith("\""):  # # Else check for <">
+                attr_name = arg[1:arg.find("\"", 1)]  # Extract btwn ""
+                arg = arg[arg.find("\"", 1) + 1:]  # Move the cursor frwd
+            arg = arg.partition(" ")  # Else partition again
 
-            if not obj:
-                print("** no instance found **")
-                return
-
-            dict_items = []
-            if "{" in arguments[2] and "}" in arguments[2]:
-
-                if eval(arguments[2]) == dict:
-                    params = eval(arguments[2])
-
-                    for k, v in params.items():
-                        dict_items.append(k)
-                        dict_items.append(v)
-            else:
-                arguments = arguments[2].partition(" ")
-
-                if arguments[0].startswith('"') and arguments[0].endswith('"'):
-                    attribute = arguments[0][1 : -1]
-
-                else:
-                    attribute = arguments[0]
-
-                if not attribute:
+            if not attr_name and arg[0] != " ":  # if no quotations
+                attr_name = arg[0]
+            if arg[2] and arg[2][0] == "\"":
+                attr_val = arg[2][1: arg[2].find("\"", 1)]
+            if arg[2] and not attr_val:
+                attr_val = arg[2].partition(" ")[0]
+            cmd_list = [attr_name, attr_val]
+        for i in range(len(cmd_list)):
+            if i % 2 == 0:  # Parse the commands in two's [Key, Value]
+                attr_name, attr_value = cmd_list[i], cmd_list[i + 1]
+                if not attr_name:
                     print("** attribute name missing **")
                     return
-
-                arguments = arguments[2].partition(" ")
-
-                if arguments[0].startswith('"') and arguments[0].endswith('"'):
-                    value = arguments[0][1 : -1]
-                else:
-                    value = arguments[0]
-
-                if  not value:
+                if not attr_value:
                     print("** value missing **")
                     return
-
-            if dict_items:
-                for i in range(0, len(dict_items)):
-                    if i % 2 == 0:
-                        setattr(obj, dict_items[i], dict_items[i + 1])
-
-            else:
-                setattr(obj, attribute, value)
+                if hasattr(eval(cls_name), attr_name):  # If attr exists
+                    attr_value = type(getattr(eval(cls_name),  # cast val
+                                              attr_name))(attr_value)
+                setattr(item_dict, attr_name, attr_value)
+                item_dict.save()  # Save the changes to file.json
 
 if __name__ == "__main__":
     CuisineConsole().cmdloop()
