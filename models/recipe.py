@@ -13,7 +13,7 @@ class Recipe(BaseModel):
     introduction = ""
     ingredients = []
     instructions = []
-    _tags = []
+    _tags_ids = []
     servings = 0
     private = False
     user_id = ""
@@ -30,8 +30,8 @@ class Recipe(BaseModel):
         """
         ASSOCIATES A RECIPE WITH A TAG
         """
-        if value and isinstance(value, str) and value not in self._tags:
-            self._tags.append(value)
+        if type(value) is Tag and value.id not in self._tag_ids:
+            self._tagd_ids.append(value.id)
 
     def untag(self, value):
         """
