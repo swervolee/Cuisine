@@ -34,8 +34,9 @@ class Recipe(BaseModel, Base):
         private = Column(Boolean, default=False)
         servings = Column(Integer, default=0)
         tags = relationship("Tag", secondary="tag_recipe",
-                            backref="recipe_tags")
-        comments = relationship("Comment", backref="recipe")
+                            backref="recipe_tags",
+                            viewonly=False)
+        comments = relationship("Comment", backref="recipe", cascade="all, delete-orphan")
     else:
         user_id = ""
         title = ""
@@ -47,39 +48,40 @@ class Recipe(BaseModel, Base):
         tags = []  # Define _tags attribute to store Tag objects
         comments = []  # Define _comments attribute to store Comment objects
 
-    @property
-    def tags(self):
-        """
-        RETURNS A LIST OF TAGS ASSOCIATED WITH THE RECIPE
-        """
-        return self.tags
+    if models.storage_type != "db":
+        @property
+        def tags(self):
+            """
+            RETURNS A LIST OF TAGS ASSOCIATED WITH THE RECIPE
+            """
+            return self.tags
 
-    @tags.setter
-    def tags(self, value):
-        """
-        ASSOCIATES A RECIPE WITH A TAG
-        """
-        if isinstance(value, Tag) and value not in self.tags:
-            self.tags.append(value)
+        @tags.setter
+        def tags(self, value):
+            """
+            ASSOCIATES A RECIPE WITH A TAG
+            """
+            if isinstance(value, Tag) and value not in self.tags:
+                self.tags.append(value)
 
-    def untag(self, value):
-        """
-        UNTAG A RECIPE
-        """
-        if value in self.tags:
-            self.tags.remove(value)
+        def untag(self, value):
+            """
+            UNTAG A RECIPE
+            """
+            if value in self.tags:
+                self.tags.remove(value)
 
-    @property
-    def comments(self):
-        """
-        RETURNS A LIST OF COMMENTS ASSOCIATED WITH THE RECIPE
-        """
-        return self.comments
+        @property
+        def comments(self):
+            """
+            RETURNS A LIST OF COMMENTS ASSOCIATED WITH THE RECIPE
+            """
+            return self.comments
 
-    @comments.setter
-    def comments(self, value):
-        """
-        ASSOCIATES A RECIPE WITH A COMMENT
-        """
-        if isinstance(value, Comment) and value not in self._comments:
-            self.comments.append(value)
+        @comments.setter
+        def comments(self, value):
+            """
+            ASSOCIATES A RECIPE WITH A COMMENT
+            """
+            if isinstance(value, Comment) and value not in self._comments:
+                self.comments.append(value.id)
