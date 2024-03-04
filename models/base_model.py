@@ -9,7 +9,10 @@ import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 
-Base = declarative_base()
+if models.storage_type == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 
 class BaseModel:
@@ -21,9 +24,10 @@ class BaseModel:
     CUISINE
     """
 
-    id = Column(String(60), unique=True, Primary_key=True)
+    id = Column(String(60), unique=True, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
     updated_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
+
     def __init__(self, *args, **kwargs):
         """
         CLASS INSTANCIATION

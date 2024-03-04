@@ -2,7 +2,7 @@
 """DATABASE STORAGE"""
 
 import models
-from models.BaseModel import BaseModel, Base
+from models.base_model import BaseModel, Base
 from models.user import User
 from models.recipe import Recipe
 from models.tag import Tag
@@ -14,9 +14,9 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 classes = {"User": User,
-           "Recipe", Recipe,
-           "Tag", Tag,
-           "Comment", Comment
+           "Recipe": Recipe,
+           "Tag": Tag,
+           "Comment": Comment
            }
 
 class DBStorage:
@@ -36,12 +36,12 @@ class DBStorage:
         CUISINE_MYSQL_HOST = getenv("CUISINE_MYSQL_HOST")
         CUISINE_MYSQL_DB = getenv("CUISINE_MYSQL_DB")
         CUISINE_ENV = getenv("CUISINE_ENV")
-        self.__engine = create_engine("mysql+mysqldb://{}:{}:{}@{}".
+        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
                                       format(CUISINE_MYSQL_USER,
                                              CUISINE_MYSQL_PWD,
                                              CUISINE_MYSQL_HOST,
                                              CUISINE_MYSQL_DB))
-        if HBNB_ENV == "test":
+        if CUISINE_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
