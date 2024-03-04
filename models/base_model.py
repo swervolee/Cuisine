@@ -5,6 +5,10 @@ A BASEMODEL FOR THE CLASSES
 import uuid
 from datetime import datetime
 import models
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime
+
+Base = declarative_base()
 
 
 class BaseModel:
@@ -15,6 +19,10 @@ class BaseModel:
 
     CUISINE
     """
+
+    id = Column(String(60), unique=True, Primary_key=True)
+    created_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
+    updated_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
     def __init__(self, *args, **kwargs):
         """
         CLASS INSTANCIATION
@@ -63,6 +71,10 @@ class BaseModel:
         new_dict['__class__'] = self.__class__.__name__
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()
+
+        if new_dict.get("_sa_instance_state", None):
+            del new_dict["_sa_instance_state"]
+
         return new_dict
 
     def delete(self):
