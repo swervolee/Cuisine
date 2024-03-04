@@ -1,52 +1,85 @@
 #!/usr/bin/python3
 """A CLASS RECIPES"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from models.comment import Comment
 import models
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Table, String, Integer, ForeignKey, Boolean
+from os import getenv
 
+if models.storage_type == "db":
+    tag_recipe = Table('tag_recipe', Base.metadata,
+                       Column('recipe_id', String(60),
+                              ForeignKey('recipes.id', onupdate="CASCADE",
+                                         ondelete="CASCADE"),
+                              primary_key=True),
+                       Column('tag_id', String(60),
+                              ForeignKey('tags.id', onupdate="CASCADE",
+                                         ondelete="CASCADE"),
+                              primary_key=True))
 
-class Recipe(BaseModel):
+class Recipe(BaseModel, Base):
     """
     DEFINES THE RECIPE CLASS
     """
-    title = ""
-    introduction = ""
-    ingredients = []
-    instructions = []
-    _tags_ids = []
-    servings = 0
-    private = False
-    user_id = ""
+
+    if models.storage_type == "db":
+        __tablename__ = "recipes"
+
+        user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
+        title = Column(String(60), nullable=False)
+        introduction = Column(String(60), nullable=False)
+        ingredients = Column(String(60), nullable=False)
+        instructions = Column(String(60), nullable=False)
+        private = Column(Boolean, default=False)
+        servings = Column(Integer, default=0)
+        tags = relationship("Tag", secondary="tag_recipe",
+                            backref="recipe_tags")
+        comments = relationship("Comment", backref="recipe")
+    else:
+        user_id = ""
+        title = ""
+        introduction = ""
+        ingredients = ""
+        instructions= ""
+        private = False
+        servings = 0
+        tags = []  # Define _tags attribute to store Tag objects
+        comments = []  # Define _comments attribute to store Comment objects
 
     @property
     def tags(self):
         """
         RETURNS A LIST OF TAGS ASSOCIATED WITH THE RECIPE
         """
-        return self._tags
+        return self.tags
 
     @tags.setter
     def tags(self, value):
         """
         ASSOCIATES A RECIPE WITH A TAG
         """
-        if type(value) is Tag and value.id not in self._tag_ids:
-            self._tagd_ids.append(value.id)
+        if isinstance(value, Tag) and value not in self.tags:
+            self.tags.append(value)
 
     def untag(self, value):
         """
         UNTAG A RECIPE
         """
-        if value in self._tags:
-            self._tags.remove(value)
+        if value in self.tags:
+            self.tags.remove(value)
 
     @property
     def comments(self):
         """
-        RETURNS A LIST OF COMMENT IDS ASSOCIATED WITH A CLASS
+        RETURNS A LIST OF COMMENTS ASSOCIATED WITH THE RECIPE
         """
-        result = []
-        for item in models.storage.all(Comment).values():
-            if item.recipe_id == self.id:
-                result.append(item.id)
-        return result
+        return self.comments
+
+    @comments.setter
+    def comments(self, value):
+        """
+        ASSOCIATES A RECIPE WITH A COMMENT
+        """
+        if isinstance(value, Comment) and value not in self._comments:
+            self.comments.append(value)
