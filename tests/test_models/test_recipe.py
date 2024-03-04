@@ -83,8 +83,8 @@ class TestRecipe(unittest.TestCase):
 
         self.assertIs(type(self.recipe.title), str)
         self.assertIs(type(self.recipe.introduction), str)
-        self.assertIs(type(self.recipe.ingredients), list)
-        self.assertIs(type(self.recipe.instructions), list)
+        self.assertIs(type(self.recipe.ingredients), str)
+        self.assertIs(type(self.recipe.instructions), str)
         self.assertIs(type(self.recipe.tags), list)
         self.assertIs(type(self.recipe.servings), int)
         self.assertIs(type(self.recipe.private), bool)
@@ -92,7 +92,7 @@ class TestRecipe(unittest.TestCase):
 
     def test_tags_property(self):
         """Test the tags property"""
-        self.assertIsInstance(self.recipe.tags, list)
+        self.assertIs(type(self.recipe.tags), list)
 
     def test_comments_property(self):
         """Test the comments property"""
