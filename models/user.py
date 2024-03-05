@@ -9,7 +9,8 @@ from sqlalchemy.orm import relationship
 # SQLAlchemy setup
 if models.storage_type == "db":
     favorites_table = Table('favorites', Base.metadata,
-                            Column('user_id', String(128), ForeignKey('users.id')),
+                            Column('user_id', String(128),
+                                   ForeignKey('users.id')),
                             Column('recipe_id', String(128), ForeignKey(
                                 'recipes.id')))
 

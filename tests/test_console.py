@@ -8,12 +8,12 @@ import sqlalchemy
 import unittest
 from io import StringIO
 from unittest.mock import patch
-
 from console import CuisineConsole
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
-#from tests import clear_stream
+import inspect
+import pep8 as pycodestyle
 
 
 def clear_stream(stream):
@@ -21,7 +21,31 @@ def clear_stream(stream):
     stream.truncate(0)
     stream.seek(0)
 
-class TestHBNBCommand(unittest.TestCase):
+
+class TestConsoleDocs(unittest.TestCase):
+    """
+    TESTS CONSOLE DOCUMENTATION
+    """
+
+    @classmethod
+    def setUpClass(self):
+        """
+        Fetch console functions
+        """
+        self.console_funcs = inspect.getmembers(CuisineConsole,
+                                                inspect.isfunction)
+
+    def test_pep8_conformance_console(self):
+        """
+        TESTS THAT CONSOLE PASSES PEP8 DOCUMENTATION
+        """
+        for path in ['console.py', 'tests/test_console.py']:
+            with self.subTest(path=path):
+                errors = pycodestyle.Checker(path).check_all()
+                self.assertEqual(errors, 0)
+
+
+class TestCuisineCommand(unittest.TestCase):
     """Represents the test class for the HBNBCommand class.
     """
     @unittest.skipIf(

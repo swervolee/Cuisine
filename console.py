@@ -13,7 +13,7 @@ import sys
 from models import storage
 
 
-classes = {"BaseModel":BaseModel,
+classes = {"BaseModel": BaseModel,
            "Recipe": Recipe,
            "User": User,
            "Commmet": Comment,
@@ -67,10 +67,10 @@ class CuisineConsole(cmd.Cmd):
                 else:
                     try:
                         value = int(value)
-                    except:
+                    except Exception:
                         try:
                             value = float(value)
-                        except:
+                        except Exception:
                             continue
                 new_dict[key] = value
         return new_dict
@@ -116,7 +116,7 @@ class CuisineConsole(cmd.Cmd):
         if not args or not class_name:
             print("** class name missing **")
 
-        elif class_name not in  classes:
+        elif class_name not in classes:
             print("** class doesn't exist **")
 
         elif not id:
@@ -285,7 +285,7 @@ class CuisineConsole(cmd.Cmd):
         """
         COUNTS THE NUMBER OF CLASS INSTANCES
         """
-        count = 0;
+        count = 0
         for item in models.storage.all().values():
             if item.__class__ == arg or item.__class__.__name__ == arg:
                 count += 1
@@ -296,7 +296,7 @@ class CuisineConsole(cmd.Cmd):
         COUNTS INSTANCES
         """
         print("Counts number of instances of a class")
-        print ("[usage] count <class name>")
+        print("[usage] count <class name>")
 
     def default(self, cmd):
         """
@@ -307,7 +307,7 @@ class CuisineConsole(cmd.Cmd):
         error message
         """
         line = cmd[:]  # copy the command
-        if not("." in line and "(" in line and ")" in line):
+        if not ("." in line and "(" in line and ")" in line):
             print(f"*** Unknown syntax: {cmd}")  # <ClsName>.<Command>(Args)
             return
         cls_name = line[: line.find(".", 1)]  # extract the cls name
@@ -343,6 +343,7 @@ class CuisineConsole(cmd.Cmd):
                 attrs = cmd2.replace(",", "")  # Else eliminate commas
             joined = " ".join([cls_name, id, attrs])  # Join the commands
             self.do_update(joined)
+
 
 if __name__ == "__main__":
     CuisineConsole().cmdloop()

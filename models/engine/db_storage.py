@@ -45,17 +45,24 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """
-        QUERY FOR OBJECTS FROM THE DATABASE
-        """
-        result = {}
-        for item in classes:
-            if cls is None or cls is classes[item] or cls is item:
-                objs = self.__session.query(classes[item]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id
-                    result[key] = obj
-        return result
+        """returns a dictionary of the query"""
+        dictionary = {}
+        if cls:
+            if type(cls) == str:
+                search = eval(cls)
+            query = self.__session.query(search)
+
+            for item in query:
+                k = f"{type(item).__name__}.{item.id}"
+                dictionary[k] = item
+        else:
+            all = [User, Recipe, Tag, Comment]
+            for i in all:
+                query = self.__session.query(i)
+                for item in query:
+                    k = f"{type(item).__name__}.{item.id}"
+                    dictionary[k] = item
+        return dictionary
 
     def new(self, obj):
         """
