@@ -13,7 +13,7 @@ import sys
 from models import storage
 
 
-classes = {"BaseModel":BaseModel,
+classes = {"BaseModel": BaseModel,
            "Recipe": Recipe,
            "User": User,
            "Commmet": Comment,
@@ -54,21 +54,41 @@ class CuisineConsole(cmd.Cmd):
         if not sys.__stdin__.isatty():
             print("cuisine$ ")
 
-    def do_create(self, cls):
-        """
-        CREATES A NEW INSTANCE OF EITHER OF THE CLASSE
-        BaseModel, User, Recipe, Tag or Comment
-        """
-        if not cls:
+    def _key_value_parser(self, args):
+        """creates a dictionary from a list of strings"""
+        new_dict = {}
+        for arg in args:
+            if "=" in arg:
+                kvp = arg.split('=', 1)
+                key = kvp[0]
+                value = kvp[1]
+                if value[0] == value[-1] == '"':
+                    value = shlex.split(value)[0].replace('_', ' ')
+                else:
+                    try:
+                        value = int(value)
+                    except Exception:
+                        try:
+                            value = float(value)
+                        except Exception:
+                            continue
+                new_dict[key] = value
+        return new_dict
+
+    def do_create(self, arg):
+        """Creates a new instance of a class"""
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
-
-        elif cls not in classes:
-            print("** class doesn't exist **")
-
+            return False
+        if args[0] in classes:
+            new_dict = self._key_value_parser(args[1:])
+            instance = classes[args[0]](**new_dict)
         else:
-            new = classes[cls]()
-            new.save()
-            print("{}".format(new.id))
+            print("** class doesn't exist **")
+            return False
+        print(instance.id)
+        instance.save()
 
     def help_create(self):
         """
@@ -96,7 +116,7 @@ class CuisineConsole(cmd.Cmd):
         if not args or not class_name:
             print("** class name missing **")
 
-        elif class_name not in  classes:
+        elif class_name not in classes:
             print("** class doesn't exist **")
 
         elif not id:
@@ -265,7 +285,7 @@ class CuisineConsole(cmd.Cmd):
         """
         COUNTS THE NUMBER OF CLASS INSTANCES
         """
-        count = 0;
+        count = 0
         for item in models.storage.all().values():
             if item.__class__ == arg or item.__class__.__name__ == arg:
                 count += 1
@@ -276,75 +296,53 @@ class CuisineConsole(cmd.Cmd):
         COUNTS INSTANCES
         """
         print("Counts number of instances of a class")
-        print ("[usage] count <class name>")
+        print("[usage] count <class name>")
 
-    def default(self, args):
+    def default(self, cmd):
         """
-        HANDLES CLASS DOT COMMANDS COMMANDS
+        Handles class commands
+        Class commands syntax is:
+            <ClsName>.<Commmand><(Arguments)>
+        if the command syntax is wrong print
+        error message
         """
-        if "." not in args or "(" not in args or ")" not in args:
+        line = cmd[:]  # copy the command
+        if not ("." in line and "(" in line and ")" in line):
+            print(f"*** Unknown syntax: {cmd}")  # <ClsName>.<Command>(Args)
             return
-
-        class_name = class_id = command = obj = None
-
-        arguments = args.partition(".")
-        class_name = arguments[0]
-
-        if class_name not in classes:
-            print(f"Unknown syntax {args}")
+        cls_name = line[: line.find(".", 1)]  # extract the cls name
+        if cls_name not in classes:  # Look it up in the clslist
+            print(f"*** Unknown syntax: {line}")
             return
-
-        command = arguments[2]
-
-        if not command:
-            print(f"Unknown syntax {args}")
+        comd = line[line.find(".", 1) + 1: line.find("(", 1)]  # Eg update, all
+        if comd not in dots:
+            print(f"*** Unknown syntax: {line}")
             return
-
-        dot_command = command[: command.find("(", 1)]
-
-        if dot_command not in dots:
-            print(f"Unknown syntax {args}")
-            return
-
-        if dot_command == "all":
-            return self.do_all(class_name)
-
-        if dot_command == "count":
-            return self.do_count(class_name)
-
-        if dot_command == "show" or dot_command == "destroy":
-            class_id = command[command.find('(') + 1: command.find(')')].strip("\"'")
-            obj = models.storage.get(class_name, class_id)
-
-            if not obj:
-                print("** no instance found **")
-                return
-
-            if dot_command == "show":
-                print(obj)
-            elif dot_command == "destroy":
-                obj.delete()
-
-        if dot_command == "update":
-            command = command[command.find('(') + 1: command.find(')')]
-            command = command.partition(" ")
-            class_id = command[0]
-
-            if not class_id:
-                print(f"Unknown syntax {args}")
-                return
-
-            class_id = class_id.strip("\"',")
-
-            obj = models.storage.get(class_name, class_id)
-
-            if not obj:
-                print("** no instance found **")
-                return
+        if comd == "all":  # prints all the classes in file.json
+            self.do_all(cls_name)
+        if comd == "count":  # Count the number of instances of a class
+            self.do_count(cls_name)
+        if comd == "show":  # prints a string representation of a cls
+            id = line[line.find("(", 1) + 1: line.find(")", 1)]
+            joined_command = " ".join([cls_name, id])
+            self.do_show(joined_command)
+        if comd == "destroy":  # Destroys an instance
+            id = line[line.find("(", 1) + 1: line.find(")", 1)]
+            joined_command = " ".join([cls_name, id])
+            self.do_destroy(joined_command)
+        if comd == "update":  # Updates an isntance with new attrs/values
+            arg = line[line.find("(", 1) + 1: line.find(")", 1)]  # Extract
+            arg = arg.partition(", ")  # The args are comma seperated so ..
+            id = arg[0]  # Extract the id which is the first args
+            cmd2 = arg[2]  # Jump id and " ".Extracts args after id
+            cmd2 = cmd2.strip()  # Eliminate trailing whitespaces
+            if cmd2 and cmd2[0] == "{" and cmd2[-1] == "}"\
+               and type(eval(cmd2)) is dict:
+                attrs = cmd2  # If its a dict, take it as it is
             else:
-                print(obj)
-
-
+                attrs = cmd2.replace(",", "")  # Else eliminate commas
+            joined = " ".join([cls_name, id, attrs])  # Join the commands
+            self.do_update(joined)
 
 
 if __name__ == "__main__":

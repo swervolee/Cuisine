@@ -13,7 +13,7 @@ article {
     border-radius: 20px;
     pposition: relative;
     z-index: -1;
-    background-color: #FEE715;
+    background-color: #373f27;
     color: black;
     max-height: 500px;
     overflow-y: auto;
@@ -41,6 +41,7 @@ article h2 {
     margin: 40px;
     border-bottom: 1px solid #aa0004;
     text-align: center;
+    color: white;
 }
 
 

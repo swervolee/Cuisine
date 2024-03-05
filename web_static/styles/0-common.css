@@ -34,7 +34,7 @@ body {
     font-family: Circular, "Helvetica Neue",Helvetica,Arial,sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #101820;
+    background-color: #cda34f
 }
 .container {
     max-width: 1000px;

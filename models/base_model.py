@@ -9,7 +9,10 @@ import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 
-Base = declarative_base()
+if models.storage_type == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 
 class BaseModel:
@@ -21,9 +24,10 @@ class BaseModel:
     CUISINE
     """
 
-    id = Column(String(60), unique=True, Primary_key=True)
+    id = Column(String(60), unique=True, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
     updated_at = Column(DateTime, nullable=False, default=(datetime.utcnow()))
+
     def __init__(self, *args, **kwargs):
         """
         CLASS INSTANCIATION
@@ -54,7 +58,7 @@ class BaseModel:
         STRING METHOD FOR ALL CLASSES
         """
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
+            self.__class__.__name__, self.id, self.to_dict())
 
     def save(self):
         """
@@ -73,7 +77,7 @@ class BaseModel:
         new_dict['created_at'] = self.created_at.isoformat()
         new_dict['updated_at'] = self.updated_at.isoformat()
 
-        if new_dict.get("_sa_instance_state", None):
+        if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
 
         return new_dict

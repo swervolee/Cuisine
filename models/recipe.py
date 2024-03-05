@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Table, String, Integer, ForeignKey, Boolean
 from os import getenv
 
+
 if models.storage_type == "db":
     tag_recipe = Table('tag_recipe', Base.metadata,
                        Column('recipe_id', String(60),
@@ -17,6 +18,7 @@ if models.storage_type == "db":
                               ForeignKey('tags.id', onupdate="CASCADE",
                                          ondelete="CASCADE"),
                               primary_key=True))
+
 
 class Recipe(BaseModel, Base):
     """
@@ -36,17 +38,18 @@ class Recipe(BaseModel, Base):
         tags = relationship("Tag", secondary="tag_recipe",
                             backref="recipe_tags",
                             viewonly=False)
-        comments = relationship("Comment", backref="recipe", cascade="all, delete-orphan")
+        comments = relationship("Comment",
+                                backref="recipe", cascade="all, delete-orphan")
     else:
         user_id = ""
         title = ""
         introduction = ""
         ingredients = ""
-        instructions= ""
+        instructions = ""
         private = False
         servings = 0
-        tags = []  # Define _tags attribute to store Tag objects
-        comments = []  # Define _comments attribute to store Comment objects
+        _tags = []  # Define _tags attribute to store Tag objects
+        _comments = []  # Define _comments attribute to store Comment objects
 
     if models.storage_type != "db":
         @property
@@ -54,7 +57,7 @@ class Recipe(BaseModel, Base):
             """
             RETURNS A LIST OF TAGS ASSOCIATED WITH THE RECIPE
             """
-            return self.tags
+            return self._tags
 
         @tags.setter
         def tags(self, value):
@@ -62,21 +65,21 @@ class Recipe(BaseModel, Base):
             ASSOCIATES A RECIPE WITH A TAG
             """
             if isinstance(value, Tag) and value not in self.tags:
-                self.tags.append(value)
+                self._tags.append(value)
 
         def untag(self, value):
             """
             UNTAG A RECIPE
             """
             if value in self.tags:
-                self.tags.remove(value)
+                self._tags.remove(value)
 
         @property
         def comments(self):
             """
             RETURNS A LIST OF COMMENTS ASSOCIATED WITH THE RECIPE
             """
-            return self.comments
+            return self._comments
 
         @comments.setter
         def comments(self, value):
@@ -84,4 +87,4 @@ class Recipe(BaseModel, Base):
             ASSOCIATES A RECIPE WITH A COMMENT
             """
             if isinstance(value, Comment) and value not in self._comments:
-                self.comments.append(value.id)
+                self._comments.append(value.id)

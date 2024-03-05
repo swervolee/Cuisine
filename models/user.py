@@ -7,25 +7,36 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 # SQLAlchemy setup
-favorites_table = Table('favorites', Base.metadata,
-    Column('user_id', Integer, ForeignKey('users.id')),
-    Column('recipe_id', Integer, ForeignKey('recipes.id'))
-)
+if models.storage_type == "db":
+    favorites_table = Table('favorites', Base.metadata,
+                            Column('user_id', String(128),
+                                   ForeignKey('users.id')),
+                            Column('recipe_id', String(128), ForeignKey(
+                                'recipes.id')))
+
 
 class User(BaseModel, Base):
     """
     CONSTRUCTS THE CLASS BASEMODEL
     """
     if models.storage_type == "db":
+
         __tablename__ = "users"
+
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
         first_name = Column(String(128), nullable=True)
         last_name = Column(String(128), nullable=True)
         bio = Column(String(1024), nullable=True)
-        recipes = relationship("Recipe", backref="user", cascade="all, delete-orphan")
-        comments = relationship("Comment", backref="user", cascade="all, delete-orphan")
-        favorites = relationship("Recipe", secondary=favorites_table, backref="favorited_by")
+        recipes = relationship("Recipe",
+                               backref="user",
+                               cascade="all, delete-orphan")
+        comments = relationship("Comment",
+                                backref="user",
+                                cascade="all, delete-orphan")
+        favorites = relationship("Recipe",
+                                 secondary=favorites_table,
+                                 backref="favorited_by")
     else:
         first_name = ""
         last_name = ""
