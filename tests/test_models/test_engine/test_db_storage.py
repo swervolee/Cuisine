@@ -106,4 +106,8 @@ class Test_DbStorage(unittest.TestCase):
         self.assertIs(type(models.storage.all()), dict)
 
     @unittest.skipIf(strg, msg)
-    def test_all_method
+    def test_all_method_without_class(self):
+        """
+        TEST ALL METHOD WITHOUT ARGUMENTS
+        """
+        pass
