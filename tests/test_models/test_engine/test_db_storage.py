@@ -98,12 +98,12 @@ class Test_DbStorage(unittest.TestCase):
                              db="cuisine_dev_db")
         cls.cur = db.cursor()
 
-    @unittest.skipIf(strg, f{msg})
+    @unittest.skipIf(strg, msg)
     def test_all_method(self):
         """
         TESTS TEH ALL METHOD OF DBSTORAGE
         """
         self.assertIs(type(models.storage.all()), dict)
 
-    @unittest.skipIf(strg, f{msg})
+    @unittest.skipIf(strg, msg)
     def test_all_method
