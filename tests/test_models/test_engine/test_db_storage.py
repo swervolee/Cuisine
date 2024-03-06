@@ -33,3 +33,12 @@ class TestDBStorge_docs(unittest.TestCase):
         TEST SETUP
         """
         cls.dbs_f = inspect.getmembers(DBStorage, inspect.isfunction)
+
+    def test_pep8_comformance_db_storage(self):
+        """
+        TEST WHETHER DB STORAGAE PASSES PEP8
+        """
+        pep8s = pep8.StyleGuide(quiet=True)
+        result = pep8s.check_files(['models/engine/db_storage'])
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors")
