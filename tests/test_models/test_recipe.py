@@ -8,6 +8,8 @@ import time
 import unittest
 import uuid
 import os
+from models.tag import Tag
+from models.user import User
 from unittest import mock
 Recipe = models.recipe.Recipe
 module_doc = models.recipe.__doc__
@@ -96,6 +98,22 @@ class TestRecipe(unittest.TestCase):
     def test_tags_property(self):
         """Test the tags property"""
         self.assertIs(type(self.recipe.tags), list)
+
+    @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") != "db", "DB")
+    def test_tag_property(self):
+        """
+        TEST THE TAG PROPERTY FOR DB STORGE
+        """
+        new_user = User(email="test_email", password="test_password")
+        new_recipe = Recipe(user_id=new_user.id,
+                            title="lunch",
+                            introduction="empty",
+                            ingredients="empty",
+                            instructions="empty")
+        new_user.save()
+        new_recipe.save()
+        print(new_user.recipes)
+        new_tag = Tag(name="lunch")
 
     def test_comments_property(self):
         """Test the comments property"""

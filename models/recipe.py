@@ -27,7 +27,6 @@ class Recipe(BaseModel, Base):
 
     if models.storage_type == "db":
         __tablename__ = "recipes"
-
         user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
         title = Column(String(60), nullable=False)
         introduction = Column(String(60), nullable=False)
@@ -39,7 +38,8 @@ class Recipe(BaseModel, Base):
                             backref="recipe_tags",
                             viewonly=False)
         comments = relationship("Comment",
-                                backref="recipe", cascade="all, delete-orphan")
+                                backref="recipe",
+                                cascade="all, delete-orphan")
     else:
         user_id = ""
         title = ""
