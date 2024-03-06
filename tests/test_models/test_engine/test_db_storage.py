@@ -65,3 +65,13 @@ class TestDBStorge_docs(unittest.TestCase):
                 self.assertIsNot(item, None)
                 self.assertTrue(len(item) > 1,
                                 "db  storage missing docstring")
+
+    def test_db_storage_func_docstring(self):
+        """
+        TEST DB FUNCTIONS DOCSTRNGS
+        """
+        for func in self.dbs_f:
+            self.assertIsNot(func[1].__doc__, None,
+                             "{:s} method needs a docstring".format(func[0]))
+            self.assertTrue(len(func[1].__doc__) > 1,
+                            "{:s} method needs a docstring".format(func[0]))
