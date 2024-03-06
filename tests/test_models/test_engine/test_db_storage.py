@@ -10,6 +10,11 @@ from models import storage
 import os
 import json
 import unittest
+from models.base_model import BaseModel
+from models.recipe import Recipe
+from models.user import User
+from models.tag import Tag
+from models.comment import Comment
 DBStorage = db_storage.DBStorage
 
 classes = {"BaseModel": BaseModel,
