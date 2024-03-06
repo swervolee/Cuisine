@@ -84,7 +84,7 @@ class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
     """
-    @unittest.skipIf(strg, "Not testing filestorage")
+    @unittest.skipIf(strg, f{msg})
     def test_all_method(self):
         """
         TESTS TEH ALL METHOD OF DBSTORAGE
