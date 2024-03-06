@@ -78,7 +78,7 @@ class TestDBStorge_docs(unittest.TestCase):
                             "{:s} method needs a docstring".format(func[0]))
 
 
-st = models.storage_type != db
+strg = models.storage_type != db
 class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
