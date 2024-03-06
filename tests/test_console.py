@@ -26,7 +26,6 @@ class TestConsoleDocs(unittest.TestCase):
     """
     TESTS CONSOLE DOCUMENTATION
     """
-
     @classmethod
     def setUpClass(self):
         """
@@ -43,6 +42,15 @@ class TestConsoleDocs(unittest.TestCase):
             with self.subTest(path=path):
                 errors = pycodestyle.Checker(path).check_all()
                 self.assertEqual(errors, 0)
+
+    def test_module_doc_string(self):
+        """
+        TEST PRESENCE OF MODULE DOCSTRING
+        """
+        self.assertIsNot(CuisineConsole.__doc__, None,
+                         "console needs a docstring")
+        self.assertTrue(len(CuisineConsole.__doc__) > 1,
+                        "console needs a docstring")
 
 
 class TestCuisineCommand(unittest.TestCase):
