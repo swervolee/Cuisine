@@ -41,6 +41,6 @@ class TestDBStorge_docs(unittest.TestCase):
         TEST WHETHER DB STORAGAE PASSES PEP8
         """
         pep8s = pep8.StyleGuide(quiet=True)
-        result = pep8s.check_files(['models/engine/db_storage'])
+        result = pep8s.check_files(['models/engine/db_storage.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors")
