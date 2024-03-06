@@ -7,6 +7,7 @@ import pep8 as pycodestyle
 import time
 import unittest
 import uuid
+import os
 from unittest import mock
 Recipe = models.recipe.Recipe
 module_doc = models.recipe.__doc__
@@ -64,12 +65,13 @@ class TestRecipe(unittest.TestCase):
         """
         SET UP TEST
         """
-        self.recipe = Recipe()
+        self.recipe = Recipe(title="chicken masala")
 
     def test_instantiation(self):
         """Test that object is correctly created"""
         self.assertIsInstance(self.recipe, Recipe)
 
+    @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "FILESTORAGE")
     def test_attributes(self):
         """Test the presence of attributes"""
         self.assertTrue(hasattr(self.recipe, 'title'))
@@ -90,6 +92,7 @@ class TestRecipe(unittest.TestCase):
         self.assertIs(type(self.recipe.private), bool)
         self.assertIs(type(self.recipe.user_id), str)
 
+    @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "FILESTORAGE")
     def test_tags_property(self):
         """Test the tags property"""
         self.assertIs(type(self.recipe.tags), list)

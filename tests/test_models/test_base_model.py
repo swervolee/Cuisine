@@ -8,6 +8,7 @@ import time
 import unittest
 import uuid
 from unittest import mock
+import os
 BaseModel = models.base_model.BaseModel
 module_doc = models.base_model.__doc__
 
@@ -188,6 +189,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn('created_at', string_representation)
         self.assertIn('updated_at', string_representation)
 
+    @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "FILESTORAGE")
     def test_to_dict_method(self):
         """
         TEST IF OBJECT TO DICTIONARY IS WORKING CORRECT
@@ -205,6 +207,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(base_model_dict[
             'updated_at'], self.base_model.updated_at.isoformat())
 
+    @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "filestorge")
     def test_save_method(self):
         """
         TEST FILE STORAGE SAVING
@@ -213,6 +216,7 @@ class TestBaseModel(unittest.TestCase):
         self.base_model.save()
         self.assertNotEqual(initial_updated_at, self.base_model.updated_at)
 
+    @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "FILESTRAGE")
     def test_delete_method(self):
         """
         TEST DELETION FROM FILE STORAGE
