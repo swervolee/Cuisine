@@ -77,6 +77,7 @@ class TestDBStorge_docs(unittest.TestCase):
             self.assertTrue(len(func[1].__doc__) > 1,
                             "{:s} method needs a docstring".format(func[0]))
 
+
 class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
