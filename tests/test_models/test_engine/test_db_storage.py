@@ -24,7 +24,7 @@ classes = {"BaseModel": BaseModel,
            "Comment": Comment
            }
 
-class TestDBStorge_docs(uinttest.TestCase):
+class TestDBStorge_docs(unittest.TestCase):
     """
     TEST DBSTORAGE DOCS
     """
