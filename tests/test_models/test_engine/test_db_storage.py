@@ -91,4 +91,5 @@ class Test_DbStorage(unittest.TestCase):
         """
         self.assertIs(type(models.storage.all()), dict)
 
-    @unittest.skipIf(strg, "
+    @unittest.skipIf(strg, f{msg})
+    def test_all_method
