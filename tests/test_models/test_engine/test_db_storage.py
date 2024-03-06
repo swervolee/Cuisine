@@ -28,6 +28,7 @@ class TestDBStorge_docs(unittest.TestCase):
     """
     TEST DBSTORAGE DOCS
     """
+    @classmethod
     def setUpClass(cls):
         """
         TEST SETUP
