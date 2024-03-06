@@ -54,4 +54,4 @@ class TestDBStorge_docs(unittest.TestCase):
         result = pep8s.check_files(
             ["tests/test_models/test_engine/test_db_storage.py"])
         self.assertEqual(result.total_errors, 0,
-                         "Found code style errors") 
+                         "Found code style errors")
