@@ -78,13 +78,17 @@ class TestDBStorge_docs(unittest.TestCase):
                             "{:s} method needs a docstring".format(func[0]))
 
 
+strg = models.storage_type != "db"
+msg = "Not testing FileStorge"
 class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
     """
-    @unittest.skipIf(models.storage_type != "db", "Not testing filestorage")
+    @unittest.skipIf(strg, "Not testing filestorage")
     def test_all_method(self):
         """
         TESTS TEH ALL METHOD OF DBSTORAGE
         """
         self.assertIs(type(models.storage.all()), dict)
+
+    @unittest.skipIf(strg, "
