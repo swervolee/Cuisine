@@ -62,6 +62,6 @@ class TestDBStorge_docs(unittest.TestCase):
         """
         for item in [db_storage.__doc__, DBStorage.__doc__]:
             with self.subTest(function=item):
-                self.assertIsNot(function, None)
-                self.assertTrue(len(function) > 1,
+                self.assertIsNot(item, None)
+                self.assertTrue(len(item) > 1,
                                 "db  storage missing docstring")
