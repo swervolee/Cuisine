@@ -8,6 +8,7 @@ import inspect
 from models.engine import db_storage
 from models import storage
 import os
+import models
 import json
 import unittest
 from models.base_model import BaseModel
