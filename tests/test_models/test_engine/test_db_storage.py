@@ -8,6 +8,7 @@ import inspect
 from models.engine import db_storage
 from models import storage
 import os
+import models
 import json
 import unittest
 from models.base_model import BaseModel
@@ -16,6 +17,8 @@ from models.user import User
 from models.tag import Tag
 from models.comment import Comment
 import pep8
+import MySQLdb
+
 DBStorage = db_storage.DBStorage
 
 classes = {"BaseModel": BaseModel,
@@ -76,8 +79,35 @@ class TestDBStorge_docs(unittest.TestCase):
             self.assertTrue(len(func[1].__doc__) > 1,
                             "{:s} method needs a docstring".format(func[0]))
 
-class Test_DbStorage(unittest.Testcase):
+
+strg = models.storage_type != "db"
+msg = "Not testing FileStorge"
+class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
     """
-    @unittest.skipIf(models.storage_t != "db", "Not testing filestorage")
+    @classmethod
+    def setUpClass(cls):
+        """
+        DOES A CLASS SETUP
+        """
+        cls.clist = ["user", "recipe", "tag", "comment"]
+        db = MySQLdb.connect(host="localhost",
+                             user="cuisine_dev",
+                             password="cuisine_dev_pwd",
+                             db="cuisine_dev_db")
+        cls.cur = db.cursor()
+
+    @unittest.skipIf(strg, msg)
+    def test_all_method(self):
+        """
+        TESTS TEH ALL METHOD OF DBSTORAGE
+        """
+        self.assertIs(type(models.storage.all()), dict)
+
+    @unittest.skipIf(strg, msg)
+    def test_all_method_without_class(self):
+        """
+        TEST ALL METHOD WITHOUT ARGUMENTS
+        """
+        pass
