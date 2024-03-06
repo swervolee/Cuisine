@@ -28,5 +28,3 @@ class TestDBStorge_docs(uinttest.TestCase):
         TEST SETUP
         """
         cls.dbs_f = inspect.getmembers(DBStorage, inspect.isfunction)
-
-        
