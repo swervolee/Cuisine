@@ -19,6 +19,7 @@ classes = {"User": User,
            "Comment": Comment
            }
 
+
 class DBStorage:
     """
     SQLALCHEMY DATABASE CONNECTION
