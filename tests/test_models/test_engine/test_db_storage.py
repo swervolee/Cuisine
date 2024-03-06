@@ -55,3 +55,13 @@ class TestDBStorge_docs(unittest.TestCase):
             ["tests/test_models/test_engine/test_db_storage.py"])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors")
+
+    def test_db_storage_docstrings(self):
+        """
+        TEST DOCSTRINGS
+        """
+        for item in [db_storage.__doc__, DBStorage.__doc__]:
+            with self.subTest(function=item):
+                self.assertIsNot(function, None)
+                self.assertTrue(len(function) > 1,
+                                "db  storage missing docstring")
