@@ -17,6 +17,8 @@ from models.user import User
 from models.tag import Tag
 from models.comment import Comment
 import pep8
+import MySQLdb
+
 DBStorage = db_storage.DBStorage
 
 classes = {"BaseModel": BaseModel,
@@ -84,6 +86,18 @@ class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
     """
+    @classmethod
+    def setUpClass(cls):
+        """
+        DOES A CLASS SETUP
+        """
+        cls.clist = ["user", "recipe", "tag", "comment"]
+        db = MySQLdb.connect(host="localhost",
+                             user="cuisine_dev",
+                             password="cuisine_dev_pwd",
+                             db="cuisine_dev_db")
+        cls.cur = db.cursor()
+
     @unittest.skipIf(strg, f{msg})
     def test_all_method(self):
         """
