@@ -15,6 +15,7 @@ from models.recipe import Recipe
 from models.user import User
 from models.tag import Tag
 from models.comment import Comment
+import pep8
 DBStorage = db_storage.DBStorage
 
 classes = {"BaseModel": BaseModel,
