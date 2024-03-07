@@ -3,12 +3,13 @@
 import models
 from models.base_model import BaseModel, Base
 from models.comment import Comment
+from models.recipe import Recipe
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 # SQLAlchemy setup
 if models.storage_type == "db":
-    favorites_table = Table('favorites', Base.metadata,
+    favorites_table = Table('favourites', Base.metadata,
                             Column('user_id', String(128),
                                    ForeignKey('users.id')),
                             Column('recipe_id', String(128), ForeignKey(
@@ -34,9 +35,9 @@ class User(BaseModel, Base):
         comments = relationship("Comment",
                                 backref="user",
                                 cascade="all, delete-orphan")
-        favorites = relationship("Recipe",
-                                 secondary=favorites_table,
-                                 backref="favorited_by")
+        _favorites = relationship("Recipe",
+                                  secondary=favorites_table,
+                                  backref="favorited_by")
     else:
         first_name = ""
         last_name = ""
@@ -44,36 +45,36 @@ class User(BaseModel, Base):
         password = ""
         bio = ""
         _favorites = []
+        _comments = []
 
-    def favorite(self, recipe_id):
-        """Adds a recipe to favorites."""
+    @property
+    def favorites(self):
+        """
+        RETURN S A LIST OF FAVORITED ITEMS
+        """
+        return self._favorites
+
+    @favorites.setter
+    def favorites(self, value):
+        """
+        RETURNS A LIST OF FAVOURITED RECIPES
+        """
         if models.storage_type == "db":
-            if recipe_id not in [recipe.id for recipe in self.favorites]:
-                self.favorites.append(models.storage.get(Recipe, recipe_id))
+            if value not in self._favorites:
+                self.favorites.append(value)
         else:
-            if recipe_id not in self._favorites:
-                self._favorites.append(recipe_id)
+            if value.id not in self._favorites:
+                self._favorites.append(value.id)
 
-    def unfavorite(self, recipe_id):
+    def unfavorite(self, value):
         """Removes a recipe from favorites."""
-        if models.storage_type == "db":
-            for recipe in self.favorites:
-                if recipe.id == recipe_id:
-                    self.favorites.remove(recipe)
-                    break
+        if models.storage_type == "db" and value in self._favorites:
+            self._favorites.remove(value)
         else:
-            if recipe_id in self._favorites:
-                self._favorites.remove(recipe_id)
+            if value.id in self._favorites:
+                self._favorites.remove(value)
 
-    if models.storage_type != 'db':
-        @property
-        def favorites(self):
-            """Returns favorited recipes."""
-            if models.storage_type == "db":
-                return [recipe.id for recipe in self.favorites]
-            else:
-                return self._favorites
-
+    if models.storage_type != "db":
         @property
         def recipes(self):
             """Returns a list of recipe IDs created by the user."""

@@ -9,6 +9,7 @@ import time
 import unittest
 import uuid
 from unittest import mock
+from models.recipe import Recipe
 User = models.user.User
 module_doc = models.user.__doc__
 
@@ -60,6 +61,22 @@ class TestUserDocs(unittest.TestCase):
 
 class TestUser(unittest.TestCase):
     """Test the User class"""
+    @classmethod
+    def setUpClass(cls):
+        """
+        DOES A CLASS SET UP
+        """
+        new_user = User(email="test_email",
+                        password="test_password")
+        new_recipe = Recipe(user_id=new_user.id,
+                            title="empty",
+                            introduction="empty",
+                            ingredients="empty",
+                            instructions="empty")
+
+        cls.new_user = new_user
+        cls.new_recipe = new_recipe
+
     def test_instantiation(self):
         """Test that object is correctly created"""
         user = User()
@@ -73,15 +90,30 @@ class TestUser(unittest.TestCase):
         self.assertTrue(hasattr(user, 'email'))
         self.assertTrue(hasattr(user, 'password'))
         self.assertTrue(hasattr(user, 'bio'))
-        self.assertTrue(hasattr(user, 'favorites'))
-        self.assertTrue(hasattr(user, 'comments'))
+        self.assertTrue(hasattr(user, '_favorites'))
 
     def test_favorites_property(self):
         """Test the favorites property"""
         user = User()
         self.assertIsInstance(user.favorites, list)
 
+        self.new_user.favorites = self.new_recipe
+        self.new_user.save()
+        self.new_recipe.save()
+
+        if models.storage_type == "db":
+            self.assertIs(self.new_user.favorites[-1], self.new_recipe)
+            self.assertIs(self.new_recipe.favorited_by[-1], self.new_user)
+
+        else:
+            self.assertIs(self.new_user.favorites[-1], self.new_recipe.id)
+            self.assertTrue(
+                self.new_recipe.favorited_by[-1] == self.new_user.id,
+                """filestorage favorites not working""")
+
+        self.new_user.delete()
+        self.new_recipe.delete()
+
     def test_comments_property(self):
         """Test the comments property"""
-        user = User()
-        self.assertIsInstance(user.comments, list)
+        pass

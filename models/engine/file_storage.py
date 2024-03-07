@@ -83,7 +83,7 @@ class FileStorage():
         """
         COUNT THE NUMBER OF OBJECTS IN STORAGE
         """
-        all_class = classes.values()
+        all_class = ["BaseModel", "User", "Recipe", "Comment", "Tag"]
 
         if not cls:
             count = 0
