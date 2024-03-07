@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """A COMMENT CLASS"""
-from models.base_model import BaseModel, Base
 import models
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 
@@ -21,3 +21,22 @@ class Comment(BaseModel, Base):
         text = ""
         user_id = ""
         recipe_id = ""
+
+    if models.storage_type != "db":
+        @property
+        def user(self):
+            """
+            FETCHES THE COMMENT WRITER
+            """
+            if self.user_id != "":
+                user = models.storage.get("User", self.user_id)
+                return user
+
+        @property
+        def recipe(self):
+            """
+            FETCHES THE RECIPE COMMENTED
+            """
+            if self.recipe_id:
+                recipe = models.storage.get("Recipe", self.recipe_id)
+                return recipe
