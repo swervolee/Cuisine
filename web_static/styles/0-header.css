@@ -1,59 +1,74 @@
+/* Header styles */
 header {
-    position: fixed;
-    top: 0;
-    border-bottom: 2px solid black;
-    height: 40px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    width: 100%;
-    background-color: #101820;
-
+  background-color: black; /* Dark gray background */
+  color: #6fffe9; /* White text color */
+  padding: 20px 0; /* Top and bottom padding */
+  position: fixed; /* Fixed position for sticky header */
+  top: 0; /* Align the header to the top of the viewport */
+  width: 100%;
 }
 
-header h1 {
-    color: #FF0000;
-    font-style: italic;
-    margin-right: 40px;
-    font-weight: bold;
+.header-container {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space items evenly */
+  align-items: center; /* Align items vertically */
+  max-width: 1200px; /* Set max width */
+  margin: 0 auto; /* Center content horizontally */
 }
 
-header .menu {
-    position: absolute;
-    left: 10px;
-    top: 35px;
-    color: #FF0000;
-
+.logo {
+  font-size: 20px; /* Adjust logo font size */
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color from header */
 }
 
-header .info {
-    border: 1px solid black;
-    margin: 10px;
-    display: none;
-    background-color: #D27D2D;
-    border-radius: 10px;
+.logo h1 {
+  margin: 0; /* Remove margin */
 }
 
-header .menu:hover .info {
-    display: block;
-    background-color: black;
-    color: white;
+nav {
+  display: flex; /* Display navigation links horizontally */
 }
 
-.menu .info i {
-    margin: 20px;
+.nav-links {
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  display: flex;
 }
 
-
-header .info h5 {
-    margin: 20px;
+.nav-links li {
+  margin-right: 30px; /* Add right margin between nav items */
 }
 
-.menu .info h5 {
-    color: #FF0000;
+.nav-links li:last-child {
+  margin-right: 0; /* Remove right margin from last nav item */
 }
 
-.menu .info > h5:hover {
-    background-color: white;
+.nav-links a {
+  color: inherit; /* Inherit text color from header */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Set font size for navigation links */
+  transition: all 0.3s ease; /* Add smooth transition on hover */
+}
+
+.nav-links a:hover {
+  color: #6fffe9; /* Change color on hover */
+}
+
+.search-bar {
+  display: flex; /* Arrange search bar elements horizontally */
+}
+
+.search-bar input {
+  width: 200px;
+  height: 30px;
+  padding: 5px; /* Add padding */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Add rounded corners */
+  font-size: 14px; /* Set font size */
+}
+
+.search-bar button {
+  width: 100px
 }

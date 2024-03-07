@@ -50,8 +50,8 @@ class DBStorage:
         dictionary = {}
         if cls:
             if type(cls) == str:
-                search = eval(cls)
-            query = self.__session.query(search)
+                cls = eval(cls)
+            query = self.__session.query(cls)
 
             for item in query:
                 k = f"{type(item).__name__}.{item.id}"

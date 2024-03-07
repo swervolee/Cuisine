@@ -21,11 +21,10 @@ import MySQLdb
 
 DBStorage = db_storage.DBStorage
 
-classes = {"BaseModel": BaseModel,
-           "User": User,
-           "Recipe": Recipe,
-           "Tag": Tag,
-           "Comment": Comment
+classes = {"user": User,
+           "recipe": Recipe,
+           "tag": Tag,
+           "comment": Comment
            }
 
 
@@ -82,6 +81,8 @@ class TestDBStorge_docs(unittest.TestCase):
 
 strg = models.storage_type != "db"
 msg = "Not testing FileStorge"
+
+
 class Test_DbStorage(unittest.TestCase):
     """
     TEST DB STORAGE
@@ -91,7 +92,7 @@ class Test_DbStorage(unittest.TestCase):
         """
         DOES A CLASS SETUP
         """
-        cls.clist = ["user", "recipe", "tag", "comment"]
+        cls.clist = ["users", "recipes", "tags", "comments"]
         db = MySQLdb.connect(host="localhost",
                              user="cuisine_dev",
                              password="cuisine_dev_pwd",
@@ -110,4 +111,84 @@ class Test_DbStorage(unittest.TestCase):
         """
         TEST ALL METHOD WITHOUT ARGUMENTS
         """
-        pass
+        def count_items():
+            count = 0
+            for item in self.clist:
+                self.cur.execute(f"SELECT * FROM {item}")
+                count += len(self.cur.fetchall())
+            return count
+
+        self.assertTrue(count_items() == len(models.storage.all()),
+                        "Models.storage.all should return all classes")
+
+    @unittest.skipIf(strg, msg)
+    def test_all_method_with_a_class(self):
+        """
+       TEST ALL METHOD WITH ARGUMENTS
+        """
+        for item in classes.keys():
+            self.cur.execute(f"SELECT * FROM {item}s")
+            self.assertTrue(len(models.storage.
+                                all(classes[item])
+                                ) == len(self.cur.fetchall()))
+
+    @unittest.skipIf(strg, msg)
+    def test_new_method(self):
+        """
+        TESTS THE NEW METHOD OF FILESTORAGE
+        """
+        before = len(models.storage.all("User"))
+        arguments = {"email": "test@email",
+                     "password": "test_password"}
+        new = User(**arguments)
+        models.storage.new(new)
+        self.assertTrue(new in models.storage.all().values(),
+                        "Object not stored")
+
+    @unittest.skipIf(strg, msg)
+    def test_save_method(self):
+        """
+        TEST DB SAVE METHOD
+        """
+        arguments = {"email": "test@email",
+                     "password": "test@password"}
+
+        new = User(**arguments)
+        models.storage.new(new)
+        models.storage.save()
+
+        db = MySQLdb.connect(host="localhost",
+                             user="cuisine_dev",
+                             password="cuisine_dev_pwd",
+                             db="cuisine_dev_db")
+
+        cursor = db.cursor()
+
+        cursor.execute("SELECT * FROM users WHERE id=%s",
+                       (new.id,))
+
+        all_user = cursor.fetchone()
+
+        self.assertTrue(all_user, "Save method not working")
+
+    @unittest.skipIf(strg, msg)
+    def test_get_db(self):
+        """
+        TEST THE GET METHOD OF DBSTORAGE
+        """
+        new = Tag(name="breakfast")
+        new.save()
+
+        get_instance = models.storage.get(Tag, new.id)
+        self. assertEqual(get_instance, new)
+
+    @unittest.skipIf(strg, msg)
+    def test_count(self):
+        """
+        TEST THE COUNT METHOD OF DB STORGE
+        """
+        for item in classes.keys():
+            self.cur.execute(f"SELECT * FROM {item}s")
+            self.assertEqual(models.storage.count(classes[item]),
+                             len(self.cur.fetchall()),
+                             "Count method not working right")

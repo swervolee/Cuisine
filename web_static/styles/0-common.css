@@ -31,11 +31,17 @@ body {
     padding: 0px;
     color: #181818;
     font-size: 16px;
-    font-family: Circular, "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #cda34f
+    background-image: url('../images/f2faa6eece1c61dd4a0f8f2db887098d.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
 }
+
 .container {
     max-width: 1000px;
     margin: 30px auto;

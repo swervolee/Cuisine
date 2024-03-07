@@ -8,6 +8,9 @@ import time
 import unittest
 import uuid
 import os
+from models.tag import Tag
+from models.user import User
+from models.comment import Comment
 from unittest import mock
 Recipe = models.recipe.Recipe
 module_doc = models.recipe.__doc__
@@ -61,15 +64,29 @@ class TestRecipeDocs(unittest.TestCase):
 class TestRecipe(unittest.TestCase):
     """Test the Recipe class"""
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         """
         SET UP TEST
         """
-        self.recipe = Recipe(title="chicken masala")
+        new_user = User(email="test_email", password="test_password")
+        new_recipe = Recipe(user_id=new_user.id,
+                            title="lunch",
+                            introduction="empty",
+                            ingredients="empty",
+                            instructions="empty")
+        new_tag = Tag(name="breakfast")
+        new_comment = Comment(user_id=new_user.id,
+                              recipe_id=new_recipe.id,
+                              text="good cook")
+        cls.new_user = new_user
+        cls.recipe = new_recipe
+        cls.new_recipe = new_recipe
+        cls.new_comment = new_comment
 
     def test_instantiation(self):
         """Test that object is correctly created"""
-        self.assertIsInstance(self.recipe, Recipe)
+        self.assertIsInstance(self.new_recipe, Recipe)
 
     @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "FILESTORAGE")
     def test_attributes(self):
@@ -78,7 +95,7 @@ class TestRecipe(unittest.TestCase):
         self.assertTrue(hasattr(self.recipe, 'introduction'))
         self.assertTrue(hasattr(self.recipe, 'ingredients'))
         self.assertTrue(hasattr(self.recipe, 'instructions'))
-        self.assertTrue(hasattr(self.recipe, 'tags'))
+        self.assertTrue(hasattr(self.recipe, '_tags'))
         self.assertTrue(hasattr(self.recipe, 'servings'))
         self.assertTrue(hasattr(self.recipe, 'private'))
         self.assertTrue(hasattr(self.recipe, 'user_id'))
@@ -87,7 +104,7 @@ class TestRecipe(unittest.TestCase):
         self.assertIs(type(self.recipe.introduction), str)
         self.assertIs(type(self.recipe.ingredients), str)
         self.assertIs(type(self.recipe.instructions), str)
-        self.assertIs(type(self.recipe.tags), list)
+        self.assertIs(type(self.recipe._tags), list)
         self.assertIs(type(self.recipe.servings), int)
         self.assertIs(type(self.recipe.private), bool)
         self.assertIs(type(self.recipe.user_id), str)
@@ -95,8 +112,63 @@ class TestRecipe(unittest.TestCase):
     @unittest.skipIf(os.getenv("CUISINE_TYPE_STORAGE") == "db", "FILESTORAGE")
     def test_tags_property(self):
         """Test the tags property"""
-        self.assertIs(type(self.recipe.tags), list)
+        self.assertIs(type(self.recipe._tags), list)
+
+    def test_tag_property(self):
+        """
+        TEST THE TAG PROPERTY FOR DB STORGE
+        """
+        new_user = User(email="test_email", password="test_password")
+        new_recipe = Recipe(user_id=new_user.id,
+                            title="lunch",
+                            introduction="empty",
+                            ingredients="empty",
+                            instructions="empty")
+        new_tag = Tag(name="lunch")
+        new_recipe.tag = new_tag
+        if models.storage_type != "db":
+            self.assertTrue(new_recipe.tag[-1] == new_tag.id)
+        else:
+            self.assertTrue(new_recipe.tag[-1] == new_tag)
+
+    def test_untag_method(self):
+        """
+        TESTS THE UNTAG METHOD OF RECIPE
+        """
+        new_user = User(email="test_email", password="test_password")
+        new_recipe = Recipe(user_id=new_user.id,
+                            title="lunch",
+                            introduction="empty",
+                            ingredients="empty",
+                            instructions="empty")
+        new_tag = Tag(name="lunch")
+        new_recipe.tag = new_tag
+        if models.storage_type != "db":
+            self.assertTrue(new_recipe.tag[-1] == new_tag.id)
+        else:
+            self.assertTrue(new_recipe.tag[-1] == new_tag)
+
+        new_recipe.untag(new_tag)
+
+        if models.storage_type == "db":
+            self.assertTrue(new_tag not in new_recipe.tag)
+        else:
+            self.assertTrue(new_tag.id not in new_recipe.tag)
 
     def test_comments_property(self):
         """Test the comments property"""
         self.assertIsInstance(self.recipe.comments, list)
+
+    def test_comment_recipe_relationship(self):
+        """
+        TEST THE COMMENT RECIPE RELATIONSHIP
+        """
+        self.new_user.save()
+        self.new_recipe.save()
+        self.new_comment.save()
+        self.assertTrue(self.new_recipe.comments != [],
+                        "Comment was not created")
+
+        self.new_user.delete()
+        self.new_recipe.delete()
+        self.new_comment.delete()
