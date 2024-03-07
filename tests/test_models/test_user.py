@@ -10,6 +10,7 @@ import unittest
 import uuid
 from unittest import mock
 from models.recipe import Recipe
+from models.comment import Comment
 User = models.user.User
 module_doc = models.user.__doc__
 
@@ -73,9 +74,26 @@ class TestUser(unittest.TestCase):
                             introduction="empty",
                             ingredients="empty",
                             instructions="empty")
+        new_comment = Comment(user_id=new_user.id,
+                              recipe_id=new_recipe.id,
+                              text="Good recipe")
 
+        new_user.save()
+        new_recipe.save()
+        new_comment.save()
         cls.new_user = new_user
         cls.new_recipe = new_recipe
+        cls.new_comment = new_comment
+
+    @classmethod
+    def tearDownClass(cls):
+        """
+        TEADOWN CLASS
+        """
+        cls.new_user.delete()
+        cls.new_recipe.delete()
+        cls.new_comment.delete()
+        models.storage.save()
 
     def test_instantiation(self):
         """Test that object is correctly created"""
@@ -111,9 +129,9 @@ class TestUser(unittest.TestCase):
                 self.new_recipe.favorited_by[-1] == self.new_user.id,
                 """filestorage favorites not working""")
 
-        self.new_user.delete()
-        self.new_recipe.delete()
-
     def test_comments_property(self):
         """Test the comments property"""
-        pass
+        self.assertIs(self.new_comment.user, self.new_user,
+                      """User comment relationship has errors""")
+        self.assertIs(self.new_comment.recipe, self.new_recipe,
+                      "Recipe comment relationship error")

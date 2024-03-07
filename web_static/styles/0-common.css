@@ -34,7 +34,8 @@ body {
     font-family: Circular, "Helvetica Neue",Helvetica,Arial,sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #cda34f
+    background: url("../images/chad-montano-MqT0asuoIcU-unsplash.jpg") no-repeat center center fixed;
+
 }
 .container {
     max-width: 1000px;
