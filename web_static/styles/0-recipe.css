@@ -18,9 +18,13 @@
 
 #recipeForm * {
     padding: 5px;
-    display: fnone;
     border-radus: 5%;
 }
+
+.recipe-creation .data {
+    display: none;
+}
+
 
 .recipe-creation:hover #recipeForm {
     display: block;
