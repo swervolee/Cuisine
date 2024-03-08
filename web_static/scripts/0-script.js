@@ -1,4 +1,3 @@
-#!/usr/bin/node
 
 $(document).ready(function() {
     console.log("Script loaded");
