@@ -26,6 +26,6 @@
 }
 
 
-.recipe-creation:hover #recipeForm {
+.recipe-creation:hover .data {
     display: block;
 }
