@@ -5,4 +5,3 @@ $(document).ready(function() {
 	this.css("display", "block")
     });
 }
-	
