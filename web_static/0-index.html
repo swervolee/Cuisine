@@ -10,6 +10,8 @@
   <link rel="stylesheet" type="text/css" href="styles/0-common.css">
   <link rel="stylesheet" type="text/css" href="styles/0-recipe.css">
   <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="scripts/0-script.js"></script>
   </head>
 
 <body>
@@ -32,10 +34,10 @@
       </nav>
     </div>
   </header>
-
   <div class="recipe-creation">
-    <h1>Recipe Form</h1>
-    <form id="recipeForm" onsubmit="submitForm(event)">
+    <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
+    <div class="data">
+      <form id="recipeForm" onsubmit="submitForm(event)">
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required><br><br>
 
@@ -49,9 +51,8 @@
         <textarea id="instructions" name="instructions" rows="4" cols="50" required></textarea><br><br>
 
         <button type="submit">Submit</button>
-    </form>
-
-    <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
+      </form>
+    </div>
   </div>
 
   <footer>
