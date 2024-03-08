@@ -4,6 +4,6 @@ $(document).ready(function() {
 
     $(".recipe-creation").on("click", function() {
         console.log("Clicked");
-        $(this).toggleClass("show");
+        $(this).addClas( "show" );
     });
 });
