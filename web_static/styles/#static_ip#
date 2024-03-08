@@ -1,0 +1,10 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:  # Replace ens33 with your interface name
+      dhcp4: no
+      addresses: [192.168.1.100/24]  # Set your desired static IP address and subnet mask
+      gateway4: 192.168.1.1  # Set your gateway IP address
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]  # Set your DNS server addresses
