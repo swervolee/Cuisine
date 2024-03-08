@@ -24,8 +24,3 @@
 .recipe-creation .data {
     display: none;
 }
-
-
-.recipe-creation:active .data {
-    display: block;
-}
