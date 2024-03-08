@@ -24,3 +24,7 @@
 .recipe-creation .data {
     display: none;
 }
+
+.recipe-creation .show {
+    display: block;
+}
