@@ -26,6 +26,6 @@
 }
 
 
-.recipe-creation:hover .data {
+.recipe-creation:active .data {
     display: block;
 }
