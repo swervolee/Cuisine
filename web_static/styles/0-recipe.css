@@ -1,11 +1,27 @@
 .recipe-creation {
     border: 1px solid green;
     position: fixed;
-    bottom: 100px;
-    right: 50px;
+    bottom: 50px;
+    left: 50px;
     color: #7cfc00;
     text-align: center;
     border-radius: 5%;
-    padding: 5px;
+    padding: 10px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 500px;
 
+}
+
+
+#recipeForm * {
+    padding: 5px;
+    display: none;
+    border-radus: 5%;
+}
+
+.recipe-creation:hover #recipeForm {
+    display: block;
 }
