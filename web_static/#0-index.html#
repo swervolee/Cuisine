@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>CUISINE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles/0-header.css">
+  <link rel="stylesheet" type="text/css" href="styles/0-footer.css">
+  <link rel="stylesheet" type="text/css" href="styles/0-common.css">
+  <link rel="stylesheet" type="text/css" href="styles/0-recipe.css">
+  <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="scripts/0-script.js"></script>
+  </head>
+
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>CUISINE</h1>
+
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search recipes">
+        <button type="submit">Search</button>
+      </div>
+      <nav>
+        <ul class="nav-links">
+	  <li><a href="#login">Login or signup</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="recipe-creation">
+    <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
+    <div class="data">
+      <form id="recipeForm" onsubmit="submitForm(event)">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="introduction">Introduction:</label>
+        <textarea id="introduction" name="introduction" rows="4" cols="50" required></textarea><br><br>
+
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" name="ingredients" rows="4" cols="50" required></textarea><br><br>
+
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="presentation">
+    <article 
+  <footer>
+    <div class="footer-container">
+      <p>&copy; 2024 CUISINE. All rights reserved.</p>
+      <nav>
+        <ul class="footer-links">
+          <li><a href="#terms">Terms of Use</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+
+</html>
+
