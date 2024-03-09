@@ -1,33 +1,87 @@
 .recipe-creation {
-    border: 1px solid green;
     position: fixed;
-    bottom: 50px;
+    bottom: 30px;
     left: 50px;
-    color: #7cfc00;
+    color: black;
     text-align: center;
-    border-radius: 5%;
+    border-radius: 2%;
     padding: 10px;
-    background-color: black;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 90%;
+    margin: 20px;
+    overflow-y: auto;
+    max-height: 80%;
+    align-items: baseline;
+}
+
+
+#recipeForm  {
+    padding: 5px;
+    border-radus: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#recipeForm label, #recipeForm button {
+    background-color: red;
+    color: #ccc;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+
+#recipeForm button:hover {
+    opacity: 0.9;
+}
+.show {
+    display: none;
+    border: 1px solid black
+}
+
+
+.recipe-container {
+    padding: 30px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    max-width: 500px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#recipeForm label, #recipeForm button {
+    width: 20%;
+    height: 20px;
+}
+
+#recipeForm textarea, #recipeForm input {
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+
+div article {
+    background-color: black;
+    padding: 10px;
+    padding-left: 40px;
+    border-radius: 15px;
+}
+
+.recipe-name *, .recipe-ingredients h3, .recipe-instructions h3 {
+    text-align: center;
+    color: #cd7f32;
     margin: 20px;
 }
 
-
-#recipeForm * {
-    padding: 5px;
-    border-radus: 5%;
+.recipe-name h2 {
+    text-decoration-line: underline;
 }
 
 
-.show {
-    display: none;
-}
 
-
-.cooking {
-    background-color: red;
-    height: 200px;
+.recipe-ingredients *, .recipe-instructions * {
+    color: #c0c0c0;
+    margin: 10px;
 }

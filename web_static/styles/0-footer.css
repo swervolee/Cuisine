@@ -1,42 +1,44 @@
 /* Styles for the footer */
 footer {
-  background-color: #f5f5f5; /* Light gray background */
-  padding: 20px; /* Adds padding around the footer content */
-  position: fixed;
-  bottom: 0;
+  background-color: #f5f5f5;
+  padding: 20px;
   width: 100%;
+  position: relative;
+  bottom: 0;
   background-color: black;
 }
 
 .footer-container {
-  display: flex; /* Arranges footer content in a row */
-  justify-content: space-between; /* Spreads content horizontally with space in between */
-  align-items: center; /* Aligns content vertically in the center */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+
 .footer-container p {
-  color: #333; /* Dark gray text color */
-  font-size: 14px; /* Sets font size for copyright text */
-  margin: 0; /* Removes default margin for better spacing */
+  color: #6fffe9;
+  font-size: 14px;
+  margin: 0;
 }
 
 .footer-links {
-  list-style: none; /* Removes default bullet points */
-  padding: 0; /* Removes default padding */
-  margin: 0; /* Removes default margin */
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-links li {
-  display: inline-block; /* Makes list items display horizontally */
-  margin-right: 20px; /* Adds space between list items */
+  display: inline-block;
+  margin-right: 20px;
 }
 
 .footer-links a {
-  color: #333; /* Dark gray text color */
-  text-decoration: none; /* Removes underline from links */
-  font-size: 14px; /* Sets font size for links */
+  color: #6fffe9;
+  text-decoration: none;
+  font-size: 14px;
 }
 
 .footer-links a:hover {
-  color: #666; /* Changes link color on hover */
+  color: #666;
 }
+
