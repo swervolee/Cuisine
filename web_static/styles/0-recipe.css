@@ -29,4 +29,5 @@
 
 .cooking {
     background-color: red;
+    z-index: 1;
 }
