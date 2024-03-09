@@ -13,6 +13,10 @@ $(document).ready(function() {
         $(".recipe-creation .data").toggle();
     });
 
+    $(".recipe-creation h3").on("click", function() {
+	$(".recipe-creation .data").toggle();
+    });
+
     $(document).on("click", function(event) {
 	console.log(event.target);
         if (!$(event.target).closest(".recipe-creation").length && !$(event.target).is(":submit")) {
