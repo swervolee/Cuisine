@@ -85,3 +85,20 @@ div article {
     color: #c0c0c0;
     margin: 10px;
 }
+
+
+ .back {
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: red;
+    height: 30px;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    margin-left: 50px;
+}

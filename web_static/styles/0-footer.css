@@ -3,9 +3,10 @@ footer {
   background-color: #f5f5f5;
   padding: 20px;
   width: 100%;
-  position: relative;
+  position: sticky;
   bottom: 0;
   background-color: black;
+  margin-top: auto;
 }
 
 .footer-container {
