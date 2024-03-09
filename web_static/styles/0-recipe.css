@@ -24,12 +24,12 @@
 
 .show {
     display: none;
-    border: 1px solid red;
 }
 
 
 .recipe {
     padding: 30px;
+    border: 1px solid red;
 }
 .recipe article {
     max-width: 600px;
