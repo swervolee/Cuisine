@@ -6,7 +6,7 @@
 }
 
 *::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 *::-webkit-scrollbar-track {
@@ -15,7 +15,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-    background: red;
+    background: #6fffe9;
     border-radius: 10px;
 }
 
@@ -34,7 +34,7 @@ body {
     font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    background-image: url('../images/jonathan-borba-1kA3lACHeqk-unsplash.jpg');
+    background-image: url('../images/giorgi-iremadze-5ZR4DxAG3RQ-unsplash.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
