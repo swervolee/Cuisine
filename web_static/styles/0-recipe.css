@@ -9,10 +9,10 @@
     padding: 10px;
     background-color: black;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     max-width: 500px;
-
+    margin: 20px;
 }
 
 
@@ -21,10 +21,13 @@
     border-radus: 5%;
 }
 
-.recipe-creation .data {
+
+.show {
     display: none;
 }
 
-.show {
-    display: block;
+
+.cooking {
+    background-color: red;
+    height: 200px;
 }
