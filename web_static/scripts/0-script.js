@@ -4,7 +4,7 @@
 $(document).ready(function() {
     console.log("Script loaded");
 
-/*    $(".recipe-creation .data").hide();*/
+    $(".recipe-creation .data").hide();
 
 
     $("#recipeForm").on("submit", function(event) {
