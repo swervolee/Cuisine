@@ -9,7 +9,7 @@
     padding: 10px;
     background-color: black;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     max-width: 500px;
     margin: 20px;
