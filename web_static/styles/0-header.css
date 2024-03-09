@@ -6,6 +6,7 @@ header {
   position: fixed; /* Fixed position for sticky header */
   top: 0; /* Align the header to the top of the viewport */
   width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
