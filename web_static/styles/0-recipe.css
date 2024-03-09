@@ -21,10 +21,7 @@
     border-radus: 5%;
 }
 
-.recipe-creation .data {
-    display: none;
-}
 
 .show {
-    display: block;
+    display: none;
 }
