@@ -2,7 +2,7 @@
 footer {
   background-color: #f5f5f5; /* Light gray background */
   padding: 20px; /* Adds padding around the footer content */
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   background-color: black;
