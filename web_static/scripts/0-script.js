@@ -84,13 +84,10 @@ $(document).ready(function() {
 
 
 
-    $("#creation").on("click", function() {
+    $("#creation").on("mouseenter", function() {
 	$(".recipe-creation h3").trigger("click");
     });
 
-    $(".introduction .abc").on("mouseenter", function() {
-	$(".recipe-creation h3").trigger("click");
-    });
 
     /*Hide the recipe creation form when area outside of it
       is clicked*/
