@@ -88,7 +88,7 @@ $(document).ready(function() {
 	$(".recipe-creation h3").trigger("click");
     });
 
-    $(".introduction .abc").on("click", function() {
+    $(".introduction .abc").on("mouseenter", function() {
 	$(".recipe-creation h3").trigger("click");
     });
 
