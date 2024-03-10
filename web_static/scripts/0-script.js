@@ -84,7 +84,7 @@ $(document).ready(function() {
 
 
 
-    $("#creation").bind("click", function() {
+    $("#creation").on("click", function() {
 	$(".recipe-creation h3").trigger("click");
     });
 
