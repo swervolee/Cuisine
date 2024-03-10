@@ -12,7 +12,7 @@ $(document).ready(function() {
     $(".back").hide();
 
 
-  
+
 
     /*change opacity of browse recipes and create recipes on hover*/
     $(".introduction h2").on("mouseenter", function() {
@@ -84,7 +84,9 @@ $(document).ready(function() {
 
 
 
-    
+    $("#creation").on("click", function() {
+	$(".recipe-creation h3").trigger("click");
+    });
 
 
     /*Hide the recipe creation form when area outside of it
