@@ -13,7 +13,8 @@ $(document).ready(function() {
 
 
     var newDiv = $("<h2>");
-    newDiv.attr("id", "creation", "text-align", "left");
+    newDiv.attr("id", "creation");
+    newDiv.css({ "text-align": "left" });
     newDiv.text("Create Recipes: Share your culinary creations with the community");
     $(".introduction").append(newDiv);
 
