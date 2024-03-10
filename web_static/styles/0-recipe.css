@@ -99,6 +99,7 @@ div article {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
-    margin-left: 50px;
+    position: fixed;
+    top: 100px;
+    left: 20px;
 }

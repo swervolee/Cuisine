@@ -11,12 +11,17 @@ $(document).ready(function() {
     $(".recipe-ingredients, .recipe-instructions").hide();
     $(".back").hide();
 
+
+
+
     /*change opacity of browse recipes and create recipes on hover*/
     $(".introduction h2").on("mouseenter", function() {
 	$(this).css("opacity", "0.7")
     }).on("mouseleave", function() {
 	$(this).css("opacity", "1");
     });
+
+
 
     /*Hide the main menu and show recipes  when show recipes
       platform is clicked*/
@@ -54,9 +59,8 @@ $(document).ready(function() {
     $(".back").on("click", function() {
 	$(".introduction").toggle();
 	$(".recipe-container").toggle();
-	(".back").hide();
+	$(".back").hide();
     });
-
 
 
 
@@ -77,6 +81,13 @@ $(document).ready(function() {
     }).on("mouseleave", function() {
 	$(this).css("opacity", "1");
     });
+
+
+
+    $("#creation").on("click", function() {
+	$(".recipe-creation h3").trigger("click");
+    });
+
 
     /*Hide the recipe creation form when area outside of it
       is clicked*/
