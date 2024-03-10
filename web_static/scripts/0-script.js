@@ -84,9 +84,13 @@ $(document).ready(function() {
 
 
 
-    $("#creation").on("click", function() {
-	$(".recipe-creation h3").trigger("click");
+
+    /*Change color of the favourite button*/
+    $(".recipe .favourite").on("click", function() {
+	$(this).toggleClass("favourite-red");
+	$(this).toggleClass("favourite")
     });
+
 
 
     /*Hide the recipe creation form when area outside of it

@@ -4,6 +4,7 @@
   <head>
     <title>CUISINE</title>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./images/images.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/0-header.css">
     <link rel="stylesheet" type="text/css" href="styles/0-footer.css">
@@ -34,6 +35,17 @@
       </div>
     </header>
 
+
+
+    <div class="introduction">
+      <h1>Welcome to Cuisine</h1>
+      <h1>Discover and share delicious recipes with Cuisine!</h1>
+      <h2 id="recipe-world">Browse Recipes: Explore a diverse collection of recipes.</h2>
+      <h2 class="my-recipes">Visit your creations</h2>
+    </div>
+
+
+
     <div class="recipe-creation">
       <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
       <div class="data">
@@ -56,18 +68,12 @@
     </div>
 
 
-    <div class="introduction">
-      <h1>Welcome to Cuisine</h1>
-      <h1>Discover and share delicious recipes with Cuisine!</h1>
-      <h2 id="recipe-world">Browse Recipes: Explore a diverse collection of recipes.</h2>
-      <h2 id="creation">Create Recipes: Share your culinary creations with the community</h2>
-    </div>
-
 
     <div class="back">Back</div>
 
     <div class="recipe-container">
       <article class="recipe">
+	<div class="favourite">Favourite</div>
 	<div class="recipe-name">
 	  <h2>CHICKEN MASALA</h2>
 	  <p><strong>A delicious and aromatic Indian chicken curry that's easy to make at home.</strong></p>
@@ -104,6 +110,10 @@
             <li>Sprinkle garam masala and garnish with fresh coriander leaves.</li>
             <li>Serve hot with steamed rice or naan.</li>
 	  </ol>
+	  <form class="comment-form">
+	    <textarea class="comment-input" placeholder="Like this recipe? Give it a review">fdf</textarea>
+	    <button type="submit" class="comment-btn">Post</button>
+	  </form>
 	</div>
       </article>
     </div>
