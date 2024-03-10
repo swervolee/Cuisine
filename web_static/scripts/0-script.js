@@ -12,13 +12,7 @@ $(document).ready(function() {
     $(".back").hide();
 
 
-    var newDiv = $("<h2>");
-    newDiv.attr("id", "creation");
-    newDiv.css({ "text-align": "left" });
-    newDiv.text("Create Recipes: Share your culinary creations with the community");
-    $(".introduction").append(newDiv);
-
-
+  
 
     /*change opacity of browse recipes and create recipes on hover*/
     $(".introduction h2").on("mouseenter", function() {
@@ -90,7 +84,7 @@ $(document).ready(function() {
 
 
 
-
+    
 
 
     /*Hide the recipe creation form when area outside of it
