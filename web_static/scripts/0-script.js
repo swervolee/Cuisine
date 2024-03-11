@@ -27,8 +27,8 @@ $(document).ready(function() {
     /*style the tags display*/
     $(".tag h4").on("mouseenter", function() {
 	$(".tag ul").css("display", "block");
-    }).on("mouseleave" function() {
-	$(".tag ul").css("display", "none"):
+    }).on("mouseleave", function() {
+	$(".tag ul").css("display", "none");
     });
 
 
