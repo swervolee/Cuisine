@@ -10,6 +10,8 @@ $(document).ready(function() {
     /*$(".recipe-container").hide();*/
     $(".recipe-ingredients, .recipe-instructions").hide();
     $(".back").hide();
+    $(".comments-section").hide();
+    $(".comment-form").hide();
 
 
 
@@ -21,6 +23,13 @@ $(document).ready(function() {
 	$(this).css("opacity", "1");
     });
 
+
+    /*style the tags display*/
+    $(".tag h4").on("mouseenter", function() {
+	$(".tag ul").css("display", "block");
+    }).on("mouseleave", function() {
+	$(".tag ul").css("display", "none");
+    });
 
 
     /*Hide the main menu and show recipes  when show recipes
@@ -63,7 +72,7 @@ $(document).ready(function() {
     });
 
 
-
+    /*Recipe creation fill form*/
     $(".recipe-creation h3").on("click", function() {
 	$(".recipe-creation .data").toggle();
 	$("header").toggle();
@@ -75,9 +84,9 @@ $(document).ready(function() {
       Expand the ingredients and instruction on clicking the
       header*/
     $(".recipe-name h2").on("click", function() {
-	$(".recipe-ingredients, .recipe-instructions").toggle();
+	$(".recipe-ingredients, .recipe-instructions, .comments-section, .comment-form").toggle();
     }).on("mouseenter", function() {
-	$(this).css("opacity", "0.9");
+	$(this).css("opacity", "0.8");
     }).on("mouseleave", function() {
 	$(this).css("opacity", "1");
     });
@@ -92,6 +101,27 @@ $(document).ready(function() {
     });
 
 
+    function flashMessage(message) {
+	var messageElement = $("<div>");
+	messageElement.text(message);
+	messageElement.addClass("to-fade");
+	messageElement.css({
+	    "color": "black",
+	    "display": "inline-block",
+	    "background-color": "white",
+	    "margin": "10px",
+	    "padding": "10px 20px",
+	    "border-radius": "5px"});
+	messageElement.insertAfter(".comment-form button");
+
+	$(".to-fade").fadeOut(3000);
+    };
+
+
+    $(".comment-form").on("submit", function(event) {
+	event.preventDefault();
+	flashMessage("Posted");
+    });
 
     /*Hide the recipe creation form when area outside of it
       is clicked*/

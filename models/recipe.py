@@ -30,9 +30,9 @@ class Recipe(BaseModel, Base):
         __tablename__ = "recipes"
         user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
         title = Column(String(60), nullable=False)
-        introduction = Column(String(60), nullable=False)
-        ingredients = Column(String(60), nullable=False)
-        instructions = Column(String(60), nullable=False)
+        introduction = Column(String(1024), nullable=False)
+        ingredients = Column(String(1024), nullable=False)
+        instructions = Column(String(1024), nullable=False)
         private = Column(Boolean, default=False)
         servings = Column(Integer, default=0)
         _tags = relationship("Tag", secondary="tag_recipe",
