@@ -98,9 +98,6 @@ div article {
     display: none;
 }
 
-.tag h4:hover, .tag ul {
-    display: block;
-}
 
 .tag ul li {
     margin-left: 5px;
