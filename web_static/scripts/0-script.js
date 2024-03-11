@@ -24,6 +24,13 @@ $(document).ready(function() {
     });
 
 
+    /*style the tags display*/
+    $(".tag h4").on("mouseenter", function() {
+	$(".tag ul").css("display", "block");
+    }).on("mouseleave" function() {
+	$(".tag ul").css("display", "none"):
+    });
+
 
     /*Hide the main menu and show recipes  when show recipes
       platform is clicked*/
