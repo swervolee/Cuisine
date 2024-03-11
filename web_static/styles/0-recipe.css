@@ -94,6 +94,10 @@ div article {
     text-align: center;
 }
 
+.tag ul {
+    display: none;
+}
+
 .tag ul li {
     margin-left: 5px;
     margin-top: 10px;
