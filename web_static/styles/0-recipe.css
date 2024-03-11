@@ -94,6 +94,10 @@ div article {
     text-align: center;
 }
 
+.tag ul li {
+    list-style-type: none;
+}
+
 
 .recipe-name h2 {
     border: 1px solid white;
