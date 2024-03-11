@@ -102,6 +102,7 @@ div article {
     list-style-type: none;
     background-color: black;
     color: white;
+    border-radius: 7px;
 }
 
 
