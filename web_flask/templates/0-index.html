@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>CUISINE</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./images/images.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/0-header.css">
+    <link rel="stylesheet" type="text/css" href="styles/0-footer.css">
+    <link rel="stylesheet" type="text/css" href="styles/0-common.css">
+    <link rel="stylesheet" type="text/css" href="styles/0-recipe.css">
+    <link rel="stylesheet" type="text/css" href="styles/0-comments.css">
+    <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="styles/0-presentation.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts/0-script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+	<div class="logo">
+          <h1>CUISINE</h1>
+	</div>
+	<div class="search-bar">
+          <input type="text" placeholder="Search recipes">
+          <button type="submit">Search</button>
+	</div>
+	<nav>
+          <ul class="nav-links">
+	    <li><a href="#login">Login or signup</a></li>
+          <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+	</nav>
+      </div>
+    </header>
+
+
+
+    <div class="introduction">
+      <h1>Welcome to Cuisine</h1>
+      <h1>Discover and share delicious recipes with Cuisine!</h1>
+      <h2 id="recipe-world">Browse Recipes: Explore a diverse collection of recipes.</h2>
+      <h2 class="my-recipes">Visit your creations</h2>
+    </div>
+
+
+
+    <div class="recipe-creation">
+      <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
+      <div class="data">
+	<form id="recipeForm" onsubmit="submitForm(event)">
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="Chicken masala .." name="title" required><br><br>
+
+          <label for="introduction">Introduction</label>
+          <textarea id="introduction" name="introduction" placeholder="A delicous..." rows="5" cols="70" required></textarea><br><br>
+
+          <label for="ingredients">Ingredients</label>
+          <textarea id="ingredients" name="Ingredients" placeholder="ingredients" rows="20" cols="70" required></textarea><br><br>
+          <label for="instructions">Instructions</label>
+          <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
+
+	  <div class="tag-selection">
+	    <h4>Optional Tags:</h4>
+	    <label><input type="checkbox" name="tags" value="vegetarian"> Vegetarian</label>
+	    <label><input type="checkbox" name="tags" value="vegan"> Vegan</label>
+	    <label><input type="checkbox" name="tags" value="gluten-free"> Gluten-free</label>
+	    <!-- Add more tags as needed -->
+	  </div>
+
+	  <div class="privacy">
+	    <label for="myCheckbox" class="check-label">Private</label>
+	    <input type="checkbox" id="myCheckbox" name="myCheckbox">
+	  </div>
+	  <button type="submit" class="submission">DONE</button>
+	</form>
+      </div>
+    </div>
+
+
+
+    <div class="back">Back</div>
+
+    <div class="recipe-container">
+      <article class="recipe">
+	<div class="tag">
+	  <h4>Tags</h4>
+	  <ul>
+	    <li>Italian</li>
+	    <li>Breakfast</li>
+	    <li>lunch</li>
+	    <li>Kenyan</li>
+	  </ul>
+	</div>
+	<div class="favourite">Favourite</div>
+	<div class="recipe-name">
+	  <h2>CHICKEN MASALA</h2>
+	  <div class="description">
+	    <h3>DESCRIPTION</h3>
+	    <p><strong>A delicious and aromatic Indian chicken curry that's easy to make at home.</strong></p>
+	  </DIV>
+	</div>
+	<div class="recipe-ingredients">
+	  <h3>Ingredients</h3>
+	  <ul>
+            <li>1 kg chicken, cut into pieces</li>
+            <li>2 onions, finely chopped</li>
+            <li>3 tomatoes, pureed</li>
+            <li>4 cloves garlic, minced</li>
+            <li>1-inch ginger, grated</li>
+            <li>1 tablespoon vegetable oil</li>
+            <li>1 teaspoon cumin seeds</li>
+            <li>1 teaspoon coriander powder</li>
+            <li>1/2 teaspoon turmeric powder</li>
+            <li>1 teaspoon garam masala</li>
+            <li>1/2 teaspoon red chili powder (adjust to taste)</li>
+            <li>Salt to taste</li>
+            <li>Fresh coriander leaves for garnish</li>
+	  </ul>
+	</div>
+	<div class="recipe-instructions">
+	  <h3>Instructions</h3>
+	  <ol>
+            <li>Heat oil in a large skillet or pan over medium heat.</li>
+            <li>Add cumin seeds and let them splutter.</li>
+            <li>Add chopped onions and sauté until golden brown.</li>
+            <li>Add minced garlic and grated ginger. Sauté for another minute.</li>
+            <li>Add pureed tomatoes and cook until the oil separates.</li>
+            <li>Add coriander powder, turmeric powder, red chili powder, and salt. Mix well.</li>
+            <li>Add chicken pieces and coat them evenly with the masala.</li>
+            <li>Cover and cook for 20-25 minutes or until the chicken is tender, stirring occasionally.</li>
+            <li>Sprinkle garam masala and garnish with fresh coriander leaves.</li>
+            <li>Serve hot with steamed rice or naan.</li>
+	  </ol>
+	</div>
+	<div class="comments-section">
+	  <h3>Comments</h3>
+	  <div class="comment-list">
+	    <div class="comment">
+              <div class="comment-author">John Doe</div>
+              <div class="comment-text">This recipe was delicious! I loved the combination of spices.</div>
+            </div>
+            <div class="comment">
+              <div class="comment-author">Jane Smith</div>
+              <div class="comment-text">I tried this recipe last night and it turned out amazing! Definitely adding it to my favorites.</div>
+            </div>
+            <div class="comment">
+              <div class="comment-author">Mike Johnson</div>
+              <div class="comment-text">Thank you for sharing this recipe! It was easy to follow and the flavors were fantastic.</div>
+            </div>
+	  </div>
+	</div>
+	<form class="comment-form">
+	  <textarea class="comment-input" placeholder="Like this recipe? Give it a review" required></textarea>
+	  <button type="submit" class="comment-btn">Post</button>
+	</form>
+      </article>
+    </div>
+    <footer>
+      <div class="footer-container">
+	<p>&copy; 2024 CUISINE. All rights reserved.</p>
+	<nav>
+          <ul class="footer-links">
+            <li><a href="#terms">Terms of Use</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+          </ul>
+	</nav>
+      </div>
+    </footer>
+  </body>
+</html>

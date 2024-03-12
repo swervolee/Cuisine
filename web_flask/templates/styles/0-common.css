@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #6fffe9;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #B30000;
+}
+
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    color: #181818;
+    font-size: 16px;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../images/giorgi-iremadze-5ZR4DxAG3RQ-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    width: 100%;
+    flex: 1 0 auto;
+}
