@@ -132,8 +132,6 @@ $(document).ready(function() {
     });
 
 
-    $(".recipe-creation h3").trigger("click");
-
 
     /*Hide the recipe creation form when area outside of it
       is clicked*/
