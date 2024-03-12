@@ -1,6 +1,6 @@
 .recipe-creation {
     position: fixed;
-    bottom: 30px;
+    bottom: 50px;
     left: 50px;
     color: black;
     text-align: center;
@@ -32,6 +32,7 @@
     color: #ccc;
     margin: 5px;
     border-radius: 5px;
+    border: 1px solid black;
 }
 
 
@@ -40,9 +41,33 @@
 }
 .show {
     display: none;
-    border: 1px solid black
+    border: 1px solid black;
 }
 
+#recipeForm .privacy {
+    display: flex;
+}
+
+#recipeForm .privacy label {
+    background-color: green;
+}
+
+#recipeForm .privacy label:hover {
+    opacity: 0.9;
+}
+
+#myCheckbox {
+    display: inline;
+    width: 20px;
+    background-color: red;
+}
+
+
+#recipeForm .submission {
+    display: inline-block;
+    height: 40px;
+    font-weight: bold;
+}
 
 .recipe-container {
     padding: 30px;
@@ -78,6 +103,7 @@ div article {
 }
 
 
+/*---------------tag handling------------------------*/
 .tag {
     position: absolute;
     background-color: #ccc;
@@ -111,13 +137,21 @@ div article {
 }
 
 
+.tag-selection {
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*---------------------------end of tag handling------------------*/
 .recipe-name h2 {
     border: 1px solid white;
     display: inline-block;
     margin-left: 33%;
     padding: 10px;
     border-radius: 5px;
-    background-color: purple;
+    background-color: #a99ac1;
     color: black;
 }
 

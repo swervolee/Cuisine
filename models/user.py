@@ -18,7 +18,7 @@ if models.storage_type == "db":
 
 class User(BaseModel, Base):
     """
-    CONSTRUCTS THE CLASS BASEMODEL
+    CONSTRUCTS THE CLASS USER
     """
     if models.storage_type == "db":
 

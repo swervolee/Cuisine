@@ -7,11 +7,14 @@ $(document).ready(function() {
 
     /*Hide items on default*/
     $(".recipe-creation .data").hide();
-    /*$(".recipe-container").hide();*/
+    $(".recipe-container").hide();
     $(".recipe-ingredients, .recipe-instructions").hide();
     $(".back").hide();
     $(".comments-section").hide();
     $(".comment-form").hide();
+
+    $(".introduction").slideDown(3000);
+
 
 
 
@@ -25,8 +28,13 @@ $(document).ready(function() {
 
 
     /*style the tags display*/
-    $(".tag h4").on("mouseenter", function() {
+    $(".tag").on("mouseenter", function() {
 	$(".tag ul").css("display", "block");
+	$(".tag ul li").on("mouseenter", function() {
+	    $(this).css("background-color", "green");
+	}).on("mouseleave", function() {
+	    $(this).css("background-color", "black");
+	});
     }).on("mouseleave", function() {
 	$(".tag ul").css("display", "none");
     });
@@ -122,6 +130,9 @@ $(document).ready(function() {
 	event.preventDefault();
 	flashMessage("Posted");
     });
+
+
+    $(".recipe-creation h3").triggerHandler("click");
 
     /*Hide the recipe creation form when area outside of it
       is clicked*/

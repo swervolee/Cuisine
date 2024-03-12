@@ -59,11 +59,22 @@
 
           <label for="ingredients">Ingredients</label>
           <textarea id="ingredients" name="Ingredients" placeholder="ingredients" rows="20" cols="70" required></textarea><br><br>
-
           <label for="instructions">Instructions</label>
           <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
 
-          <button type="submit">Submit</button>
+	  <div class="tag-selection">
+	    <h3>Optional Tags:</h3>
+	    <label><input type="checkbox" name="tags" value="vegetarian"> Vegetarian</label>
+	    <label><input type="checkbox" name="tags" value="vegan"> Vegan</label>
+	    <label><input type="checkbox" name="tags" value="gluten-free"> Gluten-free</label>
+	    <!-- Add more tags as needed -->
+	  </div>
+
+	  <div class="privacy">
+	    <label for="myCheckbox" class="check-label">Private</label>
+	    <input type="checkbox" id="myCheckbox" name="myCheckbox">
+	  </div>
+	  <button type="submit" class="submission">DONE</button>
 	</form>
       </div>
     </div>
