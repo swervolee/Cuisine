@@ -1,0 +1,242 @@
+.recipe-creation {
+    position: fixed;
+    bottom: 50px;
+    left: 50px;
+    color: black;
+    text-align: center;
+    border-radius: 2%;
+    padding: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 90%;
+    margin: 20px;
+    overflow-y: auto;
+    max-height: 80%;
+    align-items: baseline;
+    z-index: 1;
+}
+
+
+#recipeForm  {
+    padding: 5px;
+    border-radus: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#recipeForm label, #recipeForm button {
+    background-color: red;
+    color: #ccc;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+
+#recipeForm button:hover {
+    opacity: 0.9;
+}
+.show {
+    display: none;
+    border: 1px solid black;
+}
+
+#recipeForm .privacy {
+    display: flex;
+}
+
+#recipeForm .privacy label {
+    background-color: green;
+}
+
+#recipeForm .privacy label:hover {
+    opacity: 0.9;
+}
+
+#myCheckbox {
+    display: inline;
+    width: 20px;
+    background-color: red;
+}
+
+
+#recipeForm .submission {
+    display: inline-block;
+    height: 40px;
+    font-weight: bold;
+}
+
+.recipe-container {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#recipeForm label, #recipeForm button {
+    width: 20%;
+    height: 20px;
+}
+
+#recipeForm textarea, #recipeForm input {
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+
+div article {
+    background-color: black;
+    padding: 10px;
+    padding-left: 40px;
+    border-radius: 15px;
+    box-shadow: black 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, black 0px 4px 6px, black 0px 12px 13px, black 0px -3px 5px;
+}
+
+.recipe-name *, .recipe-ingredients h3, .recipe-instructions h3 {
+    text-align: center;
+    color: #cd7f32;
+    margin: 20px;
+}
+
+
+/*---------------tag handling------------------------*/
+.tag {
+    position: absolute;
+    background-color: #ccc;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.tag h4 {
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.tag ul {
+    display: none;
+}
+
+
+.tag ul li {
+    margin-left: 5px;
+    margin-top: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    list-style-type: none;
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+}
+
+
+.recipe-name h2 {
+    border: 1px solid white;
+    display: inline-block;
+    margin-left: 33%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #a99ac1;
+    color: black;
+}
+
+
+
+.recipe-ingredients *, .recipe-instructions * {
+    color: #c0c0c0;
+    margin: 10px;
+}
+
+
+ .back {
+    color: #ccc;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+    height: 30px;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    cursor: pointer;
+ }
+
+
+ .recipe .favourite {
+     background-color: #ccc;
+     color: black;
+     width: 100px;
+     text-align: center;
+     border-radius: 5px;
+     margin-left: auto;
+     margin-right: 10px;
+     margin-top: 10px;
+     font-weight: bold;
+ }
+
+ .recipe .favourite:hover {
+     opacity: 0.9;
+ }
+
+
+ .favourite-red {
+     background-color: red;
+     color: black;
+     width: 100px;
+     text-align: center;
+     border-radius: 5px;
+     margin-left: auto;
+     margin-right: 10px;
+     margin-top: 10px;
+     font-weight: bold;
+
+ }
+
+
+.comment-form {
+        max-width: 500px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+        resize: vertical;
+}
+
+.comment-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.comment-btn:hover {
+    background-color: #0056b3;
+}
+
+
+#recipeForm .tag-selection {
+    margin-right: 0;
+}
