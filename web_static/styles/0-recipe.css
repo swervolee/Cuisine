@@ -234,3 +234,8 @@ div article {
 .comment-btn:hover {
     background-color: #0056b3;
 }
+
+
+#recipeForm .tag-selection {
+    margin-right: 0;
+}
