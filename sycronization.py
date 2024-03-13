@@ -3,7 +3,7 @@
 import models
 import json
 
-if models.storage_type == db:
+if models.storage_type == "db":
     filename = "test.json"
 
     objs = ["Recipe", "User", "Tag", "Comment"]

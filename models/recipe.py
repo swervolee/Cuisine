@@ -56,6 +56,12 @@ class Recipe(BaseModel, Base):
         """
         RETURNS A LIST OF TAGS ASSOCIATED WITH THE RECIPE
         """
+        if models.storage_type != "db":
+            result = [];
+            for id in self._tags:
+                obj = models.storage.get("Tag", id)
+                result.append(obj)
+            return result
         return self._tags
 
     @tag.setter
