@@ -91,8 +91,34 @@ $(document).ready(function() {
     /*Only show title and description of recipe on default
       Expand the ingredients and instruction on clicking the
       header*/
-    $(".recipe-name h2").on("click", function() {
-	$(".recipe-ingredients, .recipe-instructions, .comments-section, .comment-form").toggle();
+
+    $(".recipe-name h2").on("click", function(event) {
+	event.stopPropagation(); // Stop event propagation to prevent hiding when clicked on this element
+	var $recipe = $(this).closest(".recipe");
+	var $otherRecipes = $(".recipe").not($recipe); // Select all other recipes
+	var $toggleItems = $recipe.find(".recipe-ingredients, .recipe-instructions, .comments-section, .comment-form");
+
+	/* Get the current scroll position */
+	var scrollTop = $(window).scrollTop();
+
+	/* Toggle the current recipe items*/
+	$toggleItems.toggle();
+
+
+	/* Hide items of other recipes*/
+	$otherRecipes.find(".recipe-ingredients, .recipe-instructions, .comments-section, .comment-form").hide();
+
+	/* Adjust the scroll position of the window to the currently clicked item*/
+	$(window).scrollTop($recipe.offset().top);
+
+	/* Click event to hide items when clicking outside of the recipe*/
+	$(document).one("click", function(event) {
+            if (!$(event.target).closest(".recipe").length) {
+		$toggleItems.hide();
+            }
+	});
+	/* Prevent the event from bubbling up to the document */
+	return false;
     }).on("mouseenter", function() {
 	$(this).css("opacity", "0.8");
     }).on("mouseleave", function() {
