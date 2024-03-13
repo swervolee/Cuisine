@@ -26,8 +26,8 @@ class User(BaseModel, Base):
 
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
-        first_name = Column(String(128), nullable=True)
-        last_name = Column(String(128), nullable=True)
+        first_name = Column(String(128), nullable=False)
+        last_name = Column(String(128), nullable=False)
         bio = Column(String(1024), nullable=True)
         recipes = relationship("Recipe",
                                backref="user",

@@ -83,6 +83,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 #recipeForm label, #recipeForm button {
@@ -102,6 +103,8 @@ div article {
     padding-left: 40px;
     border-radius: 15px;
     box-shadow: black 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, black 0px 4px 6px, black 0px 12px 13px, black 0px -3px 5px;
+    width: 80%;
+    margin: 40px;
 }
 
 .recipe-name *, .recipe-ingredients h3, .recipe-instructions h3 {
@@ -165,13 +168,15 @@ div article {
 /*---------------------------end of tag handling------------------*/
 .recipe-name h2 {
     border: 1px solid white;
-    display: inline-block;
-    margin-left: 33%;
+    /*display: inline-block;*/
+    margin: auto;
     padding: 10px;
     border-radius: 5px;
     background-color: #a99ac1;
     color: black;
     cursor: pointer;
+    width: fit-content;
+    margin-top: 50px;
 }
 
 
