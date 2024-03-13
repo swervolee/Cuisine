@@ -1,0 +1,46 @@
+.recipe .comments-section {
+    background-color: #2f4f4f;
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 40px;
+    max-height: 40%;
+    overflow: auto;
+}
+
+.comments-section h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
+
+.comment {
+    background-color: #6fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.comment-author {
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 2px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/*.comment-form button {
+    width: 50px;
+    background-color: #6fffe9;
+}*/
+
+.comment-form button:hover {
+    opacity: 0.9;
+}
+
+.comment-form textarea {
+    color: #6fffe9;
+    background-color: black;
+}

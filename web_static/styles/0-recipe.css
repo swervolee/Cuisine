@@ -35,6 +35,14 @@
     border: 1px solid black;
 }
 
+#recipeForm button["submit"] {
+    display: none;
+}
+
+.recipe-creation h3 {
+    cursor: pointer;
+}
+
 
 #recipeForm button:hover {
     opacity: 0.9;
@@ -141,9 +149,19 @@ div article {
     margin-right: auto;
     display: flex;
     justify-content: space-between;
+    padding: 5px;
+    display: inline-block;
+    margin-bottom: 20px;
 }
 
 
+.tag-selection label {
+    padding: 5px;
+}
+
+.tag-selection h4 {
+    margin: 10px;
+}
 /*---------------------------end of tag handling------------------*/
 .recipe-name h2 {
     border: 1px solid white;
@@ -153,6 +171,7 @@ div article {
     border-radius: 5px;
     background-color: #a99ac1;
     color: black;
+    cursor: pointer;
 }
 
 
@@ -163,7 +182,7 @@ div article {
 }
 
 
- .back {
+.back {
     color: #ccc;
     border: 1px solid black;
     border-radius: 5px;
@@ -192,6 +211,7 @@ div article {
      margin-right: 10px;
      margin-top: 10px;
      font-weight: bold;
+     cursor: pointer;
  }
 
  .recipe .favourite:hover {
@@ -209,6 +229,7 @@ div article {
      margin-right: 10px;
      margin-top: 10px;
      font-weight: bold;
+     cursor: pointer;
 
  }
 

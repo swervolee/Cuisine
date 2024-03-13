@@ -16,7 +16,7 @@ from models import storage
 classes = {"BaseModel": BaseModel,
            "Recipe": Recipe,
            "User": User,
-           "Commmet": Comment,
+           "Comment": Comment,
            "Tag": Tag
            }
 
@@ -63,7 +63,7 @@ class CuisineConsole(cmd.Cmd):
                 key = kvp[0]
                 value = kvp[1]
                 if value[0] == value[-1] == '"':
-                    value = shlex.split(value)[0].replace('_', ' ')
+                    value = value[1 : -1].replace('_', ' ')
                 else:
                     try:
                         value = int(value)
@@ -71,7 +71,7 @@ class CuisineConsole(cmd.Cmd):
                         try:
                             value = float(value)
                         except Exception:
-                            continue
+                            pass
                 new_dict[key] = value
         return new_dict
 
@@ -309,7 +309,7 @@ class CuisineConsole(cmd.Cmd):
         line = cmd[:]  # copy the command
         if not ("." in line and "(" in line and ")" in line):
             print(f"*** Unknown syntax: {cmd}")  # <ClsName>.<Command>(Args)
-            return
+            return cmd
         cls_name = line[: line.find(".", 1)]  # extract the cls name
         if cls_name not in classes:  # Look it up in the clslist
             print(f"*** Unknown syntax: {line}")
