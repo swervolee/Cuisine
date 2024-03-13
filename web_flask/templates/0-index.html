@@ -82,22 +82,19 @@
     <div class="back">Back</div>
 
     <div class="recipe-container">
+      {% for food in recipes %}
       <article class="recipe">
-	{% for food in recipes %}
 	<div class="tag">
 	  <h4>Tags</h4>
 	  <ul>
 	    {% for Tag in food.tag %}
 	    <li>{{ Tag.name }}</li>
 	    {% endfor %}
-	    <li>Breakfast</li>
-	    <li>lunch</li>
-	    <li>Kenyan</li>
 	  </ul>
 	</div>
 	<div class="favourite">Favourite</div>
 	<div class="recipe-name">
-	  <h2>CHICKEN MASALA</h2>
+	  <h2>food.title</h2>
 	  <div class="description">
 	    <h3>DESCRIPTION</h3>
 	    <p><strong>A delicious and aromatic Indian chicken curry that's easy to make at home.</strong></p>
