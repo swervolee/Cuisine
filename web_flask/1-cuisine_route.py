@@ -24,8 +24,8 @@ def cuisine():
     recipes = sorted(recipes, key=lambda k: k.title)
 
     for item in recipes:
-        item.Instructions = item.instructions.split("\\n")
-        item.Ingredients = item.ingredients.split("\\n")
+        item.Instructions = item.instructions.split("\n")
+        item.Ingredients = item.ingredients.split("\n")
 
     comments = models.storage.all("Comment").values()
     tags = models.storage.all("Tag").values()
