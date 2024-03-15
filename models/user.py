@@ -6,6 +6,7 @@ from models.comment import Comment
 from models.recipe import Recipe
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
+from flask_login import UserMixin
 
 # SQLAlchemy setup
 if models.storage_type == "db":
@@ -16,7 +17,7 @@ if models.storage_type == "db":
                                 'recipes.id')))
 
 
-class User(BaseModel, Base):
+class User(BaseModel, UserMixin, Base):
     """
     CONSTRUCTS THE CLASS USER
     """
