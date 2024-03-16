@@ -34,10 +34,20 @@
     margin-bottom: 20px;
 }
 
-.introduction h2 {
+.introduction h2{
     border: 2px solid #6fff;
-    padding: 15px 20px;
     border-radius: 10px;
     text-align: left;
     cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.introduction h2 a {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    padding: 15px, 20px;
+    text-decoration-line: none;
 }

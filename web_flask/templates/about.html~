@@ -1,0 +1,20 @@
+{% extends base.html %}
+
+{% block content %}
+<div class="about">
+  <main>
+    <section>
+      <h2>Create Your Culinary Masterpieces</h2>
+      <p>Unleash your creativity in the kitchen and share your favorite recipes with the world. From family classics to innovative creations, our intuitive recipe creation tool makes it easy to document and showcase your culinary adventures. Add mouthwatering photos, detailed instructions, and personal touches to make your recipes truly shine.</p>
+    </section>
+    <section>
+      <h2>Discover Inspiration From Fellow Foodies</h2>
+      <p>Explore a diverse collection of recipes curated by our passionate community of home cooks, food bloggers, and culinary experts. Whether you're craving comfort food, healthy meals, or international cuisine, our platform offers a treasure trove of inspiration to satisfy every palate. Browse trending recipes, discover hidden gems, and bookmark your favorites for later.</p>
+    </section>
+    <section>
+      <h2>Connect With Like-Minded Food Lovers</h2>
+      <p>Join a thriving community of food enthusiasts who share your love for cooking, eating, and sharing great food. Connect with fellow foodies, exchange tips and tricks, and engage in lively discussions about all things culinary. From kitchen hacks to ingredient swaps, our community is here to support and inspire you on your culinary journey.</p>
+    </section>
+  </main>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 import models
 from models.user import User
 from models.recipe import Recipe
@@ -15,10 +15,11 @@ def close_db(error):
     """
     models.storage.close()
 
-@app.route("/cuisine", strict_slashes=False)
-def cuisine():
+
+@app.route("/recipes", strict_slashes=False)
+def cuisine_recipes():
     """
-    CUISINE WEBFLASK
+    PRESENTS AVAILABLE RECIPES
     """
     recipes = [r for r in models.storage.all("Recipe").
                values() if r.private == False]
@@ -38,10 +39,26 @@ def cuisine():
 
     tags = models.storage.all("Tag").values()
 
-    return render_template("0-index.html",
-                           recipes=recipes,
-                           comments=comments,
-                           tags=tags)
+    return "hello"
+
+
+@app.route("/", strict_slashes=False)
+def cuisine():
+    """
+    LANDING PAGE FOR CUISINE
+    """
+    return render_template("main.html")
+
+@app.route("/about", strict_slashes=False)
+def about():
+    """
+    THE ABOUT PAGE
+    """
+    return render_template("about.html")
+
+@app.route("/user-creations", strict_slashes=False)
+def user_creations():
+    return "hellow world"
 
 if __name__ == "__main__":
     """
