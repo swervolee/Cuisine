@@ -43,6 +43,7 @@ p {
   color: #666;
 }
 
+
 /* Optional: Add some visual enhancements */
 .about section {
   background-color: #101820;
@@ -53,48 +54,14 @@ p {
   transition: transform 0.3s ease-in-out;
 }
 
-
-
-
-
----------------------------------SIDEBAR_STYLING-----------------
-
-
-.container {
-  display: flex;
-}
-
-.sidebar {
-  width: 250px;
-  background-color: #101820;
-  color: #fff;
-  padding: 20px;
-  position: fixed;
-  left: 0;
-  border-radius: 4px;
-}
-
-.sidebar h2 {
-    margin-bottom: 20px;
-    color: white;
+.container h1 {
+    color: #888;
     text-align: center;
+    margin-bottom: 30px;
 }
 
-.sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
 
-.sidebar ul li {
-  margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.content {
-  flex-grow: 1;
-  padding: 20px;
+.about h3 {
+    text-align: center;
+    color: #888;
 }

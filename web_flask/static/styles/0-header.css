@@ -3,7 +3,7 @@ header {
   background-color: black; /* Dark gray background */
   color: #6fffe9; /* White text color */
   padding: 20px 0; /* Top and bottom padding */
-  width: 100%;
+  # width: 100%;
   box-shadow: 0 2px 4px white;
 }
 
@@ -22,9 +22,13 @@ header {
 }
 
 .logo h1 {
-  margin: 0; /* Remove margin */
+  margin: 0;
 }
 
+.logo h1 a {
+    color: #6fffe9;
+    text-decoration: none
+}
 nav {
   display: flex; /* Display navigation links horizontally */
 }
