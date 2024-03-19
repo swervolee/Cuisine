@@ -1,0 +1,15 @@
+#!/usr/bin/node
+
+document.addEventListener("DOMContentLoaded", function () {
+    var email = document.getElementById("email");
+
+    email.addEventListener("input", function() {
+	if (email.validity.valueMissing) {
+	    email.setCustonValidity("Please enter your email address.");
+	} else if (input.validity.typeMismatch) {
+	    email.setCustomValidity("Please emter a valid email address");
+	} else {
+	    email.setCustomValidity("");
+	}
+    });
+});

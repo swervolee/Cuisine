@@ -37,6 +37,7 @@ h2 {
 
 label {
     display: block;
+    flex-wrap: wrap-reverse;
 }
 
 input[type="email"],
@@ -50,6 +51,10 @@ input[type="password"] {
     box-sizing: border-box;
 }
 
+
+.checkbox {
+    display: flex;
+}
 button[type="submit"] {
     width: 100%;
     padding: 10px;

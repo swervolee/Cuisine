@@ -8,7 +8,7 @@ from models.tag import Tag
 from models.comment import Comment
 
 app = Flask(__name__)
-app.secret_key = "eadff6d69ff0eb846bb982cb936f1bb20f48c091f04664378fd1c2de1769aa4c"
+app.secret_key = b"eadff6d69ff0eb846bb982cb936f1bb20f48c091f04664378fd1c2de1769aa4c"
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 users = models.storage.all("User").values()
@@ -26,18 +26,23 @@ def login():
     HANDLES USER LOGIN
     """
     if request.method == "GET":
+        flash("No user found with provided login details. Please try again.", "error")
         return render_template("login.html")
 
     elif request.method == "POST":
         submitted_email = request.form["email"]
         submitted_password = request.form["password"]
+        remember_me = False
 
         user = next((u for u in users if u.email == submitted_email and u.password == submitted_password), None)
 
         if user is None:
             return redirect(url_for("login"))
 
-        flask_login.login_user(user)
+        if request.form["checkbox"] == "on":
+            remember_me = True
+        flask_login.login_user(user, remember=remember_me)
+        sessions["user_id"] = user.id
         return redirect(url_for("cuisine"))
 
 @app.route("/signup")
