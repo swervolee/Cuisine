@@ -1,11 +1,17 @@
 #!/usr/bin/python3
-from flask import Flask, render_template, url_for, request, redirect, sessions, flash
+from flask import Flask, render_template, url_for
+from flask import request, redirect, sessions, flash
 import flask_login
 import models
 from models.user import User
 from models.recipe import Recipe
 from models.tag import Tag
 from models.comment import Comment
+from email_validator import validate_email, EmailNotValidError
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 
 app = Flask(__name__)
 app.secret_key = b"eadff6d69ff0eb846bb982cb936f1bb20f48c091f04664378fd1c2de1769aa4c"
@@ -26,8 +32,10 @@ def login():
     HANDLES USER LOGIN
     """
     if request.method == "GET":
-        flash("No user found with provided login details. Please try again.", "error")
-        return render_template("login.html")
+        if request.referrer:
+            if request.referrer.split("/")[-1] == "login":
+                return render_template("login.html", invalid=True)
+        return render_template("login.html", invalid=False)
 
     elif request.method == "POST":
         submitted_email = request.form["email"]
@@ -37,7 +45,7 @@ def login():
         user = next((u for u in users if u.email == submitted_email and u.password == submitted_password), None)
 
         if user is None:
-            return redirect(url_for("login"))
+            return redirect("login")
 
         if request.form["checkbox"] == "on":
             remember_me = True
@@ -50,19 +58,57 @@ def signup():
     """
     HANDLES USER SIGNUP
     """
+    invalid_email = False
     if request.method == "GET":
-        return render_template("signup.html")
+        if request.referrer:
+            if request.referrer.split("/")[-1] == "signup":
+                return render_template("signup.html",
+                                       existing=True,
+                                       invalid_email=invalid_email)
+        return render_template("signup.html", existing=False)
     else:
         email = request.form["email"]
         password = request.form["password"]
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
 
-        user = next((u for u in users if u.email == email and u.password == password), None)
+        user = next((u for u in users if u.email == email), None)
 
         if user:
-            flash("An account with this email already exists. Please sign in or use a different email.", "error")
+            return redirect(url_for("signup"))
+        try:
+            valid = validate_email(email)
+        except Exception:
+            invalid_email = True
+            return redirect(url_for("signup"))
 
+def send_login_email(reciever_email, login_link):
+    """
+    VERIFIES EMAIL WHEN USER CREATES AN ACCOOUNT
+    """
+    sender_email = "cuisinemailbox@gmail.com"
+    password = getenv("EMAIL_PASSWORD", None)
+
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = reciever_email
+    message["Subject"] = "Login Authentication"
+
+    body = f"""
+    Hi,
+
+    Here is your login authentication line:
+    {login_link}
+
+    Regards,
+    Cuisine
+    """
+
+    message.attach(MIMEText(body, "plain"))
+
+    with smptplib.SMTP_SSL("smptp.gmail.com", 465) as server:
+        server.login(sender_email, password)
+        server.send_email(sender_email, reciever_email, message.as_string())
 #---------------------END OF LOGIN -------------------------------
 
 

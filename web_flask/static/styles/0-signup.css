@@ -13,10 +13,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     max-width: 400px;
-    margin: 100px auto;
+    margin: 70px auto;
     padding: 20px;
     border-radius: 8px;
-    height: 350px;
+    height: 500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #ffb900;
 }

@@ -22,6 +22,9 @@
             <div class="input-group checkbox">
                 <label for="remember-me"><input type="checkbox" id="remember-me" name="remember-me">Remember me</label>
             </div>
+	    {% if invalid %}
+	    <div class="error-message">Invalid email or password, Please try again</div>
+	    {% endif %}
             <button type="submit">Log In</button>
         </form>
         <p class="signup-link">Don't have an account?  <a href="{{ url_for('signup') }}">Sign up here</a></p>
