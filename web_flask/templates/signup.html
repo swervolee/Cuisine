@@ -10,7 +10,7 @@
 <body>
     <div class="log">
         <h2>Create Account</h2>
-        <form action="/login" method="post">
+        <form action="/signup" method="post">
 	    <div class="input-group">
 	      <label for="first_name">First Name:</label>
 	      <input id="first_name" name="first_name" required>
@@ -30,7 +30,7 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-	    {% if existing %}
+	    {% if existing_user %}
 	    <div class="error-message">Account Already Exists</div>
 	    {% endif %}
             <button type="submit">Log In</button>

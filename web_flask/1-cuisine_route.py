@@ -11,6 +11,7 @@ from email_validator import validate_email, EmailNotValidError
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from os import getenv
 
 
 app = Flask(__name__)
@@ -53,20 +54,15 @@ def login():
         sessions["user_id"] = user.id
         return redirect(url_for("cuisine"))
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
     """
     HANDLES USER SIGNUP
     """
     invalid_email = False
-    if request.method == "GET":
-        if request.referrer:
-            if request.referrer.split("/")[-1] == "signup":
-                return render_template("signup.html",
-                                       existing=True,
-                                       invalid_email=invalid_email)
-        return render_template("signup.html", existing=False)
-    else:
+    existing_user = False
+
+    if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
         first_name = request.form["first_name"]
@@ -75,29 +71,35 @@ def signup():
         user = next((u for u in users if u.email == email), None)
 
         if user:
-            return redirect(url_for("signup"))
-        try:
-            valid = validate_email(email)
-        except Exception:
-            invalid_email = True
-            return redirect(url_for("signup"))
+            existing_user = True
+        else:
+            try:
+                valid = validate_email(email)
+            except Exception as e:
+                invalid_email = True
+            else:
+                send_login_email(email, "0.0.0.0:5000/cuisine")
 
-def send_login_email(reciever_email, login_link):
+    return render_template("signup.html",
+                           existing=existing_user,
+                           invalid_email=invalid_email)
+
+def send_login_email(receiver_email, login_link):
     """
-    VERIFIES EMAIL WHEN USER CREATES AN ACCOOUNT
+    VERIFIES EMAIL WHEN USER CREATES AN ACCOUNT
     """
     sender_email = "cuisinemailbox@gmail.com"
-    password = getenv("EMAIL_PASSWORD", None)
+    password = getenv("EMAIL_PASSWORD")
 
     message = MIMEMultipart()
     message["From"] = sender_email
-    message["To"] = reciever_email
+    message["To"] = receiver_email
     message["Subject"] = "Login Authentication"
 
     body = f"""
     Hi,
 
-    Here is your login authentication line:
+    Here is your login authentication link:
     {login_link}
 
     Regards,
@@ -106,9 +108,9 @@ def send_login_email(reciever_email, login_link):
 
     message.attach(MIMEText(body, "plain"))
 
-    with smptplib.SMTP_SSL("smptp.gmail.com", 465) as server:
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
         server.login(sender_email, password)
-        server.send_email(sender_email, reciever_email, message.as_string())
+        server.sendmail(sender_email, receiver_email, message.as_string())
 #---------------------END OF LOGIN -------------------------------
 
 
