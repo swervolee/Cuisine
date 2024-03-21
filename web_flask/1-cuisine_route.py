@@ -2,6 +2,7 @@
 from flask import Flask, render_template, url_for
 from flask import request, redirect, sessions, flash
 import flask_login
+from flask_login import current_user
 import models
 from models.user import User
 from models.recipe import Recipe
