@@ -132,8 +132,8 @@ If you have any questions or need further assistance, please contact our support
 Thank you for choosing Cuisine.
 
 Best regards,
-William
-Senior Dev
+Bree & William
+Senior Devs
 Cuisine
     """
     data = {"reciever": reciever,
@@ -184,7 +184,7 @@ def cuisine():
     """
     LANDING PAGE FOR CUISINE
     """
-    return render_template("main.html")
+    return render_template("main.html", current_user=current_user)
 
 @app.route("/about", strict_slashes=False)
 def about():

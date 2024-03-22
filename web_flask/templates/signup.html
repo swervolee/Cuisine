@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/styles/0-signup.css">
-    <script href="../static/scripts/0-signup.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Signup</title>
-</head>
-<body>
-    <div class="log">
-        <h2>Create Account</h2>
-        <form action="/signup" method="post">
-	    <div class="input-group">
-	      <label for="first_name">First Name:</label>
-	      <input id="first_name" name="first_name" required>
-	    </div>
-	    <div class="input-group">
-	      <label for="last_name">Last Name:</label>
-	      <input id="last_name" name="last_name" required>
-	    </div>
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-		{% if invalid_email %}
-		<div class="error-message">Invalid email</div>
+    <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-signup.css">
+	<script href="../static/scripts/0-signup.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<title>Signup</title>
+    </head>
+    <body>
+	<div class="log">
+            <h2>Create Account</h2>
+            <form action="/signup" method="post">
+		<div class="input-group">
+		    <label for="first_name">First Name:</label>
+		    <input id="first_name" name="first_name" required>
+		</div>
+		<div class="input-group">
+		    <label for="last_name">Last Name:</label>
+		    <input id="last_name" name="last_name" required>
+		</div>
+		<div class="input-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+		    {% if invalid_email %}
+		    <div class="error-message">Invalid email</div>
+		    {% endif %}
+		</div>
+		<div class="input-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+		</div>
+		{% if existing_user %}
+		<div class="error-message">Account Already Exists</div>
 		{% endif %}
-            </div>
-            <div class="input-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-	    {% if existing_user %}
-	    <div class="error-message">Account Already Exists</div>
-	    {% endif %}
-            <button type="submit">Log In</button>
-        </form>
-        <p class="signup-link">Have an account? <a href="{{ url_for('login') }}">Login here</a></p>
-    </div>
-</body>
+		<button type="submit">Log In</button>
+            </form>
+            <p class="signup-link">Have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+	</div>
+    </body>
 </html>
