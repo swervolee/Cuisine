@@ -15,11 +15,12 @@
 	<link rel="stylesheet" type="text/css" href="../static/styles/0-presentation.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="../static/scripts/0-script.js"></script>
+	<script src="../static/scripts/0-user_profile.js"></script>
 	{% block links %} {% endblock  %}
     </head>
     <body>
 	<header>
-	    <div class="header-container">
+	    <div class="header-cnt">
 		<div class="logo">
 		    <h1><a href="{{ url_for('cuisine') }}">CUISINE</a></h1>
 		</div>
@@ -27,23 +28,25 @@
 		    <input type="text" placeholder="Search recipes">
 		    <button type="submit">Search</button>
 		</div>
-		<nav>
-		    <ul class="nav-links">
-			<li><a href="{{ url_for('about') }}">About</a></li>
-			<li><a href="#contact">Contact</a></li>
-		    </ul>
-		</nav>
+		<div class="user">
+		    <div class="wallpaper"></div>
+		    <form action="/upload" method="post" enctype="multipart/form-data">
+			<input  id="fileInput" type="file" name="profile_picture" accept="image/*" required style="display: none;">
+			<button type="button" id="uploadButton">Upload</button>
+		    </form>
+		    <div class="favourites">Favourites</div>
+		    <div class="logout">Log Out</div>
+		</div>
 	    </div>
 	</header>
-	<div class="user">
-	    <div class="wallpaper">Wallpaper</div>
-	</div>
 	{% block content %} {% endblock %}
 	<footer>
 	    <div class="footer-container">
 	<p>&copy; 2024 CUISINE. All rights reserved.</p>
 	<nav>
             <ul class="footer-links">
+		<li><a href="{{ url_for('about') }}">About</a></li>
+		<li><a href="#contact">Contact</a></li>
 		<li><a href="#terms">Terms of Use</a></li>
 		<li><a href="#privacy">Privacy Policy</a></li>
 		<li><a href="#contact">Contact Us</a></li>

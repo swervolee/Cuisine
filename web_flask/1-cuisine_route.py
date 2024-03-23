@@ -72,7 +72,7 @@ def login(token=None):
         flask_login.login_user(user, remember=remember_me)
         return redirect(url_for("cuisine"))
 
-@app.route("/signup", methods=["GET", "POST"])
+@app.route("/signup", methods=["GET", "POST"], strict_slashes=False)
 def signup():
     """
     HANDLES USER SIGNUP
@@ -197,6 +197,14 @@ def about():
 @app.route("/user-creations", strict_slashes=False)
 def user_creations():
     return "hellow world"
+
+def user_id():
+    """
+    RETURNS USER ID IF USER IS LOGGED IN
+    """
+    if current_user.is_authenticated:
+        return current_user.id
+    return None
 
 if __name__ == "__main__":
     """

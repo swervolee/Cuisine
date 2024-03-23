@@ -2,18 +2,25 @@
 header {
   background-color: black; /* Dark gray background */
   color: #6fffe9; /* White text color */
-  padding: 20px 0; /* Top and bottom padding */
   width: 100%;
   box-shadow: 0 2px 4px white;
-  position: fixed;
+  padding: 20px;
+  margin-bottom: auto;
+  height: 150px;
+  position: sticky;
+  top: 0;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: flex-start;
 }
 
-.header-container {
+.header-cnt {
   display: flex; /* Use flexbox for layout */
   justify-content: space-between; /* Space items evenly */
   align-items: center; /* Align items vertically */
+  width: 50%;
   max-width: 1200px; /* Set max width */
-  margin: 0 auto; /* Center content horizontally */
+  #margin: 0 auto; /* Center content horizontally */
 }
 
 
