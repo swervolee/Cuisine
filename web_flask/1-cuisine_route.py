@@ -29,9 +29,10 @@ serializer = URLSafeTimedSerializer(SECRET_KEY)
 # --------------------------LOGIN----------------------------
 @login_manager.user_loader
 def user_loader(id):
-    for i in users:
+    for i in models.storage.all("User").values():
         if i.id == id:
             return i
+    return None
 
 @app.route("/login", methods=["GET", "POST"], strict_slashes=False)
 @app.route("/login/<token>", strict_slashes=False)
@@ -59,7 +60,7 @@ def login(token=None):
         submitted_password = request.form["password"]
         remember_me = False
 
-        user = next((u for u in users if u.email == submitted_email and u.password == submitted_password), None)
+        user = next((u for u in models.storage.all("User").values() if u.email == submitted_email and u.password == submitted_password), None)
 
         if user is None:
             return redirect("login")
@@ -86,7 +87,7 @@ def signup():
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
 
-        user = next((u for u in users if u.email == email), None)
+        user = next((u for u in models.storage.all("User").values() if u.email == email), None)
 
         if user:
             existing_user = True
@@ -144,6 +145,15 @@ Cuisine
     main(**data)
 #---------------------END OF LOGIN -------------------------------
 
+#---------------------PROFILE UPLOAD------------------------------
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if "profile_picture" in request.files:
+        print("File found")
+        file = request.files["profile_picture"]
+    filename, file_extension = os.path.splitext(file.name)
+    print(filename, file_extension)
+    return request.referrer
 
 @app.teardown_appcontext
 def close_db(error):
@@ -192,6 +202,15 @@ def about():
     THE ABOUT PAGE
     """
     return render_template("about.html")
+
+@app.route("/status")
+def status():
+    """
+    CHECK THE USER STATUS
+    """
+    if current_user.is_authenticated:
+        return "Logged in"
+    return "Anonymous"
 
 
 @app.route("/user-creations", strict_slashes=False)

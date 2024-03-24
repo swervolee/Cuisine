@@ -28,8 +28,11 @@
 		    <input type="text" placeholder="Search recipes">
 		    <button type="submit">Search</button>
 		</div>
+		{% if current_user.is_authenticated %}
 		<div class="user">
-		    <div class="wallpaper"></div>
+		    <div id="imageContainer">
+			<img id="profileImage" src="/static/images/image.jpeg }}" alt="profilePicture">
+		    </div>
 		    <form action="/upload" method="post" enctype="multipart/form-data">
 			<input  id="fileInput" type="file" name="profile_picture" accept="image/*" required style="display: none;">
 			<button type="button" id="uploadButton">Upload</button>
@@ -37,6 +40,7 @@
 		    <div class="favourites">Favourites</div>
 		    <div class="logout">Log Out</div>
 		</div>
+		{% endif %}
 	    </div>
 	</header>
 	{% block content %} {% endblock %}
