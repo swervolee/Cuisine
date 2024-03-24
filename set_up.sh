@@ -12,7 +12,7 @@ tar -czvf "$tar_file" ./web_static/
 file_n=$(basename "$tar_file")
 
 # Print the filename
-echo "$file_n"
+echo "$file_n is the filename"
 
 # Remove the extension
 no_ext="${file_n%.*}"
@@ -20,11 +20,12 @@ no_ext="${file_n%.*}"
 # Print the filename without extension
 echo "$no_ext"
 
-path="/data/cuisine_static/releases/"
+path="/data/cuisine_static/releases"
 
 cp "$tar_file" /tmp
 mkdir -p "$path$no_ext"
 tar -xzf /tmp/"$file_n" -C "$path/$no_ext"
+sudo rm -rf /tmp/"$tar_file"
 mv "$path/$no_ext/web_static/*" "$path/$no_ext"
 rm -rf "$path/$no_ext/web_static"
 
