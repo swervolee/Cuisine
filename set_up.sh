@@ -45,4 +45,4 @@ if [ -L "/data/cuisine_static/current" ]; then
     echo "Deleting current"
     rm -rf /data/web_static/current
 fi
-sudo ln -s "$path/$no_ext" /data/web_static/current
+sudo ln -s /data/web_static/current "$path/$no_ext"
