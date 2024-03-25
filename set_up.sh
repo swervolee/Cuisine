@@ -26,7 +26,7 @@ path="/data/cuisine_static/releases"
 mkdir -p "$path/$no_ext"
 
 # Extract contents
-tar -xzf "$tar_file" -C "$path/$no_ext/"
+tar -xvzf "$tar_file" -C "$path/$no_ext/"
 
 # Cleanup temporary files
 rm -f "$tar_file"
