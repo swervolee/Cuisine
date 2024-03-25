@@ -234,7 +234,7 @@ def status():
 
 @app.route("/user-creations", strict_slashes=False)
 def user_creations():
-    return "hellow world"
+    return render_template("user_creations.html")
 
 def user_id():
     """
