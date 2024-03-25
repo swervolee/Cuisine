@@ -29,13 +29,13 @@
 		    <button type="submit">Search</button>
 		</div>
 		{% if current_user.is_authenticated %}
-		<div class="user">
+		<div class="user" style="display: None;">
 		    <div id="imageContainer">
-			<img id="profileImage" src="/static/images/image.jpeg }}" alt="profilePicture">
+			<img id="profileImage" src="http://web-1.monadoll.tech/cuisine_static/images.jpeg" alt="profilePicture">
 		    </div>
 		    <form action="/upload" method="post" enctype="multipart/form-data">
-			<input  id="fileInput" type="file" name="profile_picture" accept="image/*" required style="display: none;">
-			<button type="button" id="uploadButton">Upload</button>
+			<input  id="fileInput" type="file" name="profile_picture" accept="image/*" required>
+			<button type="submit" id="uploadButton">Upload</button>
 		    </form>
 		    <div class="favourites">Favourites</div>
 		    <div class="logout">Log Out</div>

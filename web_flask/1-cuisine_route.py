@@ -1,25 +1,26 @@
 #!/usr/bin/python3
-from flask import Flask, render_template, url_for
-from flask import request, redirect, sessions, flash
-import flask_login
-from flask_login import current_user
-import models
-from models.user import User
-from models.recipe import Recipe
-from models.tag import Tag
-from models.comment import Comment
-from email_validator import validate_email, EmailNotValidError
-import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email_validator import EmailNotValidError, validate_email
+from flask import Flask, flash, redirect, render_template, request, sessions, url_for
+from flask_login import login_manager, current_user
+from itsdangerous import URLSafeTimedSerializer
+import flask_login
+import models
+import os
 from os import getenv
-from quickstart import get_credentials, create_message, send_message, main
-from  itsdangerous import URLSafeTimedSerializer
-
+import smtplib
+from models.comment import Comment
+from models.recipe import Recipe
+from models.tag import Tag
+from models.user import User
+from quickstart import create_message, get_credentials, main, send_message
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 SECRET_KEY = "eadff6d69ff0eb846bb982cb936f1bb20f48c091f04664378fd1c2de1769aa4c"
 app.config['SECRET_KEY'] = SECRET_KEY
+app.config['UPLOAD_FOLDER'] = "dp_uploads"
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 users = models.storage.all("User").values()
@@ -148,12 +149,30 @@ Cuisine
 #---------------------PROFILE UPLOAD------------------------------
 @app.route("/upload", methods=["POST"])
 def upload_file():
-    if "profile_picture" in request.files:
-        print("File found")
-        file = request.files["profile_picture"]
-    filename, file_extension = os.path.splitext(file.name)
-    print(filename, file_extension)
-    return request.referrer
+    """
+    USER PROFILE PICTURE HANDLING
+    """
+    if 'profile_picture' not in request.files:
+        return 'No file part'
+
+    file = request.files['profile_picture']
+
+    if file.filename == '':
+        return 'No selected file'
+
+    if file:
+        # Generate a secure filename
+        filename, extension = secure_filename(file.filename).split(".")
+
+        identity = user_id()
+        # Rename the file using the user id to make it have
+        # a unique identity
+        new_filename = identity + "_dp." + extension  # Specify the new filename
+
+        # Save the file to the upload folder with the new filename
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
+
+        return 'File successfully uploaded as {}'.format(new_filename)
 
 @app.teardown_appcontext
 def close_db(error):

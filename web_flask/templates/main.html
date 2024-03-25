@@ -11,6 +11,8 @@
   <h1>Discover and share delicious recipes with Cuisine!</h1>
   <h2 id="recipe-world"><a href="{{ url_for('cuisine_recipes') }}">Browse Recipes: Explore a diverse collection of recipes.</a></h2>
   <h2 class="my-recipes"><a href="{{ url_for('user_creations') }}">Visit your creations: See recipes you have created</a></h2>
+  {% if current_user.is_anonymous %}
   <h2 class="login"><a href="{{ url_for('login') }}">Join the community: sign up and log in</a></h2>
+  {% endif %}
 </div>
 {% endblock %}
