@@ -37,12 +37,14 @@ mv "$path/$no_ext/web_static/"* "$path/$no_ext/"
 # Remove unnecessary directory
 rm -rf "$path/$no_ext/web_static"
 
-# Remove the compressef file in /tmp
-rm -rf tmp/"$file_n"
+# Remove the compressed file in /tmp
+rm -rf /tmp/"$file_n"
 
-# Update symbolic link
-if [ -L "/data/cuisine_static/current" ]; then
-    echo "Deleting current"
+# Check if symbolic link exists and remove if it does
+if [ -L "/data/web_static/current" ]; then
+    echo "Deleting current symbolic link"
     rm -rf /data/web_static/current
 fi
-sudo ln -s /data/web_static/current "$path/$no_ext"
+
+# Create symbolic link
+ln -s "$path/$no_ext" /data/cuisine_static/current
