@@ -23,7 +23,12 @@ def get_recipes():
 @app_views.route("/recipes/<recipe_id>", methods=["GET", "PUT", "DELETE"], strict_slashes=False)
 def one_recipe(recipe_id):
     """
-    MANIPULATES RECIPE OBJECTS
+    GET - Returns a single recipe object with id provided
+    PUT - Updates a recipe instance's attributes
+    DELETE - Deletes  a recipe instance of id provided
+
+    If no instance is found of given id, returns 404 status code
+    If invalid json is given, return 400 status code
     """
     fetch = models.storage.get("Recipe", str(recipe_id))
     if fetch is None:
@@ -48,6 +53,9 @@ def one_recipe(recipe_id):
 def create_recipe(user_id):
     """
     CREATES A RECIPE OBJECT
+
+    GET - An alternative way to get a recipe but throught a user id
+    POST - A recipe must have a creator.Creates a recipe with given user id as creator
     """
     usr = models.storage.get("User", str(user_id))
     if usr is None:
