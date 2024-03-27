@@ -58,7 +58,7 @@ def create_recipe(user_id):
     if request.method == "POST":
         data = request.get_json()
         if not data:
-            abort(401, "Not a JSON")
+            abort(400, "Not a JSON")
         new = Recipe(**data)
         new.save()
         return make_response(jsonify(new.to_dict()), 201)
