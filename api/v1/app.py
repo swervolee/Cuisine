@@ -30,6 +30,6 @@ def error_404(error):
 
 if __name__ == "__main__":
     host = getenv("CUISINE_API_HOST", "0.0.0.0")
-    port = int(getenv("HBNB_API_PORT", 5000))
+    port = int(getenv("CUISINE_API_PORT", 5000))
 
     app.run(host=host, port=port, threaded=True, debug=True)
