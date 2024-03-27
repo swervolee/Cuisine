@@ -4,7 +4,7 @@ from flask import Flask
 import models
 from api.v1.views import app_views
 from os import getenv
-from flask import Flask, Blueprint, jsonify
+from flask import Flask, Blueprint, jsonify, make_response
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -27,8 +27,6 @@ def error_404(error):
     PAGE NOT FOUND HANDLER
     """
     return jsonify({"error": "Not found"}), 404
-
-
 
 if __name__ == "__main__":
     host = getenv("CUISINE_API_HOST", "0.0.0.0")
