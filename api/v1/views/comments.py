@@ -26,7 +26,7 @@ def user_comments(user_id):
         data = request.get_json()
 
         if data is None:
-            abort(404)
+            abort(400, "Not a JSON")
         
         if "message" not in data:
             abort(400, "Missing message")
@@ -45,12 +45,30 @@ def user_comments(user_id):
         new_comment.save()
         return make_response(jsonify(new_comment.to_dict()), 201)
     
-@app_views.route("/users/<user_id>/comments/<comment_id>", methods=["PUT", "DELETE", "GET"], strict_slashes=False)
-def specific_comment(user_id, comment_id):
-    user = models.storage.get("User", str(user_id))
+@app_views.route("/comments/<comment_id>", methods=["PUT", "DELETE", "GET"], strict_slashes=False)
+def specific_comment(comment_id):
     comment = models.storage.get("Comment", comment_id)
 
-    if not user or not comment or comment.user_id != user.id:
+    if not comment:
         abort(404)
-
     
+    if request.method == "GET":
+        return make_response(jsonify(comment.to_dict()), 200)
+    
+    if request.method == "PUT":
+        data = request.get_json()
+
+        if data is None:
+            abort(400, "Not a JSON")
+        
+        for i in data:
+            if i not in ["id", "created_at", "updated_at"]:
+                setattr(comment, i, data[i])
+        comment.save()
+        return make_response(jsonify(comment.to_dict()), 200)
+    
+    if request.method == "DELETE":
+        comment.delete()
+        models.storage.save()
+
+        return make_response(jsonify({}), 200)

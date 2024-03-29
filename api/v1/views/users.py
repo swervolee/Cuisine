@@ -17,7 +17,7 @@ def users():
     elif request.method == "POST":
         data = request.get_json()
         if data is None:
-            abort(400)
+            abort(400, "Not a JSON")
         if "first_name" not in data:
             abort(400, "Missing first name")
         elif "last_name" not in data:

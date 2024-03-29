@@ -18,6 +18,7 @@ def teardown_apcontext(cmd):
     """
     CLOSES CURRENT STORAGE SESSION
     """
+    models.storage.save()
     models.storage.close()
 
 
@@ -26,7 +27,7 @@ def error_404(error):
     """
     PAGE NOT FOUND HANDLER
     """
-    return jsonify({"error": "Not found"}), 404
+    return jsonify({"Error 404": "Not Found"}), 404
 
 if __name__ == "__main__":
     host = getenv("CUISINE_API_HOST", "0.0.0.0")
