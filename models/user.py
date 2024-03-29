@@ -70,7 +70,8 @@ class User(BaseModel, UserMixin, Base):
     def unfavorite(self, value):
         """Removes a recipe from favorites."""
         if models.storage_type == "db" and value in self._favorites:
-            self._favorites.remove(value)
+            if value in self._favorites:
+                self._favorites.remove(value)
         else:
             if value.id in self._favorites:
                 self._favorites.remove(value)
