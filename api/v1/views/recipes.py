@@ -70,4 +70,27 @@ def create_recipe(user_id):
         new = Recipe(**data)
         new.save()
         return make_response(jsonify(new.to_dict()), 201)
-        
+    
+
+@app_views.route("users/<user_id>/recipes/favorites/", methods=["GET"], strict_slashes=False)
+def user_favorites(user_id):
+    user = models.storage.get("User", user_id)
+    if user is None:
+        abort(404)
+    result = user.favorites
+    return make_response(jsonify([i.to_dict() for i in result]), 200)
+
+@app_views.route("users/<user_id>/recipes/favorites/",
+                 methods=["POST", "DELETE"],
+                 strict_slashes=False)
+def favorite_edit(user_id, recipe_id):
+    user = models.storage.get("User", str(user_id))
+    recipe = models.storage.get("Recipe", str(recipe_id))
+
+    if not user or not recipe:
+        abort(404)
+    
+    if request.method == "POST":
+        user.favorites = recipe
+        user.save()
+        return (jsonify({f"{user.id}_favorites": [i.to_dict() for i in user.favorites]}), 201)

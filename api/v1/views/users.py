@@ -18,6 +18,14 @@ def users():
         data = request.get_json()
         if data is None:
             abort(400)
+        if "first_name" not in data:
+            abort(400, "Missing first name")
+        elif "last_name" not in data:
+            abort(400, "Missing last_name")
+        elif "email" not in data:
+            abort(400, "Missing Email")
+        elif "password" not in data:
+            abort(400, "Missing Password")
         new = User(**data)
         new.save()
         return make_response(jsonify(new.to_dict()), 201)
@@ -46,3 +54,7 @@ def update_user(user_id):
                 setattr(user, i, data[i])
         user.save()
         return make_response(jsonify(user.to_dict()), 200)
+    elif request.method == "DELETE":
+        user.delete()
+        models.storage.save()
+        return make_response(jsonify({}), 200)
