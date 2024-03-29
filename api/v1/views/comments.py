@@ -11,7 +11,7 @@ def all_comments():
     comments = models.storage.all("Comment").values()
     return make_response([i.to_dict() for i in comments], 200)
 
-@app_views.route("/users/<user_id>/comments", methods=["GET", "POST"])
+@app_views.route("/users/<user_id>/comments", methods=["GET", "POST"], strict_slashes=False)
 def user_comments(user_id):
     user = models.storage.get("User", user_id)
 
@@ -37,3 +37,20 @@ def user_comments(user_id):
 
         if recipe is None:
             abort(404)
+
+        info = {"user_id": user_id,
+                "text": data["message"],
+                "recipe_id": data["recipe_id"]}
+        new_comment = Comment(**info)
+        new_comment.save()
+        return make_response(jsonify(new_comment.to_dict()), 201)
+    
+@app_views.route("/users/<user_id>/comments/<comment_id>", methods=["PUT", "DELETE", "GET"], strict_slashes=False)
+def specific_comment(user_id, comment_id):
+    user = models.storage.get("User", str(user_id))
+    comment = models.storage.get("Comment", comment_id)
+
+    if not user or not comment or comment.user_id != user.id:
+        abort(404)
+
+    
