@@ -8,8 +8,8 @@ from itsdangerous import URLSafeTimedSerializer
 import flask_login
 import models
 import os
+import uuid
 from os import getenv
-import smtplib
 from models.comment import Comment
 from models.recipe import Recipe
 from models.tag import Tag
@@ -26,8 +26,20 @@ login_manager.init_app(app)
 users = models.storage.all("User").values()
 login_tokens = []
 serializer = URLSafeTimedSerializer(SECRET_KEY)
+cache_id = str(uuid.uuid4())
+CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+
 
 # --------------------------LOGIN----------------------------
+
+@app.route("/logout", methods=["POST"], strict_slashes=False)
+def logout():
+    """
+    AN API TO LOGOUT USER
+    """
+    flask_login.logout_user()
+    return render_template("main.html", current_user=current_user, cache_id=cache_id)
+
 @login_manager.user_loader
 def user_loader(id):
     for i in models.storage.all("User").values():
@@ -44,7 +56,7 @@ def login(token=None):
     if request.method == "GET":
         if request.referrer:
             if request.referrer.split("/")[-1] == "login":
-                return render_template("login.html", invalid=True)
+                return render_template("login.html", invalid=True, cache_id=cache_id)
 
         if token:
             try:
@@ -54,7 +66,7 @@ def login(token=None):
                 print(unsealed)
             except Exception as e:
                 print("Error in unsealing", e)
-        return render_template("login.html", invalid=False)
+        return render_template("login.html", invalid=False, cache_id=cache_id)
 
     elif request.method == "POST":
         submitted_email = request.form["email"]
@@ -108,11 +120,12 @@ def signup():
                         }
                 sealed = serializer.dumps(data)
                 send_login_email(email, f"0.0.0.0:5000/login/{sealed}")
-                return render_template("email-confirm.html")
+                return render_template("email-confirm.html", cache_id=cache_id)
 
     return render_template("signup.html",
                            existing=existing_user,
-                           invalid_email=invalid_email)
+                           invalid_email=invalid_email,
+                           cache_id=cache_id)
 
 def send_login_email(reciever, login_link):
     """
@@ -216,14 +229,14 @@ def cuisine():
     """
     LANDING PAGE FOR CUISINE
     """
-    return render_template("main.html", current_user=current_user)
+    return render_template("main.html", current_user=current_user, cache_id=cache_id)
 
 @app.route("/about", strict_slashes=False)
 def about():
     """
     THE ABOUT PAGE
     """
-    return render_template("about.html")
+    return render_template("about.html", cachce_id=cache_id)
 
 @app.route("/status")
 def status():
@@ -237,7 +250,7 @@ def status():
 
 @app.route("/user-creations", strict_slashes=False)
 def user_creations():
-    return render_template("user_creations.html")
+    return render_template("user_creations.html", cache_id=cache_id)
 
 def user_id():
     """

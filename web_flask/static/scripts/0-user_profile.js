@@ -1,2 +1,3 @@
-#!/usr/bin/node
-
+$(".logout-text").on("click", function () {
+    
+})

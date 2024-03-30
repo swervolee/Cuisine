@@ -3,19 +3,19 @@
     <head>
 	<title>CUISINE</title>
 	<meta charset="UTF-8">
-	<link rel="shortcut icon" href="../static/images/images.jpeg">
+	<link rel="shortcut icon" href="{{url_for('static', filename='images/images.jpeg') + '?' + cache_id }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-header.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-footer.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-common.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-recipe.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-comments.css">
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-user-profile.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-header.css') + '?' + cache_id }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-footer.css') + '?' + cache_id }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-common.css') + '?' + cache_id }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-recipe.css') + '?' + cache_id}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-comments.css') + '?' + cache_id}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-user-profile.css') + '?' + cache_id}}">
 	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="../static/styles/0-presentation.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-presentation.css') + '?' + cache_id}}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="../static/scripts/0-script.js"></script>
-	<script src="../static/scripts/0-user_profile.js"></script>
+	<script src="{{ url_for('static', filename='scripts/0-script.js') + '?' + cache_id}}"></script>
+	<script src="{{ url_for('static', filename='scripts/0-user_profile.js') + '?' + cache_id }}"
 	{% block links %} {% endblock  %}
     </head>
     <body>
@@ -25,13 +25,21 @@
 		    	<h1><a href="{{ url_for('cuisine') }}">CUISINE</a></h1>
 			</div>
 			<div class="search-bar">
-		    	<input type="text" placeholder="Search recipes">
-		    	<button type="submit">Search</button>
+				<form>
+					<input type="text" placeholder="Search recipes">
+		    		<button>Search</button>
+				</form>
+		    	
 			</div>
 
+			{% if current_user.is_authenticated %}
 			<div class="logout">
-				<h2 class="logout-text">logout</h2>
+				<form id="logout-form" action="/logout" method="POST">
+					<button class="logout-text"><h2>Logout</h2></button>
+					<input type="submit" style="display: none"></input>
+				</form>
 			</div>
+			{% endif %}
 		</div>
 	</header>
 	{% block content %} {% endblock %}

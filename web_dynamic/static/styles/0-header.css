@@ -85,3 +85,13 @@ nav {
 .search-bar button {
   width: 100px
 }
+
+.logout-text {
+  padding: 5px 10px;
+  background-color: aqua;
+  border-radius: 5px;
+}
+
+.logout-text:hover {
+  opacity: 0.8;
+}
