@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 90%;
+    /*max-width: 90%;*/
     margin: 20px;
     overflow-y: auto;
     max-height: 80%;
@@ -21,14 +21,14 @@
 
 #recipeForm  {
     padding: 5px;
-    border-radus: 5%;
+    border-radius: 5%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 #recipeForm label, #recipeForm button {
-    background-color: red;
+    background-color: rgb(202, 12, 12);
     color: #ccc;
     margin: 5px;
     border-radius: 5px;

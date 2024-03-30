@@ -3,6 +3,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, sessions, url_for
+from flask import make_response, jsonify
+from flask_cors import CORS
 from flask_login import login_manager, current_user
 from itsdangerous import URLSafeTimedSerializer
 import flask_login
@@ -27,9 +29,20 @@ users = models.storage.all("User").values()
 login_tokens = []
 serializer = URLSafeTimedSerializer(SECRET_KEY)
 cache_id = str(uuid.uuid4())
+CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+
 
 # --------------------------LOGIN----------------------------
 
+@app.route("/status", methods=["GET"], strict_slashes=False)
+def status():
+    if current_user.is_authenticated:
+        data = {"status": "logged",
+                "id": current_user.id}
+        return make_response(jsonify(data), 200)
+    
+    else:
+        return make_response(jsonify({"status": "anonymous"}))
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
     """
@@ -219,7 +232,7 @@ def cuisine_recipes():
 
     tags = models.storage.all("Tag").values()
 
-    return "hello"
+    return render_template("recipe.html", recipes=recipes, comments=comments, tags=tags, user_id=user_id, cache_id=cache_id)
 
 
 @app.route("/", strict_slashes=False)
@@ -235,15 +248,6 @@ def about():
     THE ABOUT PAGE
     """
     return render_template("about.html", cachce_id=cache_id)
-
-@app.route("/status")
-def status():
-    """
-    CHECK THE USER STATUS
-    """
-    if current_user.is_authenticated:
-        return "Logged in"
-    return "Anonymous"
 
 
 @app.route("/user-creations", strict_slashes=False)

@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     /*Hide items on default*/
     $(".recipe-creation .data").hide();
-    $(".recipe-container").hide();
+   /* $(".recipe-container").hide();*/
     $(".recipe-ingredients, .recipe-instructions").hide();
     $(".back").hide();
     $(".comments-section").hide();
