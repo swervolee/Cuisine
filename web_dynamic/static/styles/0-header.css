@@ -1,0 +1,87 @@
+/* Header styles */
+header {
+  background-color: black; /* Dark gray background */
+  color: #5cdac7; /* White text color */
+  width: 100%;
+  box-shadow: 0 2px 4px rgb(255, 254, 254);
+  padding: 20px;
+  margin-bottom: auto;
+  height: 150px;
+  position: sticky;
+  top: 0;
+  margin-bottom: 30px;
+  align-items: flex-end;
+}
+
+.header-cnt {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space items evenly */
+  align-items: center; /* Align items vertically */
+  max-width: 1200px; /* Set max width */
+  /* margin: 0 auto; /* Center content horizontally */
+}
+
+
+.logo {
+  font-size: 20px; /* Adjust logo font size */
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color from header */
+}
+
+.logo h1 {
+  margin: 0;
+}
+
+.logo h1 a {
+    color: #6fffe9;
+    text-decoration: none
+}
+nav {
+  display: flex; /* Display navigation links horizontally */
+}
+
+.nav-links {
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  display: flex;
+}
+
+.nav-links a:hover {
+    background-color: #666;
+}
+.nav-links li {
+  margin-right: 30px; /* Add right margin between nav items */
+}
+
+.nav-links li:last-child {
+  margin-right: 0; /* Remove right margin from last nav item */
+}
+
+.nav-links a {
+  color: inherit; /* Inherit text color from header */
+  text-decoration: none; /* Remove underline */
+  font-size: 16px; /* Set font size for navigation links */
+  transition: all 0.3s ease; /* Add smooth transition on hover */
+}
+
+.nav-links a:hover {
+  color: #6fffe9; /* Change color on hover */
+}
+
+.search-bar {
+  display: flex; /* Arrange search bar elements horizontally */
+}
+
+.search-bar input {
+  width: 200px;
+  height: 30px;
+  padding: 5px; /* Add padding */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Add rounded corners */
+  font-size: 14px; /* Set font size */
+}
+
+.search-bar button {
+  width: 100px
+}

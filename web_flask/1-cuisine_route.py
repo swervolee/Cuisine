@@ -61,10 +61,13 @@ def login(token=None):
         submitted_password = request.form["password"]
         remember_me = False
 
-        user = next((u for u in models.storage.all("User").values() if u.email == submitted_email and u.password == submitted_password), None)
+        user = None
+        for i in models.storage.all("User").values():
+            if i.email == submitted_email and i.password == submitted_password:
+                user = i
 
         if user is None:
-            return redirect("login")
+            return redirect(url_for("login"))
 
         try:
             if request.form["checkbox"] == "on":
@@ -248,4 +251,4 @@ if __name__ == "__main__":
     """
     MAIN FUNCTION
     """
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

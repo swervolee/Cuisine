@@ -1,26 +1,24 @@
 /* Header styles */
 header {
   background-color: black; /* Dark gray background */
-  color: #6fffe9; /* White text color */
+  color: #5cdac7; /* White text color */
   width: 100%;
-  box-shadow: 0 2px 4px white;
+  box-shadow: 0 2px 4px rgb(255, 254, 254);
   padding: 20px;
   margin-bottom: auto;
   height: 150px;
   position: sticky;
   top: 0;
   margin-bottom: 30px;
-  display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
 }
 
 .header-cnt {
   display: flex; /* Use flexbox for layout */
   justify-content: space-between; /* Space items evenly */
   align-items: center; /* Align items vertically */
-  width: 50%;
   max-width: 1200px; /* Set max width */
-  #margin: 0 auto; /* Center content horizontally */
+  /* margin: 0 auto; /* Center content horizontally */
 }
 
 

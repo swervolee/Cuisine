@@ -1,0 +1,67 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+}
+
+/* About section styles */
+.about {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 40px 20px;
+  background-color: #f6f6f6;
+  background-image: url("../images/depositphotos_174625906-stock-photo-top-view-vegetables-spices-gray.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border-radius: 5px;
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    border-box: 3px;
+    border-radius: 5px;
+}
+
+h2 {
+  font-size: 28px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  color: #666;
+}
+
+
+/* Optional: Add some visual enhancements */
+.about section {
+  background-color: #101820;
+}
+
+.about section:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.container h1 {
+    color: #888;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.about h3 {
+    text-align: center;
+    color: #888;
+}

@@ -1,0 +1,32 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed black;
+    width: 15%;
+    border-radius: 5px;
+    background-color: #fff;
+    color: black;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    overflow: hidden;
+}
+
+.user * {
+    margin: 10px;
+}
+
+
+.user form {
+    diplay: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.user .wallpaper {
+    background-color: grey;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50%;
+}

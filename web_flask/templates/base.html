@@ -21,27 +21,18 @@
     <body>
 	<header>
 	    <div class="header-cnt">
-		<div class="logo">
-		    <h1><a href="{{ url_for('cuisine') }}">CUISINE</a></h1>
+			<div class="logo">
+		    	<h1><a href="{{ url_for('cuisine') }}">CUISINE</a></h1>
+			</div>
+			<div class="search-bar">
+		    	<input type="text" placeholder="Search recipes">
+		    	<button type="submit">Search</button>
+			</div>
+
+			<div class="logout">
+				<h2 class="logout-text">logout</h2>
+			</div>
 		</div>
-		<div class="search-bar">
-		    <input type="text" placeholder="Search recipes">
-		    <button type="submit">Search</button>
-		</div>
-		{% if current_user.is_authenticated %}
-		<div class="user" style="display: None;">
-		    <div id="imageContainer">
-			<img id="profileImage" src="http://web-1.monadoll.tech/cuisine_static/images.jpeg" alt="profilePicture">
-		    </div>
-		    <form action="/upload" method="post" enctype="multipart/form-data">
-			<input  id="fileInput" type="file" name="profile_picture" accept="image/*" required>
-			<button type="submit" id="uploadButton">Upload</button>
-		    </form>
-		    <div class="favourites">Favourites</div>
-		    <div class="logout">Log Out</div>
-		</div>
-		{% endif %}
-	    </div>
 	</header>
 	{% block content %} {% endblock %}
 	<footer>

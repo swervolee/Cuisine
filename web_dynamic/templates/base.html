@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<title>CUISINE</title>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="../static/images/images.jpeg">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-header.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-footer.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-common.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-recipe.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-comments.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-user-profile.css">
+	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="../static/styles/0-presentation.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="../static/scripts/0-script.js"></script>
+	<script src="../static/scripts/0-user_profile.js"></script>
+	{% block links %} {% endblock  %}
+    </head>
+    <body>
+	<header>
+	    <div class="header-cnt">
+			<div class="logo">
+		    	<h1><a href="{{ url_for('cuisine') }}">CUISINE</a></h1>
+			</div>
+			<div class="search-bar">
+		    	<input type="text" placeholder="Search recipes">
+		    	<button type="submit">Search</button>
+			</div>
+
+			<div class="logout">
+				<h2 class="logout-text">logout</h2>
+			</div>
+		</div>
+	</header>
+	{% block content %} {% endblock %}
+	<footer>
+	    <div class="footer-container">
+	<p>&copy; 2024 CUISINE. All rights reserved.</p>
+	<nav>
+            <ul class="footer-links">
+		<li><a href="{{ url_for('about') }}">About</a></li>
+		<li><a href="#contact">Contact</a></li>
+		<li><a href="#terms">Terms of Use</a></li>
+		<li><a href="#privacy">Privacy Policy</a></li>
+		<li><a href="#contact">Contact Us</a></li>
+            </ul>
+	</nav>
+	    </div>
+	</footer>
+    </body>
+</html>

@@ -59,9 +59,21 @@ def update_tag(tag_id):
         models.storage.save()
         return make_response(jsonify({}), 200)
     
-@app_views.route("/search", methods=["Post"], strict_slashes=False)
+@app_views.route("/search", methods=["POST"], strict_slashes=False)
 def search():
     data = request.get_json()
 
-    if data is None:
-        abort(400, "Not a JSON")
+    if data is None or "search_text" not in data:
+        abort(400, "Invalid JSON or missing search_text")
+
+    search_text = str(data["search_text"]).lower()
+
+    result = []
+    for recipe in models.storage.all("Recipe").values():
+        if (search_text in recipe.title.lower() or
+            search_text in recipe.introduction.lower() or
+            search_text in recipe.ingredients.lower() or
+            search_text in recipe.instructions.lower()):
+            result.append(recipe)
+
+    return jsonify([recipe.to_dict() for recipe in result]), 200
