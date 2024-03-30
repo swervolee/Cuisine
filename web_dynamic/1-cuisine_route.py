@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, sessions, url_for
+from flask import make_response, jsonify
 from flask_login import login_manager, current_user
 from itsdangerous import URLSafeTimedSerializer
 import flask_login
@@ -32,6 +33,15 @@ CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 # --------------------------LOGIN----------------------------
 
+@app.route("/status", methods=["GET"], strict_slashes=False)
+def status():
+    if current_user.is_authenticated:
+        data = {"status": "logged",
+                "id": current_user.id}
+        return make_response(jsonify(data), 200)
+    
+    else:
+        return make_response(jsonify({"status": "anonymous"}))
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
     """
@@ -221,7 +231,7 @@ def cuisine_recipes():
 
     tags = models.storage.all("Tag").values()
 
-    return "hello"
+    return render_template("recipe.html", recipes=recipes, comments=comments, tags=tags)
 
 
 @app.route("/", strict_slashes=False)
