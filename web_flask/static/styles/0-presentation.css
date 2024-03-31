@@ -2,15 +2,16 @@
     max-width: 800px;
     margin: 50px auto;
     padding: 40px 0;
-    background-color: black;
+    background-color: #00000017;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
     text-align: center;
     color: #6fffe9;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    backdrop-filter: blur(18px);
 }
 
 .introduction * {
