@@ -46,10 +46,10 @@ input[type="password"],
 #first_name {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #080202;
     border-radius: 5px;
-    background-color: black;
-    color: white;
+    background-color: rgb(253, 252, 252);
+    color: rgb(0, 0, 0);
     box-sizing: border-box;
 }
 

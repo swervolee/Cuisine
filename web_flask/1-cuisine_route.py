@@ -252,6 +252,13 @@ def about():
 
 @app.route("/user-creations", strict_slashes=False)
 def user_creations():
+    fetch_id = user_id()
+    if id:
+        user = models.storage.get("User", fetch_id)
+        recipes = [r for r in user.recipes]
+        comments = [c for c in user.comments]
+        tags = models.storage.all("Tag").values()
+        return render_template("user_creations.html", recipes=recipes, comments=comments, cache_id=cache_id, tags=tags)
     return render_template("user_creations.html", cache_id=cache_id)
 
 def user_id():

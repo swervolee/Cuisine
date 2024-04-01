@@ -1,16 +1,15 @@
 /* Header styles */
 header {
   background-color: black; /* Dark gray background */
-  color: #5cdac7; /* White text color */
+  color: #11dfc0; /* White text color */
   width: 100%;
   box-shadow: 0 2px 4px rgb(255, 254, 254);
   padding: 20px;
-  margin-bottom: auto;
-  height: 150px;
-  position: sticky;
-  top: 0;
   margin-bottom: 30px;
   align-items: flex-end;
+  position: -webkit-sticky; /* Fix the header position */
+  top: 0; /* Position the header at the top */
+  z-index: 999; /* Set a high z-index to ensure it's always on top */
 }
 
 .header-cnt {

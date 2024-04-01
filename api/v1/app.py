@@ -1,3 +1,6 @@
+#!usr/bin/python3
+
+
 from flask import Flask
 import models
 from api.v1.views import app_views
@@ -5,13 +8,11 @@ from os import getenv
 from flask import Flask, Blueprint, jsonify, make_response
 from flask_cors import CORS
 
-#!/usr/bin/python3
-
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-CORS(app, resources={r"/*": {"origins": "192.168.43.6"}})
+CORS(app)
 
 
 

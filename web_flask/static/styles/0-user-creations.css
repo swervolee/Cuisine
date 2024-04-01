@@ -1,0 +1,10 @@
+.no-creations {
+    width: fit-content;
+    margin: auto;
+    border-radius: 5px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: bisque;
+}
