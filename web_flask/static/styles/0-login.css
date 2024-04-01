@@ -7,7 +7,24 @@ body {
     background-attachment: fixed;
 }
 
+@media (max-width: 480px) {
+    body {
+        background-size: contain;
+    }
 
+    .log {
+        margin: 50px auto;
+        height: auto;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    button[type="submit"] {
+        margin-top: 10px;
+    }
+}
 .log {
     display: flex;
     flex-direction: column;
@@ -17,8 +34,9 @@ body {
     padding: 20px;
     border-radius: 8px;
     height: 350px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffb900;
+    box-shadow: 0 6px 8px rgba(223, 214, 214, 0.774), 0 4px 6px rgba(230, 217, 217, 0.932);
+    background-color: #00000017;
+    backdrop-filter: blur(10px);
 }
 
 form {
@@ -32,12 +50,14 @@ form {
 
 h2 {
     text-align: center;
+    color: #ccc;
 }
 
 
 label {
     display: block;
     flex-wrap: wrap-reverse;
+    color: #ccc;
 }
 
 input[type="email"],
@@ -48,7 +68,7 @@ input[type="password"],
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: black;
+    background-color: rgb(241, 233, 233);
     color: white;
     box-sizing: border-box;
 }
@@ -74,6 +94,8 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     opacity: 0.9;
+    background-color: #ccc;
+    color: black;
 }
 
 .signup-link {
@@ -82,12 +104,12 @@ button[type="submit"]:hover {
 }
 
 .signup-link a {
-    color: #000;
+    color: #a1e65d;
     text-decoration: none;
 }
 
 .signup-link a:hover {
     text-decoration: underline;
-    color: white;
+    color: rgb(229, 230, 227);
 
 }
