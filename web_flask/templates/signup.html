@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="../static/styles/0-signup.css">
-	
+	<link rel="shortcut icon" href="{{url_for('static', filename='images/images.jpeg') + '?' + cache_id }}">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<title>Signup</title>
     </head>
@@ -30,6 +30,13 @@
 		<div class="input-group">
                     <label for="password">Password:</label>
                     <input type="password" id="password" name="password" required>
+		</div>
+		<div class="input-group">
+					<label for="confirm_password">Confirm Password:</label>
+					<input type="password" id="confirm_password" name="confirm_password" required>
+		    {% if password_mismatch %}
+		    <div class="error-message">Passwords do not match</div>
+		    {% endif %}
 		</div>
 		{% if existing %}
 		<div class="error-message">Account Already Exists Please Try Again</div>

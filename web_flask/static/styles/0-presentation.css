@@ -1,17 +1,35 @@
+@keyframes unfold {
+    0% {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+  
+  .introduction {
+    animation: unfold 2s ease-out forwards;
+  }
 .introduction {
-    max-width: 800px;
     margin: 50px auto;
     padding: 40px 0;
     background-color: #00000017;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     text-align: center;
     color: #6fffe9;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
-    backdrop-filter: blur(18px);
+    align-items: center;
+    width: 100%;
+    backdrop-filter: blur(10px);
+}
+
+.introduction-image {
+    width: 100%;
 }
 
 .introduction * {
@@ -19,10 +37,9 @@
 }
 
 .introduction h1 {
-    font-size: 36px;
+    font-size: 2.5em;
     text-decoration: none;
-    /*This one is for doll, she loves lilac*/
-    color: #a99ac1;
+
     margin-bottom: 20px;
     text-align: left;
   }
@@ -38,7 +55,7 @@
 
 .introduction h2{
     text-decoration: none;
-    color: #6fff;
+    color: #777;
     border: 2px solid #6ff;
     border-radius: 10px;
     text-align: left;
@@ -46,12 +63,14 @@
     padding-top: 10px;
     padding-bottom: 10px;
     text-decoration: none;
+    background-color: orangered;
+    font-size: 1.5em;
 }
 
 
 .introduction h2 a {
     text-decoration: none;
-    color: #a99ac1;
+    color: burlywood;
     text-align: left;
     width: 100%;
     height: 100%;

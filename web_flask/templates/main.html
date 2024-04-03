@@ -14,5 +14,16 @@
   {% if current_user.is_anonymous %}
   <h2 class="login"><a href="{{ url_for('login') }}">Join the community: sign up and log in</a></h2>
   {% endif %}
+  <div class="introduction-image">
+    <img src="../static/images/display_images/istockphoto-1081422898-612x612.webp" alt="Image">
+  </div>
 </div>
+
+<!--
+{% for file in files %}
+  <div>{{ file }}</div>
+  <img src="{{ file }}" alt="Image">
+{% endfor %}
+-->
+
 {% endblock %}

@@ -71,6 +71,7 @@ input[type="password"],
     background-color: rgb(241, 233, 233);
     color: white;
     box-sizing: border-box;
+    margin-top: 5px;
 }
 
 
@@ -101,6 +102,7 @@ button[type="submit"]:hover {
 .signup-link {
     text-align: center;
     margin-top: 15px;
+    color: #ccc;
 }
 
 .signup-link a {
