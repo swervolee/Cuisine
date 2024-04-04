@@ -5,20 +5,32 @@
 {% endblock %}
 
 
+
 {% block content %}
-<div class="introduction">
-  <h1>Welcome to Cuisine</h1>
-  <h1>Discover and share delicious recipes with Cuisine!</h1>
-  <h2 id="recipe-world"><a href="{{ url_for('cuisine_recipes') }}">Browse Recipes: Explore a diverse collection of recipes.</a></h2>
-  <h2 class="my-recipes"><a href="{{ url_for('user_creations') }}">Visit your creations: See recipes you have created</a></h2>
-  {% if current_user.is_anonymous %}
-  <h2 class="login"><a href="{{ url_for('login') }}">Join the community: sign up and log in</a></h2>
-  {% endif %}
-  <div class="introduction-image">
-    <img src="../static/images/display_images/istockphoto-1081422898-612x612.webp" alt="Image">
+<div class="introduction-pictures">
+  <div class="introduction">
+    <h1>Welcome to Cuisine</h1>
+    <h1>Discover and share delicious recipes with Cuisine!</h1>
+    <h2 id="recipe-world"><a href="{{ url_for('cuisine_recipes') }}">Browse Recipes: Explore a diverse collection of recipes.</a></h2>
+    <h2 class="my-recipes"><a href="{{ url_for('user_creations') }}">Visit your creations: See recipes you have created</a></h2>
+    {% if current_user.is_anonymous %}
+    <h2 class="login"><a href="{{ url_for('login') }}">Join the community: sign up and log in</a></h2>
+    {% endif %}
+  </div>
+
+
+  <div class="introduction-picture pic2">
+    <h1> Health is Key<br>
+      <p>Eating healthy is essential for a balanced lifestyle. At Cuisine, we believe in providing nutritious and delicious recipes that promote well-being. Explore our collection of healthy recipes and start your journey towards a healthier you!</p>
+    </h1>
+  </div>
+
+  <div class="introduction-picture1 pic1">
+      <h1> Share Your Creations<br>
+        <p>Have a recipe you want to share with the world? Cuisine is the perfect platform to showcase your culinary skills. Share your recipes with the community and inspire others to get creative in the kitchen!</p>
+      </h1>
   </div>
 </div>
-
 <!--
 {% for file in files %}
   <div>{{ file }}</div>
