@@ -40,7 +40,8 @@
 
 
 .introduction-picture {
-  background-image: url("../images/display_images/8PXXTV4QRI.jpg");
+  /*background-image: url("../images/display_images/8PXXTV4QRI.jpg");*/
+  background-color: rgb(22, 168, 194);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -54,8 +55,13 @@
 }
 
 
+.pic1 h1, .pic2 h1 {
+  text-align: center;
+}
+
 .introduction-picture1 {
-  background-image: url("../images/display_images/OM0PRGTSEV.jpg");
+  /*background-image: url("../images/display_images/OM0PRGTSEV.jpg");*/
+  background-color: silver;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
