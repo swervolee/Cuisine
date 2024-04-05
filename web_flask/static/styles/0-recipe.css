@@ -1,21 +1,22 @@
+
+
 .recipe-creation {
-    position: fixed;
-    bottom: 50px;
-    left: 50px;
     color: black;
     text-align: center;
     border-radius: 2%;
     padding: 10px;
-    background-color: white;
+    background-color: rgb(247, 149, 4);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /*max-width: 90%;*/
     margin: 20px;
     overflow-y: auto;
     max-height: 80%;
     align-items: baseline;
     z-index: 1;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;    
 }
 
 
@@ -35,7 +36,7 @@
     border: 1px solid black;
 }
 
-#recipeForm button["submit"] {
+#recipeForm button[type="submit"] {
     display: none;
 }
 
@@ -138,8 +139,8 @@ div article {
     padding-left: 40px;
     border-radius: 15px;
     box-shadow: black 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, black 0px 4px 6px, black 0px 12px 13px, black 0px -3px 5px;
-    width: 80%;
-    margin: 40px;
+    width: 45%;
+    margin: 40px 20px;
 }
 
 .recipe-name *, .recipe-ingredients h3, .recipe-instructions h3 {

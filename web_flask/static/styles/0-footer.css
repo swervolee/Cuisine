@@ -4,7 +4,7 @@ footer {
   padding: 20px;
   /*width: 100%;*/
   position: -webkit-sticky;
-  z-index: 999;
+  /*z-index: 999;*/
   bottom: 0;
   background-color: black;
   margin-top: auto;

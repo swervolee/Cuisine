@@ -1,31 +1,25 @@
 #!/usr/bin/node
 
 
-/* HANDLE CREATION OF ITEMS */
+$(window).on('load', () => {
+    $('.loader').fadeOut(2000);
+    
+})
 
 $(document).ready(function() {
 
+
+    
+        
     /*Hide items on default*/
     $(".recipe-creation .data").hide();
-   /* $(".recipe-container").hide();*/
+    /*$(".recipe-container").hide();*/
     $(".recipe-ingredients, .recipe-instructions").hide();
     $(".back").hide();
     $(".comments-section").hide();
     $(".comment-form").hide();
 
     $(".introduction").slideDown(3000);
-
-
-
-
-
-    /*change opacity of browse recipes and create recipes on hover*/
-    $(".introduction h2").on("mouseenter", function() {
-	$(this).css("opacity", "0.7")
-    }).on("mouseleave", function() {
-	$(this).css("opacity", "1");
-    });
-
 
     /*style the tags display*/
     $(".tag").on("mouseenter", function() {
@@ -43,7 +37,6 @@ $(document).ready(function() {
     /*Hide the main menu and show recipes  when show recipes
       platform is clicked*/
     $("#recipe-world").on("click", function() {
-	$(".introduction").hide();
 	$(".recipe-container").toggle();
 	$(".back").toggle();
     });

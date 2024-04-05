@@ -256,7 +256,7 @@ def about():
     """
     THE ABOUT PAGE
     """
-    return render_template("about.html", cachce_id=cache_id)
+    return render_template("about.html", cache_id=cache_id)
 
 
 @app.route("/user-creations", strict_slashes=False)
