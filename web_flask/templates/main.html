@@ -25,6 +25,7 @@
       <label for="instructions">Instructions</label>
       <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
 
+      {% if tags %}
       <div class="tag-selection">
         <h4>Classify your recipe with a tag.(Optional)</h4>
         <select name="tags" multiple>
@@ -33,6 +34,7 @@
           {% endfor %}
         </select>
       </div>
+      {% endif %}
       
       <div class="privacy">
         <input type="checkbox" id="myCheckbox" name="myCheckbox" title="If checked, the recipe created will not be visible to the public.">

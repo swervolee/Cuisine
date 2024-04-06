@@ -87,7 +87,8 @@
     margin-bottom: 20px;
     text-align: center;
     padding-bottom: 10px;
-    border-bottom: 1px solid #777;
+    border-bottom: 1px solid #cec5c5;
+    text-shadow: 1px 1px rgb(236, 13, 13);
   }
 .introduction p {
     font-size: 18px;
@@ -102,14 +103,13 @@
 .introduction h2{
     text-decoration: none;
     color: #777;
-    border: 2px solid #6ff;
     border-radius: 10px;
     text-align: left;
     cursor: pointer;
     padding-top: 10px;
     padding-bottom: 10px;
     text-decoration: none;
-    background-color: rgb(221, 1, 1);
+    background-color: rgb(236, 13, 13);
     font-size: 1.5em;
 }
 
