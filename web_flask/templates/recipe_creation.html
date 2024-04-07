@@ -10,9 +10,100 @@
     	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-presentation.css') + '?' + cache_id}}">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="../static/scripts/recipe_creation.js"></script>
 	</head>
 	<body>
 		<header>
-			<p>This is a header</p>
+			
+			<div class="nav">
+				<a href="url_for('home')"><i class="fas fa-home"></i> Home</a>
+			</div>
+
+			<a href="0.0.0.0:5001/" class="home"><h1>CUISINE</h1></a>
+
+			<div class="save"><i class="fas fa-check"></i> Save </div>
 		</header>
+		<div class="content">
+			<div class="container">
+				<h2>About</h2>
+				<form action="{{ url_for('recipe_creation') }}" method="POST" enctype="multipart/form-data">
+					<div class="recipe">
+						<div class="title">
+							<label for="title">Name</label>
+							<input type="text" name="title" placeholder="Name">
+						</div>
+						<div class="title description">
+							<label for="description">Description</label>
+							<textarea name="description" placeholder="Description"></textarea>
+						</div>
+						<div class="recipe-notes title">
+							<label for="notes">Notes</label>
+							<textarea name="notes" placeholder="Notes"></textarea>
+						</div>
+					</div>
+				</form>
+				<div class="tag-container">
+					<h2>Cuisine Quest</h2>
+					<div class="tags">
+						<div class="tag">
+							<input type="checkbox" id="vegan" name="tags" value="Vegan">
+							<label for="vegan">Vegan</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="vegetarian" name="tags" value="Vegetarian">
+							<label for="vegetarian">Vegetarian</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="gluten-free" name="tags" value="Gluten-Free">
+							<label for="gluten-free">Gluten-Free</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="dairy-free" name="tags" value="Dairy-Free">
+							<label for="dairy-free">Dairy-Free</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="keto" name="tags" value="Keto">
+							<label for="keto">Keto</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="low-carb" name="tags" value="Low-Carb">
+							<label for="low-carb">Low-Carb</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="low-fat" name="tags" value="Low-Fat">
+							<label for="low-fat">Low-Fat</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="low-sodium" name="tags" value="Low-Sodium">
+							<label for="low-sodium">Low-Sodium</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="paleo" name="tags" value="Paleo">
+							<label for="paleo">Paleo</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="pescatarian" name="tags" value="Pescatarian">
+							<label for="pescatarian">Pescatarian</label>
+						</div>
+						<div class="tag">
+							<input type="checkbox" id="whole30" name="tags" value="Whole30">
+							<label for="whole30">Whole30</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<h2>Ingredients for <strong>1 serving</strong></h2>
+				<div class="ingredients">
+					<div class="ingredient">
+						<textarea name="ingredient"
+						id="txtarea"
+						cols="20"
+						rows="4"
+						placeholder="Ingredient"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
+</html>
