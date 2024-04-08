@@ -128,13 +128,116 @@ header .nav {
     margin: 10px;
 }
 
+.steps {
+    width: 55%;
+}
+.steps h2 {
+    margin-bottom: 20px;
+}
+
+.ingredient {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1em;
+}
 
 .ingredients .ingredient textarea {
-    width: 500px;
+    width: 70%;
     height: auto;
     background-color: rgb(165, 164, 163);
     font-size: 1.1em;
     padding: 5px;
     overflow: hidden;
     transition: height 0.2s ease-out;
+}
+
+.ingredient p {
+    margin-bottom: 10px;
+    color: #045c2b;
+}
+
+.instruction {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1em;
+}
+
+.instruction textarea {
+    width: 100%;
+    height: auto;
+    background-color: rgb(165, 164, 163);
+    font-size: 1.1em;
+    padding: 5px;
+    overflow: hidden;
+    transition: height 0.2s ease-out;
+}
+.instruction p {
+    margin-bottom: 10px;
+    color: #045c2b;
+}
+
+
+
+
+
+.favorite {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.favorite h3 {
+    margin: 5px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }

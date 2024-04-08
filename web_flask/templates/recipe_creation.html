@@ -91,19 +91,42 @@
 						</div>
 					</div>
 				</div>
+				<div class="favorite">
+					<h3>Favorite</h3>
+					<label class="switch">
+						<input type="checkbox">
+						<span class="slider"></span>
+					</label>
+				</div>
 			</div>
-			<div class="container">
-				<h2>Ingredients for <strong>1 serving</strong></h2>
+			<div class="steps container">
+				<h2>Description</h2>
 				<div class="ingredients">
 					<div class="ingredient">
+						<label for="ingredient">Ingredient for <strong>1 serving</strong></label>
 						<textarea name="ingredient"
 						id="txtarea"
 						cols="20"
 						rows="4"
 						placeholder="Ingredient"></textarea>
+						<p><em>Please place each ingredient on a new line</em></p>
+					</div>
+				</div>
+				<h2>Instructions</h2>
+				<div class="instructions">
+					<div class="instruction">
+						<label for="instruction">Instruction</label>
+						<textarea name="instruction"
+						id="txtarea"
+						cols="20"
+						rows="4"
+						placeholder="Instruction"></textarea>
+						<p><em>Please seperate each step with two new lines</em></p>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		
 	</body>
 </html>
