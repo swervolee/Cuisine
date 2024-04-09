@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <title>CUISINE</title>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="../static/images/images.jpeg">
@@ -11,140 +11,136 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/0-common.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/0-recipe.css">
     <link rel="stylesheet" type="text/css" href="../static/styles/0-comments.css">
-    <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../static/styles/0-presentation.css">
+    <script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../static/scripts/0-script.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <header>
-      <div class="header-container">
-	<div class="logo">
-          <h1>CUISINE</h1>
-	</div>
-	<div class="search-bar">
-          <input type="text" placeholder="Search recipes">
-          <button type="submit">Search</button>
-	</div>
-	<nav>
-          <ul class="nav-links">
-	    <li><a href="#login">Login or signup</a></li>
-          <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-	</nav>
-      </div>
+        <div class="header-container">
+            <div class="logo">
+                <h1>CUISINE</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search recipes">
+                <button type="submit">Search</button>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#login">Login or signup</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-
-
     <div class="introduction">
-      <h1>Welcome to Cuisine</h1>
-      <h1>Discover and share delicious recipes with Cuisine!</h1>
-      <h2 id="recipe-world">Browse Recipes: Explore a diverse collection of recipes.</h2>
-      <h2 class="my-recipes">Visit your creations</h2>
+        <h1>Welcome to Cuisine</h1>
+        <h1>Discover and share delicious recipes with Cuisine!</h1>
+        <h2 id="recipe-world">Browse Recipes: Explore a diverse collection of recipes.</h2>
+        <h2 class="my-recipes">Visit your creations</h2>
     </div>
-
-
 
     <div class="recipe-creation">
-      <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
-      <div class="data">
-	<form id="recipeForm" onsubmit="submitForm(event)">
-          <label for="title">Title</label>
-          <input type="text" id="title" placeholder="Chicken masala .." name="title" required><br><br>
+        <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
+        <div class="data">
+            <form id="recipeForm" onsubmit="submitForm(event)">
+                <label for="title">Title</label>
+                <input type="text" id="title" placeholder="Chicken masala .." name="title" required><br><br>
 
-          <label for="introduction">Introduction</label>
-          <textarea id="introduction" name="introduction" placeholder="A delicous..." rows="5" cols="70" required></textarea><br><br>
+                <label for="introduction">Introduction</label>
+                <textarea id="introduction" name="introduction" placeholder="A delicous..." rows="5" cols="70" required></textarea><br><br>
 
-          <label for="ingredients">Ingredients</label>
-          <textarea id="ingredients" name="Ingredients" placeholder="ingredients" rows="20" cols="70" required></textarea><br><br>
-          <label for="instructions">Instructions</label>
-          <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
+                <label for="ingredients">Ingredients</label>
+                <textarea id="ingredients" name="Ingredients" placeholder="ingredients" rows="20" cols="70" required></textarea><br><br>
+                <label for="instructions">Instructions</label>
+                <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
 
-	  <div class="tag-selection">
-	    <h4>Optional Tags:</h4>
-	    {% for tg in tags %}
-	    <label><input type="checkbox" name="tags" value="{{ tg.name }}">{{ tg.name }}</label>
-	    {% endfor %}
-	  </div>
-	  <div class="privacy">
-	    <label for="myCheckbox" class="check-label">Private</label>
-	    <input type="checkbox" id="myCheckbox" name="myCheckbox">
-	  </div>
-	  <button type="submit" class="submission">DONE</button>
-	</form>
-      </div>
+                <div class="tag-selection">
+                    <h4>Optional Tags:</h4>
+                    {% for tg in tags %}
+                    <label><input type="checkbox" name="tags" value="{{ tg.name }}">{{ tg.name }}</label>
+                    {% endfor %}
+                </div>
+                <div class="privacy">
+                    <label for="myCheckbox" class="check-label">Private</label>
+                    <input type="checkbox" id="myCheckbox" name="myCheckbox">
+                </div>
+                <button type="submit" class="submission">DONE</button>
+            </form>
+        </div>
     </div>
-
-
 
     <div class="back">Back</div>
 
     <div class="recipe-container">
-      {% for food in recipes %}
-      <article class="recipe">
-	<div class="tag">
-	  <h4>Tags</h4>
-	  <ul>
-	    {% for Tag in food.tag %}
-	    <li>{{ Tag.name }}</li>
-	    {% endfor %}
-	  </ul>
-	</div>
-	<div class="favourite">Favourite</div>
-	<div class="recipe-name">
-	  <h2>{{ food.title }}</h2>
-	  <div class="description">
-	    <h3>DESCRIPTION</h3>
-	    <p><strong>{{ food.introduction }}</strong></p>
-	  </DIV>
-	</div>
-	<div class="recipe-ingredients">
-	  <h3>Ingredients</h3>
-	  <ul>
-	    {% for item in food.Ingredients %}
-            <li>{{ item }}</li>
-	    {% endfor %}
-	  </ul>
-	</div>
-	<div class="recipe-instructions">
-	  <h3>Instructions</h3>
-	  <ol>
-	    {% for item in food.Instructions %}
-            <li>{{ item }}</li>
-	    {% endfor %}
-	  </ol>
-	</div>
-	<div class="comments-section">
-	  <h3>Comments</h3>
-	  <div class="comment-list">
-	    {% for item in food.comments %}
-	    <div class="comment">
-              <div class="comment-author">{{ item.user.first_name + " " + item.user.last_name  }}</div>
-              <div class="comment-text">{{ item.text }}</div>
+        {% for food in recipes %}
+        <article class="recipe">
+            <div class="tag">
+                <h4>Tags</h4>
+                <ul>
+                    {% for Tag in food.tag %}
+                    <li>{{ Tag.name }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-	    {% endfor %}
-	  </div>
-	</div>
-	<form class="comment-form">
-	  <textarea class="comment-input" placeholder="Like this recipe? Give it a review" required></textarea>
-	  <button type="submit" class="comment-btn">Post</button>
-	</form>
-      </article>
-      {% endfor %}
+            <div class="favourite">Favourite</div>
+            <div class="recipe-name">
+                <h2>{{ food.title }}</h2>
+                <div class="description">
+                    <h3>DESCRIPTION</h3>
+                    <p><strong>{{ food.introduction }}</strong></p>
+                </div>
+            </div>
+            <div class="recipe-ingredients">
+                <h3>Ingredients</h3>
+                <ul>
+                    {% for item in food.Ingredients %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="recipe-instructions">
+                <h3>Instructions</h3>
+                <ol>
+                    {% for item in food.Instructions %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="comments-section">
+                <h3>Comments</h3>
+                <div class="comment-list">
+                    {% for item in food.comments %}
+                    <div class="comment">
+                        <div class="comment-author">{{ item.user.first_name + " " + item.user.last_name }}</div>
+                        <div class="comment-text">{{ item.text }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <form class="comment-form">
+                <textarea class="comment-input" placeholder="Like this recipe? Give it a review" required></textarea>
+                <button type="submit" class="comment-btn">Post</button>
+            </form>
+        </article>
+        {% endfor %}
     </div>
     <footer>
-      <div class="footer-container">
-	<p>&copy; 2024 CUISINE. All rights reserved.</p>
-	<nav>
-          <ul class="footer-links">
-            <li><a href="#terms">Terms of Use</a></li>
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-          </ul>
-	</nav>
-      </div>
+        <div class="footer-container">
+            <p>&copy; 2024 CUISINE. All rights reserved.</p>
+            <nav>
+                <ul class="footer-links">
+                    <li><a href="#terms">Terms of Use</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
-  </body>
+</body>
+
 </html>

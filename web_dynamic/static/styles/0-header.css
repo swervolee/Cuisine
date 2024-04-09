@@ -1,23 +1,22 @@
 /* Header styles */
 header {
-  background-color: black; /* Dark gray background */
-  color: #5cdac7; /* White text color */
+  background-color: #fff; /* Dark gray background */
+  color: #f80000; /* White text color */
   width: 100%;
   box-shadow: 0 2px 4px rgb(255, 254, 254);
   padding: 20px;
-  margin-bottom: auto;
-  height: 150px;
-  position: sticky;
-  top: 0;
   margin-bottom: 30px;
-  align-items: flex-end;
+  position: -webkit-sticky; /* Fix the header position */
+  top: 0; /* Position the header at the top */
+  /*z-index: 999;  Set a high z-index to ensure it's always on top */
 }
 
 .header-cnt {
   display: flex; /* Use flexbox for layout */
   justify-content: space-between; /* Space items evenly */
   align-items: center; /* Align items vertically */
-  max-width: 1200px; /* Set max width */
+  width: 100%; /* Set max width */
+  flex-wrap: wrap;
   /* margin: 0 auto; /* Center content horizontally */
 }
 
@@ -33,7 +32,7 @@ header {
 }
 
 .logo h1 a {
-    color: #6fffe9;
+    color: #ee0c0c;
     text-decoration: none
 }
 nav {
@@ -74,22 +73,36 @@ nav {
 }
 
 .search-bar input {
-  width: 200px;
+  width: 300px;
   height: 30px;
   padding: 5px; /* Add padding */
-  border: 1px solid #ccc; /* Add border */
+  border: 1px solid #000000; /* Add border */
   border-radius: 5px; /* Add rounded corners */
   font-size: 14px; /* Set font size */
 }
 
 .search-bar button {
-  width: 100px
+  width: 100px;
+  height: 30px;
+  background-color: #f80000;
+  border: none;
+  border-radius: 7px;
 }
+
+.search-bar button:hover {
+  opacity: 0.8;
+}
+
 
 .logout-text {
   padding: 5px 10px;
-  background-color: aqua;
+  background-color: rgb(243, 43, 43);
   border-radius: 5px;
+}
+
+.logout-text.logout-text:hover {
+  background-color: rgb(255, 0, 0);
+
 }
 
 .logout-text:hover {

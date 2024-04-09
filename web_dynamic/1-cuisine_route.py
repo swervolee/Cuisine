@@ -4,6 +4,7 @@ from email.mime.text import MIMEText
 from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, sessions, url_for
 from flask import make_response, jsonify
+from flask_cors import CORS
 from flask_login import login_manager, current_user
 from itsdangerous import URLSafeTimedSerializer
 import flask_login
@@ -112,6 +113,10 @@ def signup():
         password = request.form["password"]
         first_name = request.form["first_name"]
         last_name = request.form["last_name"]
+        confirm_password = request.form["confirm_password"]
+
+        if confirm_password != password:
+            return render_template("signup.html", password_mismatch=True, cache_id=cache_id)
 
         user = next((u for u in models.storage.all("User").values() if u.email == email), None)
 
@@ -128,6 +133,7 @@ def signup():
                         "first_name": first_name,
                         "last_name": last_name,
                         }
+                
                 sealed = serializer.dumps(data)
                 send_login_email(email, f"0.0.0.0:5000/login/{sealed}")
                 return render_template("email-confirm.html", cache_id=cache_id)
@@ -231,7 +237,7 @@ def cuisine_recipes():
 
     tags = models.storage.all("Tag").values()
 
-    return render_template("recipe.html", recipes=recipes, comments=comments, tags=tags)
+    return render_template("recipe.html", recipes=recipes, comments=comments, tags=tags, user_id=user_id, cache_id=cache_id)
 
 
 @app.route("/", strict_slashes=False)
@@ -239,27 +245,29 @@ def cuisine():
     """
     LANDING PAGE FOR CUISINE
     """
-    return render_template("main.html", current_user=current_user, cache_id=cache_id)
+    path = "web_flask/static/images/display_images/"
+    fnames = []
+    for filename in os.listdir(path):
+        fnames.append("../static/images/display_images/" + filename)
+    return render_template("main.html", current_user=current_user, cache_id=cache_id, files=fnames)
 
 @app.route("/about", strict_slashes=False)
 def about():
     """
     THE ABOUT PAGE
     """
-    return render_template("about.html", cachce_id=cache_id)
-
-@app.route("/status")
-def status():
-    """
-    CHECK THE USER STATUS
-    """
-    if current_user.is_authenticated:
-        return "Logged in"
-    return "Anonymous"
+    return render_template("about.html", cache_id=cache_id)
 
 
 @app.route("/user-creations", strict_slashes=False)
 def user_creations():
+    fetch_id = user_id()
+    if id:
+        user = models.storage.get("User", fetch_id)
+        recipes = [r for r in user.recipes]
+        comments = [c for c in user.comments]
+        tags = models.storage.all("Tag").values()
+        return render_template("user_creations.html", recipes=recipes, comments=comments, cache_id=cache_id, tags=tags)
     return render_template("user_creations.html", cache_id=cache_id)
 
 def user_id():
@@ -274,4 +282,4 @@ if __name__ == "__main__":
     """
     MAIN FUNCTION
     """
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001)

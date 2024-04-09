@@ -13,12 +13,13 @@ body {
     flex-direction: column;
     justify-content: space-between;
     max-width: 400px;
-    margin: 70px auto;
+    margin: 100px auto;
     padding: 20px;
     border-radius: 8px;
-    height: 500px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffb900;
+    height: fit-content;
+    box-shadow: 0 6px 8px rgba(223, 214, 214, 0.774), 0 4px 6px rgba(230, 217, 217, 0.932);
+    background-color: #00000017;
+    backdrop-filter: blur(10px);
 }
 
 form {
@@ -32,12 +33,14 @@ form {
 
 h2 {
     text-align: center;
+    color: #ccc;
 }
 
 
 label {
     display: block;
     flex-wrap: wrap-reverse;
+    color: #ccc;
 }
 
 input[type="email"],
@@ -46,11 +49,13 @@ input[type="password"],
 #first_name {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #080202;
     border-radius: 5px;
-    background-color: black;
-    color: white;
+    background-color: rgb(253, 252, 252);
+    color: rgb(0, 0, 0);
     box-sizing: border-box;
+    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 
@@ -79,15 +84,22 @@ button[type="submit"]:hover {
 .signup-link {
     text-align: center;
     margin-top: 15px;
+    color: #fff;
 }
 
 .signup-link a {
-    color: #000;
+    color: #c0e073;
     text-decoration: none;
 }
+
 
 .signup-link a:hover {
     text-decoration: underline;
     color: white;
 
+}
+
+.error-message {
+    text-align: center;
+    margin-bottom: 15px;
 }

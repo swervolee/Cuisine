@@ -1,9 +1,98 @@
 {% extends "base.html" %}
 
-
+{% block links %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/0-user-creations.css') + '?' + cache_id  }}">
+{% endblock %}
 {% block content %}
+<div class="recipe-creation">
+    <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
+    <div class="data">
+  <form id="recipeForm" onsubmit="submitForm(event)">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="Name of the recipe" name="title" required><br><br>
 
-{% if not user_creations %}
-<h2> What an empty<br>Recipes you have created will be added here</h2>
-{% endif %}
+        <label for="introduction">Introduction</label>
+        <textarea id="introduction" name="introduction" placeholder="Describe your recipe" rows="5" cols="70" required></textarea><br><br>
+
+        <label for="ingredients">Ingredients</label>
+        <textarea id="ingredients" name="Ingredients" placeholder="List what is needed to make the recipe" rows="20" cols="70" required></textarea><br><br>
+        <label for="instructions">Instructions</label>
+        <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
+
+    <div class="tag-selection" title="Hold Ctr for multiple selections">
+      <h4>Classify your recipe with a tag.(Optional)</h4>
+      <select name="tags" multiple>
+        {% for tg in tags %}
+        <option value="{{ tg.name }}">{{ tg.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="privacy">
+      <input type="checkbox" id="myCheckbox" name="myCheckbox" title="If checked, the recipe created will not be visible to the public.">
+      <label for="myCheckbox" class="check-label" title="If checked, the recipe created will not be visible to the public.">Private</label>
+      
+    </div>
+    <button type="submit" class="submission">DONE</button>
+  </form>
+    </div>
+  </div>
+{% if not recipes %}
+<h2 class="no-creations"> What an empty<br>Recipes you have created will be added here</h2>
+{% else %}
+  <div class="back">Back</div>
+
+    <div class="recipe-container">
+      {% for food in recipes %}
+      <article class="recipe">
+	<div class="tag">
+	  <h4>Tags</h4>
+	  <ul>
+	    {% for Tag in food.tag %}
+	    <li>{{ Tag.name }}</li>
+	    {% endfor %}
+	  </ul>
+	</div>
+	<div class="favourite">Favourite</div>
+	<div class="recipe-name">
+	  <h2>{{ food.title }}</h2>
+	  <div class="description">
+	    <h3>DESCRIPTION</h3>
+	    <p><strong>{{ food.introduction }}</strong></p>
+	  </DIV>
+	</div>
+	<div class="recipe-ingredients">
+	  <h3>Ingredients</h3>
+	  <ul>
+	    {% for item in food.Ingredients %}
+            <li>{{ item }}</li>
+	    {% endfor %}
+	  </ul>
+	</div>
+	<div class="recipe-instructions">
+	  <h3>Instructions</h3>
+	  <ol>
+	    {% for item in food.Instructions %}
+            <li>{{ item }}</li>
+	    {% endfor %}
+	  </ol>
+	</div>
+	<div class="comments-section">
+	  <h3>Comments</h3>
+	  <div class="comment-list">
+	    {% for item in food.comments %}
+	    <div class="comment">
+              <div class="comment-author">{{ item.user.first_name + " " + item.user.last_name  }}</div>
+              <div class="comment-text">{{ item.text }}</div>
+            </div>
+	    {% endfor %}
+	  </div>
+	</div>
+	<form class="comment-form">
+	  <textarea class="comment-input" placeholder="Like this recipe? Give it a review" required></textarea>
+	  <button type="submit" class="comment-btn">Post</button>
+	</form>
+      </article>
+      {% endfor %}
+    </div>
+	{% endif %}
 {% endblock %}
