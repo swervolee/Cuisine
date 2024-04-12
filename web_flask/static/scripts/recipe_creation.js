@@ -98,10 +98,72 @@ $(function() {
     });
 
 
+    function flashMessage(message) {
+        var messageElement = $("<div>");
+        messageElement.text(message);
+        messageElement.addClass("to-fade");
+        messageElement.css({
+            "color": "black",
+            "display": "block",
+            "background-color": "white",
+            "margin": "10px",
+            "padding": "10px 20px",
+            "width": "calc(100% - 40px)",
+            "text-align": "center",
+            "border-radius": "5px"});
+        messageElement.insertAfter("header");
+    
+        $(".to-fade").fadeOut(6000);
+        };
+    
 
 
     $("header .save").on("click", function(){
-        /*code to send to api goes here*/
+        if (!$("#title").val()) $("#title").val("Untitled Recipe");
+        var submitted_title = $("#title").val();
+
+        if (!$("#ds").val()) $("#ds").val("No description");
+        var submitted_ds = $("#ds").val();
+
+        if (!$("#notes").val()) $("#notes").val("No notes");
+        var submitted_notes = $("#notes").val();
+
+        if (!$("#txt").val()) $("#txt").val("No ingredients");
+        var submitted_txt = $("#txt").val();
+
+        if (!$("#txtarea").val()) $("#txtarea").val("No instructions");
+        var submitted_txtarea = $("#txtarea").val();
+
+        var user_id;
+
+        $.ajax({
+            url: "http://0.0.0:5001/status",
+            type: "GET",
+            Headers: {
+                "Access-Control-Allow-Origin": "0.0.0.0:5001",
+            }
+        }).done(function(json) {
+            if (json.status === "logged") {
+                user_id = json.id;
+            }
+        });
+
+        if (!user_id) {
+            flashMessage("You must be logged in to save a recipe.");
+            return;
+        }
+
+        var recipe = {
+            title: submitted_title,
+            ds: submitted_ds,
+            notes: submitted_notes,
+            txt: submitted_txt,
+            txtarea: submitted_txtarea
+        };
+
+        console.log(recipe);
+        
+        
         localStorage.clear();
     });
 });
