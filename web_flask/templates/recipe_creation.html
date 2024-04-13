@@ -10,7 +10,7 @@
     	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-presentation.css') + '?' + cache_id}}">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="../static/scripts/recipe_creation.js"></script>
+		<script src="{{url_for('static', filename='/scripts/recipe_creation.js') + '?' + cache_id }}" ></script>
 	</head>
 	<body>
 		<header>

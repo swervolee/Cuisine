@@ -10,40 +10,7 @@
 
 
 <div class="recipe-creation">
-  <h3><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</h3>
-  <div class="data">
-    <form id="recipeForm" onsubmit="submitForm(event)">
-      <label for="title">Title</label>
-      <input type="text" id="title" placeholder="Name of the recipe" name="title" required><br><br>
-
-      <label for="introduction">Introduction</label>
-      <textarea id="introduction" name="introduction" placeholder="Describe your recipe" rows="5" cols="70" required></textarea><br><br>
-
-      <label for="ingredients">Ingredients</label>
-      <textarea id="ingredients" name="Ingredients" placeholder="List what is needed to make the recipe" rows="20" cols="70" required></textarea><br><br>
-      
-      <label for="instructions">Instructions</label>
-      <textarea id="instructions" name="instructions" placeholder="How to" rows="20" cols="70" required></textarea><br><br>
-
-      {% if tags %}
-      <div class="tag-selection">
-        <h4>Classify your recipe with a tag.(Optional)</h4>
-        <select name="tags" multiple>
-          {% for tg in tags %}
-          <option value="{{ tg.name }}">{{ tg.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      {% endif %}
-      
-      <div class="privacy">
-        <input type="checkbox" id="myCheckbox" name="myCheckbox" title="If checked, the recipe created will not be visible to the public.">
-        <label for="myCheckbox" class="check-label" title="If checked, the recipe created will not be visible to the public.">Private</label>
-      </div>
-      
-      <button type="submit" class="submission">DONE</button>
-    </form>
-  </div>
+  <h3><i class="fa fa-plus-square" aria-hidden="true"></i><a href="http://0.0.0.0:5001/recipe_creation">Create</a></h3>
 </div>
 
 
@@ -52,7 +19,13 @@
     <h1>Discover and share delicious recipes with Cuisine!</h1>
     <div class="tabs">
       <h2 id="recipe-world"><a href="{{ url_for('cuisine_recipes') }}">Browse Recipes      </a></h2>
+      
+      {% if current_user.is_authenticated %}
       <h2 class="my-recipes"><a href="{{ url_for('user_creations') }}">Visit your creations</a></h2>
+      {% endif %}
+
+      <h2 class="create-recipe"><a href="{{ url_for('recipe_creation') }}">Create a recipe</a></h2>
+      
       {% if current_user.is_anonymous %}
       <h2 class="login"><a href="{{ url_for('login') }}">Join the community: sign up and log in</a></h2>
       {% endif %}
@@ -74,11 +47,4 @@
       </h3>
   </div>
 </div>
-<!--
-{% for file in files %}
-  <div>{{ file }}</div>
-  <img src="{{ file }}" alt="Image">
-{% endfor %}
--->
-
 {% endblock %}

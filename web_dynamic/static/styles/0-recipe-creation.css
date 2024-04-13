@@ -43,13 +43,23 @@ header .home {
     font-weight: bold;
 }
 header a:hover, .save:hover {
-    color: #6fffe9;
+    background-color: #000000;
+    color: #ffffff
 }
 
 header .nav {
     display: flex;
     justify-content: space-between;
     width: fit-content;
+}
+
+header .save {
+    background-color: #ffffff;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
 
 
@@ -129,7 +139,7 @@ header .nav {
 }
 
 .steps {
-    width: 55%;
+    width: fit-content;
 }
 .steps h2 {
     margin-bottom: 20px;
@@ -142,7 +152,7 @@ header .nav {
 }
 
 .ingredients .ingredient textarea {
-    width: 70%;
+    width: 600px;
     height: auto;
     background-color: rgb(165, 164, 163);
     font-size: 1.1em;
@@ -195,7 +205,7 @@ header .nav {
     position: relative;
     display: inline-block;
     width: 60px;
-    height: 34px;
+    height: 30px;
 }
 
 .switch input { 
@@ -211,23 +221,25 @@ header .nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: #f81e1e;
     transition: .4s;
+    border-radius: 20px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 30px;
+    width: 30px;
     left: 4px;
-    bottom: 4px;
-    background-color: white;
+    bottom: 0;
+    background-color: rgb(144, 233, 0);
+    border-radius: 50%;
     transition: .4s;
 }
 
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #000000;
 }
 
 input:checked + .slider:before {

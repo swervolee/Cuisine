@@ -134,36 +134,65 @@ $(function() {
         if (!$("#txtarea").val()) $("#txtarea").val("No instructions");
         var submitted_txtarea = $("#txtarea").val();
 
-        var user_id;
-
+        
         $.ajax({
             url: "http://0.0.0:5001/status",
             type: "GET",
             Headers: {
-                "Access-Control-Allow-Origin": "0.0.0.0:5001",
+                "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
             }
         }).done(function(json) {
+
             if (json.status === "logged") {
-                user_id = json.id;
+                var user_id = json.id;
+                console.log("user creation and user is logged in")
             }
+
+
+            if (!user_id) {
+                flashMessage("You must be logged in to save a recipe.");
+                return;
+            }
+
+            var recipe = {
+                "user_id": user_id,
+                "title": submitted_title,
+                "introduction": submitted_ds,
+                "notes": submitted_notes,
+                "ingredients": submitted_txt,
+                "instructions": submitted_txtarea
+            };
+
+            $.ajax({
+                url: "http://0.0.0.0:5000/api/v1/users/" + user_id + "/recipes",
+                type: "POST",
+                data: JSON.stringify(recipe),
+                contentType: "application/json",
+                headers: {
+                    "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
+                }
+            }).done(function(json) {
+                flashMessage("Recipe saved successfully!");
+            }).fail(function() {
+                flashMessage("Failed to save recipe.");
+            });
+
+            $.ajax({
+                url: "http://0.0.0.0:5000/api/v1/recipes",
+                type: "GET",
+                headers: {
+                    "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
+                }
+                
+            }).done(function(json) {
+                console.log(json);
+            }
+            );
+
+            console.log(recipe);
+        
+        
+            localStorage.clear();
         });
-
-        if (!user_id) {
-            flashMessage("You must be logged in to save a recipe.");
-            return;
-        }
-
-        var recipe = {
-            title: submitted_title,
-            ds: submitted_ds,
-            notes: submitted_notes,
-            txt: submitted_txt,
-            txtarea: submitted_txtarea
-        };
-
-        console.log(recipe);
-        
-        
-        localStorage.clear();
     });
 });

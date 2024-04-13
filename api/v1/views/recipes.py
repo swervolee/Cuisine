@@ -54,8 +54,19 @@ def create_recipe(user_id):
     """
     CREATES A RECIPE OBJECT
 
-    GET - An alternative way to get a recipe but throught a user id
-    POST - A recipe must have a creator.Creates a recipe with given user id as creator
+    GET - An alternative way to get a recipe but through a user id
+    POST - A recipe must have a creator. Creates a recipe with the given user id as the creator
+
+    Args:
+        user_id (str): The ID of the user creating the recipe
+
+    Returns:
+        Response: The HTTP response containing the created recipe in JSON format
+
+    Raises:
+        404: If the user with the given user_id does not exist
+        400: If the request data is not in JSON format
+
     """
     usr = models.storage.get("User", str(user_id))
     if usr is None:
@@ -74,6 +85,19 @@ def create_recipe(user_id):
 
 @app_views.route("users/<user_id>/recipes/favorites/", methods=["GET", "POST", "DELETE"], strict_slashes=False)
 def user_favorites(user_id):
+    """
+    Retrieve, add, or remove favorite recipes for a specific user.
+
+    Args:
+        user_id (str): The ID of the user.
+
+    Returns:
+        A response containing the favorite recipes in JSON format.
+
+    Raises:
+        404: If the user with the specified ID does not exist.
+        400: If the request is not in JSON format or if the recipe ID is missing.
+    """
     user = models.storage.get("User", user_id)
     if user is None:
         abort(404)

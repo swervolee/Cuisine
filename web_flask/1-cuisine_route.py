@@ -29,7 +29,10 @@ users = models.storage.all("User").values()
 login_tokens = []
 serializer = URLSafeTimedSerializer(SECRET_KEY)
 cache_id = str(uuid.uuid4())
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+
 
 
 # --------------------------LOGIN----------------------------

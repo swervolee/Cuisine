@@ -10,13 +10,13 @@
     	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-presentation.css') + '?' + cache_id}}">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="../static/scripts/recipe_creation.js"></script>
+		<script src="{{url_for('static', filename='/scripts/recipe_creation.js') + '?' + cache_id }}" ></script>
 	</head>
 	<body>
 		<header>
 			
 			<div class="nav">
-				<a href="url_for('home')"><i class="fas fa-home"></i> Home</a>
+				<a href="{{ url_for('cuisine') }}"><i class="fas fa-home"></i> Home</a>
 			</div>
 
 			<a href="0.0.0.0:5001/" class="home"><h1>CUISINE</h1></a>
@@ -30,15 +30,15 @@
 					<div class="recipe">
 						<div class="title">
 							<label for="title">Name</label>
-							<input type="text" name="title" placeholder="Name">
+							<input id="title" type="text" name="title" placeholder="Name">
 						</div>
 						<div class="title description">
-							<label for="description">Description</label>
-							<textarea name="description" placeholder="Description"></textarea>
+							<label for="ds">Description</label>
+							<textarea id="ds" name="description" placeholder="Description"></textarea>
 						</div>
 						<div class="recipe-notes title">
 							<label for="notes">Notes</label>
-							<textarea name="notes" placeholder="Notes"></textarea>
+							<textarea id="notes" name="notes" placeholder="Notes"></textarea>
 						</div>
 					</div>
 				</form>
@@ -103,9 +103,9 @@
 				<h2>Description</h2>
 				<div class="ingredients">
 					<div class="ingredient">
-						<label for="ingredient">Ingredient for <strong>1 serving</strong></label>
+						<label for="txt">Ingredient for <strong>1 serving</strong></label>
 						<textarea name="ingredient"
-						id="txtarea"
+						id="txt"
 						cols="20"
 						rows="4"
 						placeholder="Ingredient"></textarea>
@@ -115,13 +115,13 @@
 				<h2>Instructions</h2>
 				<div class="instructions">
 					<div class="instruction">
-						<label for="instruction">Instruction</label>
+						<label for="txtarea">Instruction</label>
 						<textarea name="instruction"
 						id="txtarea"
 						cols="20"
 						rows="4"
 						placeholder="Instruction"></textarea>
-						<p><em>Please seperate each step with two new lines</em></p>
+						<p><em>Please separate each step with two new lines</em></p>
 					</div>
 				</div>
 			</div>

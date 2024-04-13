@@ -29,13 +29,25 @@ users = models.storage.all("User").values()
 login_tokens = []
 serializer = URLSafeTimedSerializer(SECRET_KEY)
 cache_id = str(uuid.uuid4())
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+
 
 
 # --------------------------LOGIN----------------------------
 
 @app.route("/status", methods=["GET"], strict_slashes=False)
 def status():
+    """
+    Returns the status of the user.
+
+    If the user is authenticated, it returns a JSON response with the status "logged" and the user's ID.
+    If the user is not authenticated, it returns a JSON response with the status "anonymous".
+
+    Returns:
+        A JSON response with the user's status.
+    """
     if current_user.is_authenticated:
         data = {"status": "logged",
                 "id": current_user.id}
@@ -47,12 +59,27 @@ def status():
 def logout():
     """
     AN API TO LOGOUT USER
+
+    This function logs out the user by calling the `flask_login.logout_user()` function.
+    It then renders the "main.html" template with the `current_user` and `cache_id` variables.
+
+    Returns:
+        The rendered template "main.html" with the `current_user` and `cache_id` variables.
     """
     flask_login.logout_user()
     return render_template("main.html", current_user=current_user, cache_id=cache_id)
 
 @login_manager.user_loader
 def user_loader(id):
+    """
+    Load a user from the database based on the given ID.
+
+    Args:
+        id (int): The ID of the user to load.
+
+    Returns:
+        User: The user object if found, None otherwise.
+    """
     for i in models.storage.all("User").values():
         if i.id == id:
             return i
@@ -62,7 +89,17 @@ def user_loader(id):
 @app.route("/login/<token>", strict_slashes=False)
 def login(token=None):
     """
-    HANDLES USER LOGIN
+    Handles user login.
+
+    Args:
+        token (str, optional): A token for user authentication. Defaults to None.
+
+    Returns:
+        str: The rendered login template or a redirect to the cuisine route.
+
+    Raises:
+        Exception: If there is an error in unsealing the token.
+
     """
     if request.method == "GET":
         if request.referrer:
@@ -104,6 +141,15 @@ def login(token=None):
 def signup():
     """
     HANDLES USER SIGNUP
+
+    This function handles the user signup process. It receives a POST request with user information
+    such as email, password, first name, last name, and confirm password. It validates the input data,
+    checks if the email is already registered, and sends a confirmation email to the user if the data is valid.
+
+    Returns:
+        If the request method is POST and the data is valid, it renders the "email-confirm.html" template.
+        If the request method is GET or the data is invalid, it renders the "signup.html" template with appropriate
+        error messages.
     """
     invalid_email = False
     existing_user = False
@@ -261,18 +307,43 @@ def about():
 
 @app.route("/user-creations", strict_slashes=False)
 def user_creations():
+    """
+    Renders the user creations page with the user's recipes, comments, and tags.
+
+    Returns:
+        The rendered user_creations.html template with the following variables:
+        - recipes: A list of the user's recipes.
+        - comments: A list of the user's comments.
+        - cache_id: The cache ID.
+        - tags: A list of all tags.
+    """
     fetch_id = user_id()
     if id:
         user = models.storage.get("User", fetch_id)
-        recipes = [r for r in user.recipes]
-        comments = [c for c in user.comments]
-        tags = models.storage.all("Tag").values()
-        return render_template("user_creations.html", recipes=recipes, comments=comments, cache_id=cache_id, tags=tags)
+        if user:
+            recipes = [r for r in user.recipes]
+            comments = [c for c in user.comments]
+            tags = models.storage.all("Tag").values()
+        
+            return render_template("user_creations.html", recipes=recipes, comments=comments, cache_id=cache_id, tags=tags)
     return render_template("user_creations.html", cache_id=cache_id)
+
+@app.route("/recipe_creation", methods=["GET"], strict_slashes=False)
+def recipe_creation():
+    """
+    Renders the recipe_creation.html template with the cache_id parameter.
+
+    Returns:
+        The rendered template with the cache_id parameter.
+    """
+    return render_template("recipe_creation.html", cache_id=cache_id)
 
 def user_id():
     """
-    RETURNS USER ID IF USER IS LOGGED IN
+    Returns the user ID if the user is logged in.
+
+    Returns:
+        int or None: The user ID if the user is logged in, None otherwise.
     """
     if current_user.is_authenticated:
         return current_user.id
@@ -282,4 +353,4 @@ if __name__ == "__main__":
     """
     MAIN FUNCTION
     """
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5001, debug=True)

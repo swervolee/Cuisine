@@ -1,7 +1,7 @@
 #!usr/bin/python3
 
 
-from flask import Flask
+from flask import Flask, request, jsonify, current_app
 import models
 from api.v1.views import app_views
 from os import getenv
@@ -12,7 +12,16 @@ from flask_cors import CORS
 app = Flask(__name__)
 app.register_blueprint(app_views)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+@app.after_request
+def after_request(response):
+  # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5001')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  response.headers.add('Access-Control-Allow-Credentials', 'true')
+  return response
 
 
 
