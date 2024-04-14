@@ -195,4 +195,42 @@ $(function() {
             localStorage.clear();
         });
     });
+
+
+    var recipe_id = $(".food_id").val();
+    console.log(recipe_id);
+
+    $("comment-form").on("submit", function(event) {
+        event.preventDefault();
+        var comment = $(this).find("textarea").val();
+
+        $.ajax({
+            url: "http://0.0.0.0:5001/api/v1/status",
+            type: "GET",
+            headers: {
+                "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
+            }
+        }).done(function(json) {
+            if (json.status === "logged") {
+                var user_id = json.id;
+            }
+
+            if (!user_id) {
+                flashMessage("You must be logged in to comment.");
+                return;
+            }
+
+            var comment = {
+                "user_id": user_id,
+                "recipe_id": recipe_id,
+                "comment": comment
+            };
+
+            $.ajax({
+                url: "http://0.0.0.0:5000/api/v1/users/" + user_id + "/comments",
+                type: "POST",
+                data: JSON.stringify(comment),
+            });
+        });
+    });
 });
