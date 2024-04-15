@@ -60,9 +60,9 @@
       {% endfor %}
     </div>
   </div>
-  <div class="food_id" style="display: none;">{{ food.id }}</div>
-  <form class="comment-form">
-    <textarea class="comment-input" placeholder="Like this recipe? Give it a review" required></textarea>
+  <div class="food_id">{{ food.id }}</div>
+  <form class="comment-form" id="comment-form">
+    <textarea class="comment-input" data-id="{{ food.id}}" placeholder="Like this recipe? Give it a review" required></textarea>
     <button type="submit" class="comment-btn">Post</button>
   </form>
     </article>

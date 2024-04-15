@@ -128,30 +128,6 @@ $(document).ready(function() {
     });
 
 
-    function flashMessage(message) {
-	var messageElement = $("<div>");
-	messageElement.text(message);
-	messageElement.addClass("to-fade");
-	messageElement.css({
-	    "color": "black",
-	    "display": "inline-block",
-	    "background-color": "white",
-	    "margin": "10px",
-	    "padding": "10px 20px",
-	    "border-radius": "5px"});
-	messageElement.insertAfter(".comment-form button");
-
-	$(".to-fade").fadeOut(3000);
-    };
-
-
-    $(".comment-form").on("submit", function(event) {
-	event.preventDefault();
-	flashMessage("Posted");
-    });
-
-
-
     /*Hide the recipe creation form when area outside of it
       is clicked*/
     $(document).on("click", function(event) {

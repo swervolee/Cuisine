@@ -98,7 +98,7 @@ $(function() {
     });
 
 
-    function flashMessage(message) {
+    function flashMessage(message, position=null) {
         var messageElement = $("<div>");
         messageElement.text(message);
         messageElement.addClass("to-fade");
@@ -111,7 +111,11 @@ $(function() {
             "width": "calc(100% - 40px)",
             "text-align": "center",
             "border-radius": "5px"});
-        messageElement.insertAfter("header");
+        if (position) {
+            messageElement.insertAfter(position);
+        } else {
+            messageElement.insertAfter("header");
+        }
     
         $(".to-fade").fadeOut(6000);
         };
@@ -195,42 +199,32 @@ $(function() {
             localStorage.clear();
         });
     });
-
-
-    var recipe_id = $(".food_id").val();
-    console.log(recipe_id);
-
-    $("comment-form").on("submit", function(event) {
+    
+    $("#comment-form button").on("click", function() {
         event.preventDefault();
-        var comment = $(this).find("textarea").val();
-
+        var message = $(this).parent().find("textarea").val();
+        var recipe_id = $(this).parent().find("textarea").attr("data-id");
         $.ajax({
-            url: "http://0.0.0.0:5001/api/v1/status",
+            url: "http://0.0.0.0:5001/status",
             type: "GET",
-            headers: {
-                "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
+            Headers: {
+                "Access-Control-Allow-Origin": "http://0.0.0.0",
             }
         }).done(function(json) {
+            var user_id = null;
             if (json.status === "logged") {
                 var user_id = json.id;
             }
-
             if (!user_id) {
-                flashMessage("You must be logged in to comment.");
+                flashMessage("You must be logged in to comment.", ".comment-form button");
                 return;
             }
-
-            var comment = {
-                "user_id": user_id,
-                "recipe_id": recipe_id,
-                "comment": comment
-            };
-
-            $.ajax({
-                url: "http://0.0.0.0:5000/api/v1/users/" + user_id + "/comments",
-                type: "POST",
-                data: JSON.stringify(comment),
-            });
         });
+
+        if (!message) {
+            flashMessage("Please enter a comment.", ".comment-form button");
+            return;
+        }
+
     });
 });
