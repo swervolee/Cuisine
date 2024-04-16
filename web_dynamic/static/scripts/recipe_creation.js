@@ -202,8 +202,8 @@ $(function() {
     
     $("#comment-form button").on("click", function() {
         event.preventDefault();
-        var message = $(this).parent().find("textarea").val();
-        var recipe_id = $(this).parent().find("textarea").attr("data-id");
+        var that = this;
+ 
         $.ajax({
             url: "http://0.0.0.0:5001/status",
             type: "GET",
@@ -213,18 +213,38 @@ $(function() {
         }).done(function(json) {
             var user_id = null;
             if (json.status === "logged") {
-                var user_id = json.id;
+                user_id = json.id;
             }
             if (!user_id) {
                 flashMessage("You must be logged in to comment.", ".comment-form button");
                 return;
             }
-        });
 
-        if (!message) {
-            flashMessage("Please enter a comment.", ".comment-form button");
-            return;
-        }
+            var message = $(that).parent().find("textarea").val();
+            var recipe_id = $(that).parent().find("textarea").attr("data-id");
+
+            if (!message) {
+                flashMessage("Please enter a comment.", ".comment-form button");
+                return;
+            }
+
+            var info = {
+                "message": message,
+                "recipe_id": recipe_id,
+            }
+            $.ajax({
+                url: "http://0.0.0.0:5000/api/v1/users/" + user_id + "/comments",
+                type: "POST",
+                data: JSON.stringify(info),
+                contentType: "application/json",
+                headers: {
+                    "Access-Control-Allow-Origin": "http://0.0.0.0",
+                }
+            }).done(function(json) {
+                console.log("posted");
+                flashMessage("Comment added successfully.", ".comment-form button");
+            });
+        });
 
     });
 });
