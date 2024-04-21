@@ -56,11 +56,10 @@
       <div class="comment">
             <div class="comment-author">{{ item.user.first_name + " " + item.user.last_name  }}</div>
             <div class="comment-text">{{ item.text }}</div>
-          </div>
+      </div>
       {% endfor %}
     </div>
   </div>
-  <div class="food_id">{{ food.id }}</div>
   <form class="comment-form" id="comment-form">
     <textarea class="comment-input" data-id="{{ food.id}}" placeholder="Like this recipe? Give it a review" required></textarea>
     <button type="submit" class="comment-btn">Post</button>

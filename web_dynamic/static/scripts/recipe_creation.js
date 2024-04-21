@@ -212,8 +212,22 @@ $(function() {
             }
         }).done(function(json) {
             var user_id = null;
+            var user = null;
             if (json.status === "logged") {
                 user_id = json.id;
+            }
+
+            if (user_id) {
+                $.ajax({
+                    url: "http://0.0.0.0:5000/api/v1/users/" + user_id,
+                    type: "GET",
+                    headers: {
+                        "Access-Control-Allow-Origin": "http://0.0.0.0"
+                    }
+                }).done(function(json) {
+                    user = JSON.parse(json);
+                    console.log(user)
+                });
             }
             if (!user_id) {
                 flashMessage("You must be logged in to comment.", ".comment-form button");
@@ -243,6 +257,13 @@ $(function() {
             }).done(function(json) {
                 console.log("posted");
                 flashMessage("Comment added successfully.", ".comment-form button");
+
+                $(".comments-section .comment-list").append(
+                    '<div class="comment">' +
+                        '<div class="comment-author">' + user.first_name + ' ' + user.last_name + '</div>' +
+                        '<div class="comment-text">' + json.text + '</div>' +
+                    '</div>'
+                );
             });
         });
 
