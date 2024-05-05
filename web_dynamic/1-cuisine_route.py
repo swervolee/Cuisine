@@ -291,7 +291,7 @@ def cuisine():
     """
     LANDING PAGE FOR CUISINE
     """
-    path = "web_flask/static/images/display_images/"
+    path = "web_dynamic/static/images/display_images/"
     fnames = []
     for filename in os.listdir(path):
         fnames.append("../static/images/display_images/" + filename)
