@@ -5,7 +5,7 @@ import models
 import pep8
 import unittest
 import json
-FileStorage = models.engine.file_storage.FileStorage
+from models.engine.file_storage import FileStorage
 from models.engine import file_storage
 from models.base_model import BaseModel
 classes = {"BaseModel": BaseModel}

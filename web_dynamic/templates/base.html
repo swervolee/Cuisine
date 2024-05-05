@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<title>CUISINE</title>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="{{url_for('static', filename='images/images.jpeg') + '?' + cache_id }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-header.css') + '?' + cache_id }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-footer.css') + '?' + cache_id }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-common.css') + '?' + cache_id }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-recipe.css') + '?' + cache_id}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-comments.css') + '?' + cache_id}}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-user-profile.css') + '?' + cache_id}}">
+	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-presentation.css') + '?' + cache_id}}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="{{ url_for('static', filename='scripts/0-script.js') + '?' + cache_id}}"></script>
+	<script src="{{ url_for('static', filename='scripts/0-user_profile.js') + '?' + cache_id }}"></script>
+	<script src="{{ url_for('static', filename='scripts/0-user_info.js')}}"></script>
+	{% block links %} {% endblock  %}
+    </head>
+    <body>
+	<header>
+	    <div class="header-cnt">
+			<div class="logo">
+		    	<h1><a href="{{ url_for('cuisine') }}">CUISINE</a></h1>
+			</div>
+			<div class="search-bar">
+				<form>
+					<input type="text" placeholder="Search recipes">
+		    		<button>Search</button>
+				</form>
+		    	
+			</div>
+
+			{% if current_user.is_authenticated %}
+			<div class="logout">
+				<form id="logout-form" action="/logout" method="POST">
+					<button class="logout-text"><h2>Logout</h2></button>
+					<input type="submit" style="display: none"></input>
+				</form>
+			</div>
+			{% endif %}
+		</div>
+	</header>
+
+	<div class="loader"></div>
+
+
+	
+
+	{% block content %} {% endblock %}
+	<footer>
+	    <div class="footer-container">
+			<p>&copy; 2024 CUISINE. All rights reserved.</p>
+			<nav>
+            	<ul class="footer-links">
+					<li><a href="{{ url_for('about') }}">About</a></li>
+					<li><a href="#contact">Contact</a></li>
+					<li><a href="#terms">Terms of Use</a></li>
+					<li><a href="#privacy">Privacy Policy</a></li>
+					<li><a href="#contact">Contact Us</a></li>
+            	</ul>
+			</nav>
+	    </div>
+	</footer>
+    </body>
+</html>

@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../images/miti-qYreP9QOdrk-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+@media (max-width: 480px) {
+    body {
+        background-size: contain;
+    }
+
+    .log {
+        margin: 50px auto;
+        height: auto;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    button[type="submit"] {
+        margin-top: 10px;
+    }
+}
+.log {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border-radius: 8px;
+    height: 350px;
+    box-shadow: 0 6px 8px rgba(223, 214, 214, 0.774), 0 4px 6px rgba(230, 217, 217, 0.932);
+    background-color: #00000017;
+    backdrop-filter: blur(10px);
+}
+
+form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+h2 {
+    text-align: center;
+    color: #ccc;
+}
+
+
+label {
+    display: block;
+    flex-wrap: wrap-reverse;
+    color: #ccc;
+}
+
+input[type="email"],
+input[type="password"],
+#last_name,
+#first_name {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgb(241, 233, 233);
+    color: white;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+
+.checkbox {
+    display: flex;
+}
+
+.error-message {
+    color: red;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #101820;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.9;
+    background-color: #ccc;
+    color: black;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #ccc;
+}
+
+.signup-link a {
+    color: #a1e65d;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+    color: rgb(229, 230, 227);
+
+}

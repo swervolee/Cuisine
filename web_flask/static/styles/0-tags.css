@@ -1,0 +1,44 @@
+.tags  .tags-style {
+    color: white;
+    height: 20px;
+    display: block;
+    margin: 5px;
+}
+
+
+.tags {
+    position: absolute;
+    left: 300px;
+    width: 600px;
+    border: 1px solid white;
+    background-color: #101820;
+    paddint: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    color: white;
+    padding-left: 10px;
+    jjustify-content: center;
+}
+
+.tags .tag-box {
+    background-color: #101820;
+    padding: 10px;
+    border-radius: 10px;
+    width: 150px;
+    display: none;
+    height: 200px;
+}
+
+.tags .tag-box::-webkit-scrollbar {
+    width: 0;
+}
+
+.tags:hover .tag-box {
+    display: block;
+}
+
+
+.tags .tag-box input {
+    margin-right: 10px;
+}

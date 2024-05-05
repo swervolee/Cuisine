@@ -6,7 +6,7 @@
 }
 
 *::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
 *::-webkit-scrollbar-track {
@@ -15,7 +15,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-    background: red;
+    background: #6fffe9;
     border-radius: 10px;
 }
 
@@ -31,11 +31,17 @@ body {
     padding: 0px;
     color: #181818;
     font-size: 16px;
-    font-family: Circular, "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: #101820;
+    background-image: url('../images/giorgi-iremadze-5ZR4DxAG3RQ-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
 }
+
 .container {
     max-width: 1000px;
     margin: 30px auto;

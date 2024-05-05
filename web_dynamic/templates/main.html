@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block links %}
+    <script src="../static/scripts/introduction.js"></script>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="recipe-creation">
+  <h3><i class="fa fa-plus-square" aria-hidden="true"></i><a href="http://0.0.0.0:5001/recipe_creation">Create</a></h3>
+</div>
+
+
+<div class="introduction-pictures">
+  <div class="introduction">
+    <h1>Discover and share delicious recipes with Cuisine!</h1>
+    <div class="tabs">
+      <h2 id="recipe-world"><a href="{{ url_for('cuisine_recipes') }}">Browse Recipes      </a></h2>
+      
+      {% if current_user.is_authenticated %}
+      <h2 class="my-recipes"><a href="{{ url_for('user_creations') }}">Visit your creations</a></h2>
+      {% endif %}
+
+      <h2 class="create-recipe"><a href="{{ url_for('recipe_creation') }}">Create a recipe</a></h2>
+      
+      {% if current_user.is_anonymous %}
+      <h2 class="login"><a href="{{ url_for('login') }}">Join the community: sign up and log in</a></h2>
+      {% endif %}
+    </div>
+  </div>
+
+
+  <div class="introduction-picture pic2">
+    <h1> Health is Key</h1>
+      <h3>
+        <p>Eating healthy is essential for a balanced lifestyle. At Cuisine, we believe in providing nutritious and delicious recipes that promote well-being. Explore our collection of healthy recipes and start your journey towards a healthier you!</p>
+      </h3>
+  </div>
+
+  <div class="introduction-picture1 pic1">
+      <h1> Share Your Creations</h1>
+        <h3>
+          <p>Have a recipe you want to share with the world? Cuisine is the perfect platform to showcase your culinary skills. Share your recipes with the community and inspire others to get creative in the kitchen!</p>
+      </h3>
+  </div>
+</div>
+{% endblock %}
