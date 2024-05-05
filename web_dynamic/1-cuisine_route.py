@@ -291,11 +291,11 @@ def cuisine():
     """
     LANDING PAGE FOR CUISINE
     """
-    path = "web_dynamic/static/images/display_images/"
-    fnames = []
-    for filename in os.listdir(path):
-        fnames.append("../static/images/display_images/" + filename)
-    return render_template("main.html", current_user=current_user, cache_id=cache_id, files=fnames)
+    # path = "web_dynamic/static/images/display_images/"
+    # fnames = []
+    # for filename in os.listdir(path):
+    #    fnames.append("../static/images/display_images/" + filename)
+    return render_template("main.html", current_user=current_user, cache_id=cache_id)
 
 @app.route("/about", strict_slashes=False)
 def about():
