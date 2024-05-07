@@ -1,9 +1,0 @@
-{% extends base.html %}
-
-
-{% block content %}
-
-{% if not user_creations %}
-<h2> What an empty<br>Recipes you have created will be added here</h2>
-
-{% endblock %}

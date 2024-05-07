@@ -195,7 +195,7 @@ def send_login_email(reciever, login_link):
     """
 
     message = f"""
-    Dear [User],
+    Dear User,
 
 You are receiving this email because you requested to log in to your account on Cuisine. To proceed, please click on the link below:
 
