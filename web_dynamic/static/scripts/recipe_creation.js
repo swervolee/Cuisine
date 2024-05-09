@@ -140,7 +140,7 @@ $(function() {
 
         
         $.ajax({
-            url: "http://0.0.0:5001/status",
+            url: "http://52.91.120.169/api/v1/status",
             type: "GET",
             Headers: {
                 "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
