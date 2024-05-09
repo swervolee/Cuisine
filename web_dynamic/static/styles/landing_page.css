@@ -37,6 +37,8 @@ body {
     background-color: #cccccc;
 }
 
+
+
 .heading span {
     display: flex;
     align-items: center;
@@ -58,6 +60,23 @@ body {
     color: #B30000;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    justify-content: space-around;
+    padding: 30px;
+}
+
+.sec1 {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.content * {
+    margin: 5px;
+}
+
 .content .left {
     display: flex;
     align-items: flex-end;
@@ -69,4 +88,38 @@ body {
     height: 300px;
     object-fit: cover;
     margin: auto;
+}
+
+.right {
+    justify-content: center;
+    align-items: center;
+}
+
+.right h1 {
+    margin-bottom: 50px;
+    border-bottom: 1px solid rgba(85, 75, 75, 0.623);
+    padding: 50px;
+}
+
+.right p {
+    font-size: 1.5rem;
+    margin: 10px;
+    text-align: justify;
+}
+
+
+.redirects {
+    display: flex;
+    justify-content: space-around;
+}
+
+.redirects a {
+    line-height: 1.5rem;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.redirects a:hover {
+    background-color: black;
+    color: #ccc;
 }
