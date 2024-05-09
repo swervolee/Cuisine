@@ -3,7 +3,7 @@
 // var user = {};
 
 $.ajax({
-    url: "http://0.0.0.0:5001/status",
+    url: "http://52.91.120.169/status",
     type: "GET",
     Headers: {
         "Access-Control-Allow-Origin": "0.0.0.0:5001"
@@ -13,11 +13,11 @@ $.ajax({
         console.log("User is logged in and id is " + json.id);
 
         $.ajax({
-            url: "http://0.0.0.0:5000/api/v1/users/" + json.id,
+            url: "http://52.91.120.169/api/v1/users/" + json.id,
             dataType: "json",
             type: "GET",
             Headers: {
-                "Access-Control-Allow-Origin": "0.0.0.0:50001"
+                "Access-Control-Allow-Origin": "52.91.120.169"
             }
         }).done(function (userJson) {
             var user = userJson; // Declare user variable here
@@ -33,14 +33,14 @@ $.ajax({
 });
 
 $.ajax({
-    url: "http://0.0.0.0:5001/status",
+    url: "http://52.91.120.169/status",
     type: "GET",
 }).done(function (json) {
     if (json.status === "logged") {
         console.log("User is logged in and id is " + json.id);
 
         $.ajax({
-            url: "http://0.0.0.0:5000/api/v1/users/" + json.id,
+            url: "http://52.91.120.169/api/v1/users/" + json.id,
             dataType: "json",
             type: "GET"
         }).done(function (userJson) {

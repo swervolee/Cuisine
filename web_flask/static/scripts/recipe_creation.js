@@ -136,7 +136,7 @@ $(function() {
 
         
         $.ajax({
-            url: "http://0.0.0:5001/status",
+            url: "http://52.91.120.169/status",
             type: "GET",
             Headers: {
                 "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
@@ -164,7 +164,7 @@ $(function() {
             };
 
             $.ajax({
-                url: "http://0.0.0.0:5000/api/v1/users/" + user_id + "/recipes",
+                url: "http://52.91.120.169/api/v1/users/" + user_id + "/recipes",
                 type: "POST",
                 data: JSON.stringify(recipe),
                 contentType: "application/json",
@@ -178,7 +178,7 @@ $(function() {
             });
 
             $.ajax({
-                url: "http://0.0.0.0:5000/api/v1/recipes",
+                url: "http://52.91.120.169/api/v1/recipes",
                 type: "GET",
                 headers: {
                     "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
