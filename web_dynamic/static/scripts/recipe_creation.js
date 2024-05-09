@@ -158,12 +158,12 @@ $(function() {
                 return;
             }
 
-            var favorite;
+            /*var favorite;
             if ($(".switch checkbox").is(":isChecked")) {
                 favorite = true;
             } else {
                 favorite = false;
-            }
+            }*/
 
             var recipe = {
                 "user_id": user_id,
