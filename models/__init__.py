@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 """This module instantiates an object of class FileStorage"""
 from os import getenv
+import os
+
+os.environ["CUISINE_TYPE_STORAGE"] = "db"
 
 storage_type = getenv('CUISINE_TYPE_STORAGE')
 
