@@ -32,10 +32,10 @@ class DBStorage:
         """
         DB STORAGE SET UP
         """
-        CUISINE_MYSQL_USER = getenv("CUISINE_MYSQL_USER")
-        CUISINE_MYSQL_PWD = getenv("CUISINE_MYSQL_PWD")
-        CUISINE_MYSQL_HOST = getenv("CUISINE_MYSQL_HOST")
-        CUISINE_MYSQL_DB = getenv("CUISINE_MYSQL_DB")
+        CUISINE_MYSQL_USER = "cuisine_dev" # getenv("CUISINE_MYSQL_USER")
+        CUISINE_MYSQL_PWD = "cuisine_dev_pwd" # getenv("CUISINE_MYSQL_PWD")
+        CUISINE_MYSQL_HOST = "localhost" # getenv("CUISINE_MYSQL_HOST")
+        CUISINE_MYSQL_DB = "cuisine_dev_db" # getenv("CUISINE_MYSQL_DB")
         CUISINE_ENV = getenv("CUISINE_ENV")
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
                                       format(CUISINE_MYSQL_USER,
