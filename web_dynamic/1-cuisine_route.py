@@ -181,7 +181,7 @@ def signup():
                         }
                 
                 sealed = serializer.dumps(data)
-                send_login_email(email, f"0.0.0.0:5000/login/{sealed}")
+                send_login_email(email, f"52.91.120.169/:5000/login/{sealed}")
                 return render_template("email-confirm.html", cache_id=cache_id)
 
     return render_template("signup.html",
