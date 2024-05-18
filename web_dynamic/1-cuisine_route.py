@@ -181,7 +181,7 @@ def signup():
                         }
                 
                 sealed = serializer.dumps(data)
-                send_login_email(email, f"52.91.120.169/:5000/login/{sealed}")
+                send_login_email(email, f"https://web-02.monadoll.tech/login/{sealed}")
                 return render_template("email-confirm.html", cache_id=cache_id)
 
     return render_template("signup.html",
@@ -353,4 +353,4 @@ if __name__ == "__main__":
     """
     MAIN FUNCTION
     """
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=False)
