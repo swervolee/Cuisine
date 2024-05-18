@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block links %}
-    <script src="http://52.91.120.169/static/scripts/introduction.js"></script>
+    <script src="https://web-02.monadoll.tech/static/scripts/introduction.js"></script>
 {% endblock %}
 
 
@@ -10,7 +10,7 @@
 
 
 <div class="recipe-creation">
-  <h3><i class="fa fa-plus-square" aria-hidden="true"></i><a href="http://52.91.120.169/recipe_creation">Create</a></h3>
+  <h3><i class="fa fa-plus-square" aria-hidden="true"></i><a href="https://web-02.monadoll.tech/recipe_creation">Create</a></h3>
 </div>
 
 
@@ -18,7 +18,7 @@
   <div class="introduction">
     <h1>Discover and share delicious recipes with Cuisine!</h1>
     <div class="tabs">
-      <h2 id="recipe-world"><a href="http://52.91.120.169/recipes" >Visit available recipes</a></h2>
+      <h2 id="recipe-world"><a href="https://web-02.monadoll.tech/recipes" >Visit available recipes</a></h2>
       
       {% if current_user.is_authenticated %}
       <h2 class="my-recipes"><a href="{{ url_for('user_creations') }}">Visit your creations</a></h2>

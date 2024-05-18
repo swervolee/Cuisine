@@ -3,7 +3,7 @@
 // var user = {};
 
 $.ajax({
-    url: "http://52.91.120.169/status",
+    url: "https://web-02.monadoll.tech/status",
     type: "GET",
     Headers: {
         "Access-Control-Allow-Origin": "0.0.0.0:5001"
@@ -13,7 +13,7 @@ $.ajax({
         console.log("User is logged in and id is " + json.id);
 
         $.ajax({
-            url: "http://52.91.120.169/api/v1/users/" + json.id,
+            url: "https://web-02.monadoll.tech/api/v1/users/" + json.id,
             dataType: "json",
             type: "GET",
             Headers: {
@@ -33,14 +33,14 @@ $.ajax({
 });
 
 $.ajax({
-    url: "http://52.91.120.169/status",
+    url: "https://web-02.monadoll.tech/status",
     type: "GET",
 }).done(function (json) {
     if (json.status === "logged") {
         console.log("User is logged in and id is " + json.id);
 
         $.ajax({
-            url: "http://52.91.120.169/api/v1/users/" + json.id,
+            url: "https://web-02.monadoll.tech/api/v1/users/" + json.id,
             dataType: "json",
             type: "GET"
         }).done(function (userJson) {

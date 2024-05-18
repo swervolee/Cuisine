@@ -140,7 +140,7 @@ $(function() {
 
         
         $.ajax({
-            url: "http://52.91.120.169/status",
+            url: "https://web-02.monadoll.tech/status",
             type: "GET",
             Headers: {
                 "Access-Control-Allow-Origin": "http://0.0.0.0:5000",
@@ -175,7 +175,7 @@ $(function() {
             };
 
             $.ajax({
-                url: "http://52.91.120.169/api/v1/users/" + user_id + "/recipes",
+                url: "https://web-02.monadoll.tech/api/v1/users/" + user_id + "/recipes",
                 type: "POST",
                 data: JSON.stringify(recipe),
                 contentType: "application/json",
@@ -189,10 +189,10 @@ $(function() {
             });
 
             $.ajax({
-                url: "http://52.91.120.169/api/v1/recipes",
+                url: "https://web-02.monadoll.tech/api/v1/recipes",
                 type: "GET",
                 headers: {
-                    "Access-Control-Allow-Origin": "http://52.91.120.169",
+                    "Access-Control-Allow-Origin": "https://web-02.monadoll.tech",
                 }
                 
             }).done(function(json) {
@@ -212,10 +212,10 @@ $(function() {
         var that = this;
  
         $.ajax({
-            url: "http://52.91.120.169/status",
+            url: "https://web-02.monadoll.tech/status",
             type: "GET",
             Headers: {
-                "Access-Control-Allow-Origin": "http://52.91.120.169",
+                "Access-Control-Allow-Origin": "https://web-02.monadoll.tech",
             }
         }).done(function(json) {
             var user_id = null;
@@ -226,7 +226,7 @@ $(function() {
 
             if (user_id) {
                 $.ajax({
-                    url: "http://52.91.120.169/api/v1/users/" + user_id,
+                    url: "https://web-02.monadoll.tech/api/v1/users/" + user_id,
                     type: "GET",
                     headers: {
                         "Access-Control-Allow-Origin": "http://0.0.0.0"
@@ -254,7 +254,7 @@ $(function() {
                 "recipe_id": recipe_id,
             }
             $.ajax({
-                url: "http://52.91.120.169/api/v1/users/" + user_id + "/comments",
+                url: "https://web-02.monadoll.tech/api/v1/users/" + user_id + "/comments",
                 type: "POST",
                 data: JSON.stringify(info),
                 contentType: "application/json",
