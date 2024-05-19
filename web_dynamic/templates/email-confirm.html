@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/styles/0-email-confirm.css">
-    <script href="url_for('static', filename='scripts/0-signup.js') + '?' + cached_id"></script>
+    <link rel="stylesheet" type="text/css" href="https://web-02.monadoll.tech/static/styles/0-email-confirm.css?{{ cache_id }}">
+    <script href="https://web-02.monadoll.tech/static/scripts/0-signup.js?{{ cached_id }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Confirm email</title>
     <script>
         setTimeout(function() {
-            window.location.href = "http://0.0.0.0:5001/login";
+            window.location.href = "https://web-02.monadoll.tech/login";
         }, 10000000);
     </script>
 </head>

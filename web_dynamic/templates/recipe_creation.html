@@ -3,14 +3,14 @@
     <head>
 		<title>CUISINE</title>
 		<meta charset="UTF-8">
-		<link rel="shortcut icon" href="{{ url_for('static', filename='images/images.jpeg') }}">
+		<link rel="shortcut icon" href="https://web-02.monadoll.tech/static/images/images.jpeg?{{ cache_id }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-common.css') + '?' + cache_id }}">
-		<link rel="stylesheet" type="text/css" href="../static/styles/0-recipe-creation.css">
+		<link rel="stylesheet" type="text/css" href="https://web-02.monadoll.tech/static/styles/0-common.css?{{ cache_id }}">
+		<link rel="stylesheet" type="text/css" href="https://web-02.monadoll.tech/static/styles/0-recipe-creation.css?{{ cache_id }}">
     	<script src="https://kit.fontawesome.com/11f4cefc5f.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/0-presentation.css') + '?' + cache_id}}">
+		<link rel="stylesheet" type="text/css" href="https://web-02.monadoll.tech/static/styles/0-presentation.css?{{ cache_id }}">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="{{url_for('static', filename='/scripts/recipe_creation.js') + '?' + cache_id }}" ></script>
+		<script src="https://web-02.monadoll.tech/static/scripts/recipe_creation.js?{{ cache_id }}" ></script>
 	</head>
 	<body>
 		<header>

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block links %}
-    <script src="https://web-02.monadoll.tech/static/scripts/introduction.js"></script>
+    <script src="https://web-02.monadoll.tech/static/scripts/introduction.js?{{ cache_id }}"></script>
 {% endblock %}
 
 
@@ -10,7 +10,7 @@
 
 
 <div class="recipe-creation">
-  <h3><i class="fa fa-plus-square" aria-hidden="true"></i><a href="https://web-02.monadoll.tech/recipe_creation">Create</a></h3>
+  <h3><i class="fa fa-plus-square" aria-hidden="true"></i><a href="https://web-02.monadoll.tech/recipe_creation?{{ cache_id }}">Create</a></h3>
 </div>
 
 
