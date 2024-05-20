@@ -114,6 +114,7 @@ def login(token=None):
         if user is None:
             return redirect(url_for("login"))
 
+        current_user.is_authenticated = True
         try:
             if request.form["checkbox"] == "on":
                 remember_me = True
