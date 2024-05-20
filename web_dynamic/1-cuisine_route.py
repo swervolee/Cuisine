@@ -119,7 +119,7 @@ def login(token=None):
     elif request.method == "POST":
         submitted_email = request.form["email"]
         submitted_password = request.form["password"]
-        remember_me = False
+        remember_me = True
 
         user = None
         for i in models.storage.all("User").values():
