@@ -95,8 +95,10 @@ def login(token=None):
                 new = User(**unsealed)
                 new.save()
                 print(unsealed)
+                current_user.is_authenticated = True
             except Exception as e:
                 print("Error in unsealing", e)
+        current_user.is_authenticated = True
         return render_template("login.html", invalid=False, cache_id=cache_id)
 
     elif request.method == "POST":
