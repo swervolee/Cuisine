@@ -23,13 +23,17 @@ app = Flask(__name__)
 SECRET_KEY = "eadff6d69ff0eb846bb982cb936f1bb20f48c091f04664378fd1c2de1769aa4c"
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['UPLOAD_FOLDER'] = "dp_uploads"
-login_manager = LoginManager()
+login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 users = models.storage.all("User").values()
 login_tokens = []
 serializer = URLSafeTimedSerializer(SECRET_KEY)
 cache_id = str(uuid.uuid4())
 CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+
+
 
 # --------------------------LOGIN----------------------------
 
@@ -45,15 +49,16 @@ def status():
         A JSON response with the user's status.
     """
     if current_user.is_authenticated:
-        data = {"status": "logged", "id": current_user.id}
+        data = {"status": "logged",
+                "id": current_user.id}
         return make_response(jsonify(data), 200)
+    
     else:
         return make_response(jsonify({"status": "anonymous"}))
-
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
     """
-    An API to logout the user.
+    AN API TO LOGOUT USER
 
     This function logs out the user by calling the `flask_login.logout_user()` function.
     It then renders the "main.html" template with the `current_user` and `cache_id` variables.
@@ -75,9 +80,9 @@ def user_loader(id):
     Returns:
         User: The user object if found, None otherwise.
     """
-    for user in models.storage.all("User").values():
-        if str(user.id) == str(id):
-            return user
+    for i in models.storage.all("User").values():
+        if i.id == id:
+            return i
     return None
 
 @app.route("/login", methods=["GET", "POST"], strict_slashes=False)
@@ -94,6 +99,7 @@ def login(token=None):
 
     Raises:
         Exception: If there is an error in unsealing the token.
+
     """
     if request.method == "GET":
         if request.referrer:
@@ -103,8 +109,8 @@ def login(token=None):
         if token:
             try:
                 unsealed = serializer.loads(token, max_age=300)
-                new_user = User(**unsealed)
-                new_user.save()
+                new = User(**unsealed)
+                new.save()
                 print(unsealed)
             except Exception as e:
                 print("Error in unsealing", e)
@@ -113,24 +119,28 @@ def login(token=None):
     elif request.method == "POST":
         submitted_email = request.form["email"]
         submitted_password = request.form["password"]
-        remember_me = "checkbox" in request.form and request.form["checkbox"] == "on"
+        remember_me = False
 
         user = None
-        for u in models.storage.all("User").values():
-            if u.email == submitted_email and u.password == submitted_password:
-                user = u
-                break
+        for i in models.storage.all("User").values():
+            if i.email == submitted_email and i.password == submitted_password:
+                user = i
 
         if user is None:
             return redirect(url_for("login"))
 
+        try:
+            if request.form["checkbox"] == "on":
+                remember_me = True
+        except Exception:
+            pass
         flask_login.login_user(user, remember=remember_me)
         return redirect(url_for("cuisine"))
 
 @app.route("/signup", methods=["GET", "POST"], strict_slashes=False)
 def signup():
     """
-    Handles user signup.
+    HANDLES USER SIGNUP
 
     This function handles the user signup process. It receives a POST request with user information
     such as email, password, first name, last name, and confirm password. It validates the input data,
@@ -161,16 +171,15 @@ def signup():
         else:
             try:
                 valid = validate_email(email)
-            except EmailNotValidError:
+            except Exception as e:
                 invalid_email = True
             else:
-                data = {
-                    "email": email,
-                    "password": password,
-                    "first_name": first_name,
-                    "last_name": last_name,
-                }
-
+                data = {"email": email,
+                        "password": password,
+                        "first_name": first_name,
+                        "last_name": last_name,
+                        }
+                
                 sealed = serializer.dumps(data)
                 send_login_email(email, f"https://web-02.monadoll.tech/login/{sealed}")
                 return render_template("email-confirm.html", cache_id=cache_id)
@@ -180,47 +189,46 @@ def signup():
                            invalid_email=invalid_email,
                            cache_id=cache_id)
 
-def send_login_email(receiver, login_link):
+def send_login_email(reciever, login_link):
     """
-    Sends a verification email when a user creates an account.
+    VERIFIES EMAIL WHEN USER CREATES AN ACCOUNT
     """
+
     message = f"""
     Dear User,
 
-    You are receiving this email because you requested to log in to your account on Cuisine. To proceed, please click on the link below:
+You are receiving this email because you requested to log in to your account on Cuisine. To proceed, please click on the link below:
 
-    {login_link}
+{login_link}
 
-    This link will direct you to the login page where you can access your account securely. Please note that the link is valid for a limited time and will expire after 5 minutes.
+This link will direct you to the login page where you can access your account securely. Please note that the link is valid for a limited time and will expire after 5 minutes.
 
-    If you did not request this login link or believe this email was sent to you in error, please disregard it and do not click on the link.
+If you did not request this login link or believe this email was sent to you in error, please disregard it and do not click on the link.
 
-    For security reasons, please do not share this login link with anyone. Additionally, ensure that you are accessing the login page from a secure and trusted device.
+For security reasons, please do not share this login link with anyone. Additionally, ensure that you are accessing the login page from a secure and trusted device.
 
-    If you have any questions or need further assistance, please contact our support team at williamkubai101@gmail.com.
+If you have any questions or need further assistance, please contact our support team at williamkubai101@gmail.com.
 
-    Thank you for choosing Cuisine.
+Thank you for choosing Cuisine.
 
-    Best regards,
-    Bree & William
-    Senior Devs
-    Cuisine
+Best regards,
+Bree & William
+Senior Devs
+Cuisine
     """
-    data = {
-        "receiver": receiver,
-        "subject": "Login Link for Cuisine",
-        "message": message
-    }
+    data = {"reciever": reciever,
+            "subject": "Login Link for Cuisine",
+            "message": message
+            }
 
     main(**data)
+#---------------------END OF LOGIN -------------------------------
 
-# ---------------------END OF LOGIN -------------------------------
-
-# ---------------------PROFILE UPLOAD------------------------------
+#---------------------PROFILE UPLOAD------------------------------
 @app.route("/upload", methods=["POST"])
 def upload_file():
     """
-    Handles user profile picture upload.
+    USER PROFILE PICTURE HANDLING
     """
     if 'profile_picture' not in request.files:
         return 'No file part'
@@ -232,12 +240,12 @@ def upload_file():
 
     if file:
         # Generate a secure filename
-        filename = secure_filename(file.filename)
-        extension = filename.rsplit('.', 1)[1]
+        filename, extension = secure_filename(file.filename).split(".")
 
         identity = user_id()
-        # Rename the file using the user id to give it a unique identity
-        new_filename = f"{identity}_dp.{extension}"
+        # Rename the file using the user id to make it have
+        # a unique identity
+        new_filename = identity + "_dp." + extension  # Specify the new filename
 
         # Save the file to the upload folder with the new filename
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
@@ -247,10 +255,9 @@ def upload_file():
 @app.teardown_appcontext
 def close_db(error):
     """
-    Closes the current SQLAlchemy session.
+    CLOSES THE CURRENT SQLALCHEMY SESSION
     """
     models.storage.close()
-
 
 
 @app.route("/recipes", strict_slashes=False)
