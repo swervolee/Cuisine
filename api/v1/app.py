@@ -45,4 +45,4 @@ if __name__ == "__main__":
     host = getenv("CUISINE_API_HOST", "0.0.0.0")
     port = int(getenv("CUISINE_API_PORT", 5000))
 
-    app.run(host=host, port=port, threaded=True, debug=True)
+    app.run(host=host, port=port, threaded=True, debug=False)
