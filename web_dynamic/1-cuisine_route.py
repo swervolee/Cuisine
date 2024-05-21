@@ -33,9 +33,30 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 
-
+user_stat = False
 
 # --------------------------LOGIN----------------------------
+
+
+@app.route("/status", methods=["GET"], strict_slashes=False)
+def status(arg=None):
+    """
+    Returns the status of the user.
+
+    If the user is authenticated, it returns a JSON response with the status "logged" and the user's ID.
+    If the user is not authenticated, it returns a JSON response with the status "anonymous".
+
+    Returns:
+        A JSON response with the user's status.
+    """
+    if current_user.is_authenticated:
+        data = {"status": "logged",
+                "id": current_user.id}
+        return make_response(jsonify(data), 200)
+    
+    else:
+        return make_response(jsonify({"status": "anonymous"}))
+    
 
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
@@ -117,6 +138,7 @@ def login(token=None):
         except Exception:
             pass
         flask_login.login_user(user, remember=True)
+        user_stat = True
         print(current_user.is_authenticated)
         return redirect(url_for("cuisine"))
 
@@ -332,24 +354,7 @@ def user_id():
         return current_user.id
     return None
 
-@app.route("/status", methods=["GET"], strict_slashes=False)
-def status():
-    """
-    Returns the status of the user.
 
-    If the user is authenticated, it returns a JSON response with the status "logged" and the user's ID.
-    If the user is not authenticated, it returns a JSON response with the status "anonymous".
-
-    Returns:
-        A JSON response with the user's status.
-    """
-    if current_user.is_authenticated:
-        data = {"status": "logged",
-                "id": current_user.id}
-        return make_response(jsonify(data), 200)
-    
-    else:
-        return make_response(jsonify({"status": "anonymous"}))
 
 if __name__ == "__main__":
     """
