@@ -56,7 +56,7 @@ def status(arg=None):
     Returns:
         A JSON response with the user's status.
     """
-    if test_stat(None) == True:
+    if test_stat("hello") == True:
         data = {"status": "logged",
                 "id": current_user.id}
         return make_response(jsonify(data), 200)
