@@ -36,7 +36,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 # --------------------------LOGIN----------------------------
-
+print(current_user.is_authenticated)
 
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
@@ -118,6 +118,7 @@ def login(token=None):
         except Exception:
             pass
         flask_login.login_user(user, remember=True)
+        print(current_user.is_authenticated)
         return redirect(url_for("cuisine"))
 
 @app.route("/signup", methods=["GET", "POST"], strict_slashes=False)
