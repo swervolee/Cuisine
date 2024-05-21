@@ -36,7 +36,6 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 # --------------------------LOGIN----------------------------
-print(current_user.is_authenticated)
 
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
