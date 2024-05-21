@@ -38,6 +38,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # --------------------------LOGIN----------------------------
 
 def test_stat(stat=None):
+    item = False
     if (stat == False or stat == True):
         item = stat
         print(stat)
