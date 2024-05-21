@@ -147,7 +147,7 @@ def login(token=None, stats=None):
                 remember_me = True
         except Exception:
             pass
-        flask_login.login_user(user, remember=True)
+        flask_login.login_user(user, remember=remember_me)
         test_stat(True)
         return redirect(url_for("cuisine"))
 
