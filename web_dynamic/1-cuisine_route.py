@@ -33,7 +33,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 
-user_stat = False
+
 
 # --------------------------LOGIN----------------------------
 
@@ -49,7 +49,7 @@ def status(arg=None):
     Returns:
         A JSON response with the user's status.
     """
-    if current_user.is_authenticated:
+    if current_user.is_authenticated == True:
         data = {"status": "logged",
                 "id": current_user.id}
         return make_response(jsonify(data), 200)
@@ -57,6 +57,8 @@ def status(arg=None):
     else:
         return make_response(jsonify({"status": "anonymous"}))
     
+def test_stat(stat):
+    print(stat)
 
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
@@ -70,6 +72,7 @@ def logout():
         The rendered template "main.html" with the `current_user` and `cache_id` variables.
     """
     flask_login.logout_user()
+    test_stat(False)
     return render_template("main.html", current_user=current_user, cache_id=cache_id)
 
 @login_manager.user_loader
@@ -88,9 +91,11 @@ def user_loader(id):
             return i
     return None
 
+
+
 @app.route("/login", methods=["GET", "POST"], strict_slashes=False)
 @app.route("/login/<token>", strict_slashes=False)
-def login(token=None):
+def login(token=None, stats=None):
     """
     Handles user login.
 
@@ -115,7 +120,6 @@ def login(token=None):
                 new = User(**unsealed)
                 new.save()
                 print(unsealed)
-                current_user.is_authenticated = True
             except Exception as e:
                 print("Error in unsealing", e)
         return render_template("login.html", invalid=False, cache_id=cache_id)
@@ -138,7 +142,7 @@ def login(token=None):
         except Exception:
             pass
         flask_login.login_user(user, remember=True)
-        user_stat = True
+        test_stat(True)
         print(current_user.is_authenticated)
         return redirect(url_for("cuisine"))
 
