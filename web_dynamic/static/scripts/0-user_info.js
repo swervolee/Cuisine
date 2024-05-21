@@ -3,7 +3,7 @@
 // var user = {};
 $(document).ready(function() {
     $.ajax({
-        url: "0.0.0.0:5001/status",
+        url: "https://web-02.monadoll.tech/status",
         type: "GET",
         Headers: {
             "Access-Control-Allow-Origin": "52.91.120.169"

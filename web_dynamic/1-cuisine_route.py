@@ -37,6 +37,12 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # --------------------------LOGIN----------------------------
 
+def test_stat(stat=None):
+    if (stat == False or stat == True):
+        item = stat
+        print(stat)
+    return item
+
 
 @app.route("/status", methods=["GET"], strict_slashes=False)
 def status(arg=None):
@@ -49,7 +55,7 @@ def status(arg=None):
     Returns:
         A JSON response with the user's status.
     """
-    if current_user.is_authenticated == True:
+    if test_stat(None) == True:
         data = {"status": "logged",
                 "id": current_user.id}
         return make_response(jsonify(data), 200)
@@ -57,8 +63,7 @@ def status(arg=None):
     else:
         return make_response(jsonify({"status": "anonymous"}))
     
-def test_stat(stat):
-    print(stat)
+
 
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
@@ -143,7 +148,6 @@ def login(token=None, stats=None):
             pass
         flask_login.login_user(user, remember=True)
         test_stat(True)
-        print(current_user.is_authenticated)
         return redirect(url_for("cuisine"))
 
 @app.route("/signup", methods=["GET", "POST"], strict_slashes=False)
