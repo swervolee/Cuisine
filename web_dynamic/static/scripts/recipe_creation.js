@@ -265,7 +265,9 @@ $(function() {
                 console.log("posted");
                 flashMessage("Comment added successfully.", ".comment-form button");
 
-                location.reload();
+                setTimeout(function() {
+                    location.reload();
+                }, 4000);
 
                 $(".comments-section .comment-list").append(
                     '<div class="comment">' +
