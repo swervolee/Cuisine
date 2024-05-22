@@ -2,10 +2,10 @@
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email_validator import EmailNotValidError, validate_email
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, sessions, url_for
 from flask import make_response, jsonify
 from flask_cors import CORS
-from flask_login import LoginManager, current_user
+from flask_login import login_manager, current_user
 from itsdangerous import URLSafeTimedSerializer
 import flask_login
 import models
@@ -37,16 +37,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # --------------------------LOGIN----------------------------
 
-def test_stat(stat=None):
-    item = False
-    if (stat == False or stat == True):
-        item = stat
-        print(stat)
-    return item
-
-
 @app.route("/status", methods=["GET"], strict_slashes=False)
-def status(arg=None):
+def status():
     """
     Returns the status of the user.
 
@@ -56,16 +48,13 @@ def status(arg=None):
     Returns:
         A JSON response with the user's status.
     """
-    if test_stat("hello") == True:
+    if current_user.is_authenticated:
         data = {"status": "logged",
                 "id": current_user.id}
         return make_response(jsonify(data), 200)
     
     else:
         return make_response(jsonify({"status": "anonymous"}))
-    
-
-
 @app.route("/logout", methods=["POST"], strict_slashes=False)
 def logout():
     """
@@ -78,7 +67,6 @@ def logout():
         The rendered template "main.html" with the `current_user` and `cache_id` variables.
     """
     flask_login.logout_user()
-    test_stat(False)
     return render_template("main.html", current_user=current_user, cache_id=cache_id)
 
 @login_manager.user_loader
@@ -97,11 +85,9 @@ def user_loader(id):
             return i
     return None
 
-
-
 @app.route("/login", methods=["GET", "POST"], strict_slashes=False)
 @app.route("/login/<token>", strict_slashes=False)
-def login(token=None, stats=None):
+def login(token=None):
     """
     Handles user login.
 
@@ -133,7 +119,7 @@ def login(token=None, stats=None):
     elif request.method == "POST":
         submitted_email = request.form["email"]
         submitted_password = request.form["password"]
-        remember_me = True
+        remember_me = False
 
         user = None
         for i in models.storage.all("User").values():
@@ -142,13 +128,13 @@ def login(token=None, stats=None):
 
         if user is None:
             return redirect(url_for("login"))
+
         try:
             if request.form["checkbox"] == "on":
                 remember_me = True
         except Exception:
             pass
         flask_login.login_user(user, remember=remember_me)
-        test_stat(True)
         return redirect(url_for("cuisine"))
 
 @app.route("/signup", methods=["GET", "POST"], strict_slashes=False)
@@ -195,7 +181,7 @@ def signup():
                         }
                 
                 sealed = serializer.dumps(data)
-                send_login_email(email, f"https://web-02.monadoll.tech/login/{sealed}")
+                send_login_email(email, f"0.0.0.0:5000/login/{sealed}")
                 return render_template("email-confirm.html", cache_id=cache_id)
 
     return render_template("signup.html",
@@ -362,8 +348,6 @@ def user_id():
     if current_user.is_authenticated:
         return current_user.id
     return None
-
-
 
 if __name__ == "__main__":
     """
