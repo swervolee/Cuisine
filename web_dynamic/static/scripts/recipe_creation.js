@@ -265,6 +265,8 @@ $(function() {
                 console.log("posted");
                 flashMessage("Comment added successfully.", ".comment-form button");
 
+                location.reload();
+
                 $(".comments-section .comment-list").append(
                     '<div class="comment">' +
                         '<div class="comment-author">' + user.first_name + ' ' + user.last_name + '</div>' +
