@@ -6,67 +6,66 @@
 {% endblock %}
 
 {% block content %}
-	<div class="recipe-creation">
-		<h3><a href="https://web-02.monadoll.tech/recipe_creation"><i class="fa fa-plus-square" aria-hidden="true"></i>CREATE</a></h3>
-	</div>
+<div class="recipe-creation">
+    <h3><a href="{{ url_for('recipe_creation') }}"><i class="fa fa-plus-square" aria-hidden="true"></i> CREATE</a></h3>
+  </div>
+</div>
 
-	{% if not recipes %}
-		<h2 class="no-creations"> What an empty<br>Recipes you have created will be added here</h2>
-	{% else %}
-		<div class="back">Back</div>
 
-		<div class="recipe-container">
-			{% for food in recipes %}
-				<article class="recipe">
-					<div class="tag">
-						<h4>Tags</h4>
-						<ul>
-							{% for Tag in food.tag %}
-								<li>{{ Tag.name }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div class="favourite">Favourite</div>
-					<div class="recipe-name">
-						<h2>{{ food.title }}</h2>
-						<div class="description">
-							<h3>DESCRIPTION</h3>
-							<p><strong>{{ food.introduction }}</strong></p>
-						</div>
-					</div>
-					<div class="recipe-ingredients">
-						<h3>Ingredients</h3>
-						<ul>
-							{% for item in food.Ingredients %}
-								<li>{{ item }}</li>
-							{% endfor %}
-						</ul>
-					</div>
-					<div class="recipe-instructions"></div>
-						<h3>Instructions</h3>
-						<ol>
-							{% for item in food.Instructions %}
-								<li>{{ item }}</li>
-							{% endfor %}
-						</ol>
-					</div>
-					<div class="comments-section"></div>
-						<h3>Comments</h3>
-						<div class="comment-list">
-							{% for item in food.comments %}
-								<div class="comment">
-									<div class="comment-author">{{ item.user.first_name + " " + item.user.last_name  }}</div>
-									<div class="comment-text">{{ item.text }}</div>
-								</div>
-							{% endfor %}
-						</div>
-					</div>
-					<form class="comment-form" id="comment-form">
-						<textarea class="comment-input" data-id="{{ food.id}}" placeholder="Like this recipe? Give it a review" required></textarea>
-						<button type="submit" class="comment-btn">Post</button>
-					</form>
-				</article>
-			{% endfor %}
-		</div>
-	{% endif %}
-{% endblock %}
+
+  <div class="back">Back</div>
+
+  <div class="recipe-container">
+    {% for food in recipes %}
+    <article class="recipe">
+  <div class="tag">
+    <h4>Tags</h4>
+    <ul>
+      {% for Tag in food.tag %}
+      <li>{{ Tag.name }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="favourite">Favourite</div>
+  <div class="recipe-name">
+    <h2>{{ food.title }}</h2>
+    <div class="description">
+      <h3>DESCRIPTION</h3>
+      <p><strong>{{ food.introduction }}</strong></p>
+    </DIV>
+  </div>
+  <div class="recipe-ingredients">
+    <h3>Ingredients</h3>
+    <ul>
+      {% for item in food.Ingredients %}
+          <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="recipe-instructions">
+    <h3>Instructions</h3>
+    <ol>
+      {% for item in food.Instructions %}
+          <li>{{ item }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+  <div class="comments-section">
+    <h3>Comments</h3>
+    <div class="comment-list">
+      {% for item in food.comments %}
+      <div class="comment">
+            <div class="comment-author">{{ item.user.first_name + " " + item.user.last_name  }}</div>
+            <div class="comment-text">{{ item.text }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <form class="comment-form" id="comment-form">
+    <textarea class="comment-input" data-id="{{ food.id}}" placeholder="Like this recipe? Give it a review" required></textarea>
+    <button type="submit" class="comment-btn">Post</button>
+  </form>
+    </article>
+    {% endfor %}
+  </div>
+  {% endblock %}
